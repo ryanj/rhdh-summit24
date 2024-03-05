@@ -1,4 +1,4 @@
-= 2. Catalog Entities
+= 1. Red Hat Devloper Hub
 
 == Downloading the UBI
 

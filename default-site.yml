@@ -1,7 +1,7 @@
 ---
 site:
-  title: Showroom Template Demo
-  url: https://redhat-scholars.github.io/course-template
+  title: "Red Hat Developer Hub - Prepare to Perform with the Software Catalog"
+  url: https://redhat-scholars.github.io/rhdh-catalog
   start_page: modules::index.adoc
 
 content:

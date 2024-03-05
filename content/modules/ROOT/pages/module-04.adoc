@@ -1,0 +1,8 @@
+= 4. Templates
+
+templates
+
+[#new]
+== New Solutions
+
+new content
