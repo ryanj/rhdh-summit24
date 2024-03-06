@@ -6,6 +6,12 @@ nav:
 
 asciidoc:
   attributes:
+    page-user: 'User X'
+    page-links:
+    - link: https://redhat.com
+      text: Red Hat
+    - link: https://www.redhat.com/en/summit
+      text: Summit
     lab_name: "Prepare to Perform with the Software Catalog"
     release-version: master
     page-pagination: true
