@@ -6,15 +6,24 @@ nav:
 
 asciidoc:
   attributes:
-    page-user: 'User X'
+    page-user: {rhdh_user}
     page-links:
     - link: https://redhat.com
       text: Red Hat
     - link: https://www.redhat.com/en/summit
       text: Summit
+    - link: {rhdh_url}
+      text: Red Hat Developer Hub
+    - link: {gitlab_url}
+      text: GitLab
+    - link: {devspaces_url}
+      text: DevSpaces
     lab_name: "Prepare to Perform with the Software Catalog"
     release-version: master
     page-pagination: true
+    devspaces_url: {devspaces_url}
+    rhdh_url: {rhdh_url}
+    gitlab_url: {gitlab_url}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid
     ssh_user: devops
