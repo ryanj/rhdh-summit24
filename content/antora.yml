@@ -6,7 +6,7 @@ nav:
 
 asciidoc:
   attributes:
-    page-user: {rhdh_user}
+    page-user: {user}
     page-links:
     - link: https://redhat.com
       text: Red Hat

@@ -15,7 +15,7 @@ This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
 
 {gitlab_url}
 
-{page-user}
+your user_id is: {user}
 
 == Writing your lab
 
