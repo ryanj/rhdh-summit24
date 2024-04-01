@@ -232,7 +232,7 @@ The NestJS Service backend template is composed of six sequential steps, each of
 
 image::3-15.png[title="Figure 3-15: NestJS Service template scaffolding."]
 
-Template steps can use built-in actions (https://backstage.io/docs/features/software-templates/builtin-actions/) and custom actions written for a team’s specific needs (https://backstage.io/docs/features/software-templates/writing-custom-actions/). You can view which actions are installed in your RHDH instance by visiting `http(s)://<YOUR_BACKSTAGE_BASE_URL>/create/actions`. This page shows the instance’s available actions, including a brief description of each and the parameters it accepts. 
+Template steps can use built-in actions (https://backstage.io/docs/features/software-templates/builtin-actions/) and custom actions written for a team’s specific needs (https://backstage.io/docs/features/software-templates/writing-custom-actions/). You can view which actions are installed in your RHDH instance by visiting {rhdh_url}/create/actions. This page shows the instance’s available actions, including a brief description of each and the parameters it accepts. 
 
 image::3-16.png[title="Figure 3-16: Describing the fetch-template action and its parameters."]
 
@@ -426,7 +426,7 @@ image::3-37.png[title="Figure 3-37: Quarkus Service with Angular template config
 
 In the second section (Figure 3-38), you specify important settings, namely the *cluster ID*, *namespace*, *application ID*, and *owner* for our new software component. Based on this information it’s clear into which Kubernetes cluster and namespace this component is eventually going to be deployed with the entered application ID as its name. The selected user defines the ownership for this software component. 
 
-NOTE: It’s important to make sure that you use the same namespace and cluster ID as for the backend template you applied earlier (see Template form wizard).
+NOTE: It’s important to make sure that you use the same namespace and cluster ID as for the backend template you applied earlier (see link:#_template_form_wizard_2[Template form wizard]).
 
 image::3-38.png[title="Figure 3-38: Quarkus Service with Angular template configuration form, second section."]
 
@@ -476,7 +476,7 @@ Just to clarify, of course it would work to treat both these components complete
 
 NOTE: Keep in mind that the actual possibilities, the available tabs, and the tiles anywhere in that detail view primarily depend on the configuration of the RHDH instance, the installed plug-ins as well as any component view customizations which might or might not be in place for your environment.
 
-Because you already visited the different tabs for a component’s detail view earlier while exploring the `demo01-poi-backend` component (see POI backend in the Software Catalog) of the POI map application, this should all look very familiar to you at that stage.
+Because you already visited the different tabs for a component’s detail view earlier while exploring the `demo01-poi-backend` component (see link:#_poi_backend_in_the_software_catalog[POI backend in the Software Catalog]) of the POI map application, this should all look very familiar to you at that stage.
 
 == Summary
 
