@@ -1,7 +1,9 @@
 = Chapter 2: The Software Catalog
 Before you can do much work, you have to find your tools and materials. The Developer Portal’s Software Catalog, shown in Figure 2-1, provides a searchable index of APIs, services, and software components.
 
-image::catalog-1.png[Figure 2-1: The Software Catalog.]
+:!figure-caption:
+
+image::2-1.png[title="Figure 2-1: The Software Catalog."]
 
 == Catalog overview
 The catalog provides a central, organized location where development teams can register and document the services and components they use in their software projects. This includes information about applications, APIs, libraries, databases, and more.
