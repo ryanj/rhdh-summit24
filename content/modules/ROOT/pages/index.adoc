@@ -17,42 +17,10 @@ This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
 
 your user_id is: {user}
 
-== Writing your lab
+= About the preview edition
 
-Whatever type of content you are writing we'll refer to your *content* as "your lab" in this document.
+This fragment invites you into our thinking as we write a developer’s guide to developer portals. In the first chapter, you’ll learn what an internal developer portal is and the problems addressed by this category of software. To practically apply those ideas, you’ll examine Red Hat Developer Hub (RHDH), built around the open source Backstage core to implement an enterprise distribution of a platform for creating developer portals.
 
-=== Lab structure
+Subsequent chapters present some of the tools found in an RHDH instance and their representation in the RHDH user interface, then show you how to work with those tools to build an application. By the end of this preview, you’ll know the basics of Backstage Software Templates and the architecture of the example app. 
 
-
-Wether you are writing a lab
-
-* First, we will build a monolithic application already compiled as RPM packages and put it into a container. This will allow us to deploy the application, copy it between machines, and update it separately from the operating system. This process affords us a portable and easily maintained component instead of tightly coupling the application with your operating system maintenance.
-
-* In closing we will build a second container on a different operating system version that makes an application not packaged into RPMs. This will be similar to a web application deployment, positioning the correct files at the right locations. To do this, we will pull a project from GitHub and position the component files within our container image. The purpose of this is to achieve a portable application container that can deploy on several different versions of Red Hat Enterprise Linux. This also provides the benefit of decoupling your application maintenance, which would all happen by building new containers versus operating system maintenance. The container is no longer reliant on the operating system installed on the machine where the application is deployed.
-
-
-. Now let's examine this cluster a bit more by describing the cluster (the `$GUID` environment variable is already set for you so you can immediately describe your individual cluster):
-+
-[source,sh,role=execute]
-----
-podman ps
-----
-+
-.Sample Output
-[source,texinfo,subs="attributes"]
-----
-CONTAINER ID  IMAGE                        COMMAND           CREATED      STATUS      PORTS                 NAMES
-2dcfee9e50c4  docker.io/library/httpd:2.4  httpd-foreground  3 hours ago  Up 3 hours  0.0.0.0:8080->80/tcp  showroom-httpd
-----
-
-
-
-
-
-
-
-
-=== Lab Access
-
-The terminal window to your right is *already* logged into the lab environment as the `{ssh_user}` user via `ssh`. 
-All steps of this lab are to be completed as the `{ssh_user}` user.
+We hope this advance screening will leave you informed about why IDPs are having a moment and intrigued enough to read the complete first edition when it is available. We’ll do our best to deliver insights about developer portals in modern development in terms of Backstage and RHDH, which together represent the pioneering implementation of developer portal concepts.
