@@ -444,7 +444,7 @@ image::3-41.png[title="Figure 3-41: Quarkus Service with Angular template scaffo
 
 ==== Template scaffolding process
 
-Insights into what’s happening during the scaffolding process under the covers have been provided in detail for the backend template already. Feel free to revisit the corresponding book section (Template scaffolding process) if necessary.
+Insights into what’s happening during the scaffolding process under the covers have been provided in detail for the backend template already. Feel free to revisit the corresponding book section (link:#_template_scaffolding_process[Template scaffolding process]) if necessary.
 
 ==== Template results
 
