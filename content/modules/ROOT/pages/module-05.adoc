@@ -1,5 +1,324 @@
-= 5. Software Lifecycle
+= Chapter 5: Template and component evolution
 
-[#delivery]
-== Iterating on Solutions
+You’ve learned how to jump-start a new application with Software Templates, which scaffolded source repos for you and eventually constructed container images and deployed them on Kubernetes. But, software is never finished. Sooner or later, you’ll need to update your templates and the components they generate. In this chapter, you’ll see how to manage these maintenance and upgrade tasks in Red Hat Developer Hub.
 
+== Evolving Software Templates
+
+Remember the second template you have applied in Chapter 3 to scaffold the proxy and frontend parts of the POI map application created a Quarkus application that hosts an Angular SPA frontend. In order to have some concrete example to work on, assume your company decides that all Templates for Quarkus applications should, as of now, adhere to the following standards:
+
+* The container base image for Java applications should be `ubi8/openjdk-17:1.18`.
+* The platform version for Quarkus should be `3.6.7`.
+* Quarkus-based applications are supposed to include the `smallrye-health` extension.
+
+Taking a closer look, it’s quite clear that the software template `quarkus-with-angular` that is currently registered in the Red Hat Developer Hub catalog needs to be updated. While the responsibility for template-related maintenance typically lies with platform engineers, the suggested updates in the context of this use case are relatively straightforward and serve as a simple example for developers in order to have a basic understanding of this procedure.
+
+=== Locate the template and clone the repository
+
+Go to *+ Create* and find the *Quarkus Service with hosted Angular Frontend* template. Click the *Links (<>)* button in the lower-left corner of the software template tile (Figure 5-1).
+
+image::5-1.png[title="Figure 5-1: Quarkus Service with hosted Angular Frontend template."]
+
+Clicking this Links button brings you to the GitLab repository that hosts the template files. Over in GitLab, find the *Clone* button for the repository, then clone it to your local machine by using the provided clone URL (Figure 5-2). 
+
+:!figure-caption:
+
+image::5-2.png[title="Figure 5-2: GitLab repository for the template to clone from."]
+
+=== Make the necessary template changes
+
+After successfully cloning it, open the repository in the IDE of your choice, then start to perform the following necessary changes to the respective files residing in the `quarkus-with-angular` folder.
+
+==== Patch the container file
+
+Open the file `quarkus-with-angular/skeleton/Dockerfile`, scroll down to the `FROM` statement in line 80, and adapt the base image to `openjdk-17:1.18` as follows:
+
+----
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.18
+----
+
+Save your changes.
+
+==== Patch the pom.xml file
+
+Open the file `quarkus-with-angular/skeleton/pom.xml`, scroll down to the Quarkus platform version in line 15, and adapt the version to 3.6.7 as follows:
+
+----
+<quarkus.platform.version>3.6.7</quarkus.platform.version>
+----
+
+Next, scroll further down to the dependencies section, which starts at line 31, and include the `smallrye-health` extension by adding the following XML snippet (e.g., right below the `quarkus-arc` dependency that is already there). It’s important that you don’t remove any of the existing ones:
+
+:source-highlighter: coderay
+
+[,xml,highlight=7..10]
+----
+<!-- ... -->
+<dependencies>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+<!-- ... -->
+</dependencies>
+----
+
+Save the file.
+
+=== Commit and push template updates
+
+With these template updates in place, stage, commit, and push your changes. Then verify that your changes are reflected in the upstream repository on GitLab (Figure 5-3).
+
+image::5-3.png[title="Figure 5-3: GitLab repository after updating the template."]
+
+With these updates in place, all new components scaffolded from this new version of the `quarkus-with-angular` Template automatically follow the defined requirements related to the version of the container base image, the Quarkus platform version, and the inclusion of the `smallrye-health` extension. In the next section, you’ll learn how to update existing software components that have already been created.
+
+== Updating existing components
+
+It’s crucial not to forget about the fact that despite changing a specific software template, existing applications built from this very template do not yet adhere to any newly defined standards. So how should you go about that? 
+
+Unsurprisingly, the answer again is related to yet another template that will make the procedure of patching previously created software components a lot easier and less error prone. By making sure that the necessary changes are first suggested to existing source code repositories by means of a pull request, component owners can review everything and have a final say before eventually merging the auto-generated changes originating from the applied “patch template.”
+
+=== Register the predefined patch template
+
+1. Go to *+ Create → Register existing component* and copy the full HTTPS URL to the `template.yaml` file in the `custom-component-patch` folder of the Git repository. Paste the URL into the form’s (1) Select URL field, as shown in Figure 5-4.
++
+image::5-4.png[title="Figure 5-4: Template registration into the Software Catalog, step 1."]
++
+2. Clicking the *ANALYZE* button shows that two entities will be added into the software catalog (Figure 5-5). One entity is the location, pointing to the HTTPS URL from where the template was loaded, and the other entity is the template itself.
++
+image::5-5.png[title="Figure 5-5: Template registration into the Software Catalog, step 2."]
++
+3. Click the *IMPORT* button to confirm. Figure 5-6 shows the entities have been added to the catalog.
++
+image::5-6.png[title="Figure 5-6: Template registration into the Software Catalog, step 3."]
+
+=== Apply the predefined patch template
+
+Go to *+ Create* and select the *Quarkus Application Patch Template* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 5-7).
+
+image::5-7.png[title="Figure 5-7: Quarkus Application Patch Template."]
+
+==== Template form wizard
+
+This brings you to the template’s form wizard where you can configure certain elements of the template. In the first section of this form (Figure 5-8), you provide information about the component that you want to apply this patch on. In this example, it’s the cluster ID, the GitLab group/owner, and most importantly, the GitLab repo name(s) that should get patched. You are going to specify the repo name by clicking on the *+ ADD ITEM* button and entering the repo name of the proxy and frontend component, which is `demo01-poi-map` if you followed the naming conventions so far. You can optionally enter a particular name (default: `templated-app-patch`) for the repo branch that will store the code changes that should get applied by the template. This branch in turn becomes the source for the merge request that gets automatically opened.
+
+image::5-8.png[title="Figure 5-8: Quarkus Application Patch Template configuration form, first section."]
+
+In the second section (Figure 5-9), you can specify all information about the patch itself that is getting applied to the selected source code repositories. The template already provides the necessary defaults. In this example: 
+
+ * the `pom.xml` file will get patched with the desired Quarkus version, and
+ * the `Dockerfile` to build the container image will get patched with the proper base image.
+
+Remember that another requirement was to include the `smallrye-health` extension. This is an additional change to the `pom.xml` file and happens without the need for explicit template configuration parameters.
+
+image::5-9.png[title="Figure 5-9: Quarkus Application Patch Template configuration form, second section."]
+
+Clicking the *NEXT STEP* button shows you a summary of all the entered form fields for a final review, as shown in Figure 5-10.
+
+image::5-10.png[title="Figure 5-10: Quarkus Application Patch Template configuration form, final review."]
+
+Click *CREATE* to kick-off the process of patching the component’s source code repository.
+
+==== Template patching procedure
+
+The Quarkus Application Patch Template (Figure 5-11) is composed of four sequential steps, each of which represents either a built-in or a custom scaffolder action available in your running RHDH portal:
+
+. `fetch:plain`: This action fetches one or more source code repositories from its location and stores the repository contents into a working directory.
+. `roadiehq:utils:fs:replace`: This action will look into each of the working directories and process the specified files as follows: 
+.. `pom.xml`: Replace the Quarkus version and add the `smallrye-health` extension.
+..  `Dockerfile`: Replace the base image.
+. `publish:gitlab:merge-request`: After applying the necessary changes to selected files in the working directory, this action will create a merge request in the respective GitLab repository.
+. `debug:log`: This action prints the full URL pointing to the merge request(s) that have been opened in one or more repositories.
+
+image::5-11.png[title="Figure 5-11: Quarkus Application Patch Template."]
+
+=== Review the opened merge request
+
+In GitLab, go to the repository that has been patched by means of the template and inspect the opened merge request (Figure 5-12). The *Changes* tab shows the applied patches to the files as previously discussed.
+
+image::5-12.png[title="Figure 5-12: Inspect the suggested changes in the opened merge request."]
+
+=== Merge the auto-generated code changes
+
+If everything went well and the review of the suggested code changes is positive, you as the component owner can merge this into the main branch. Go back to the *Overview* tab of the GitLab merge request, select the *Delete source branch* checkbox, and hit the *MERGE* button (Figure 5-13).
+
+image::5-13.png[title="Figure 5-13: Merge the suggested changes."]
+
+=== Inspect the build pipeline
+
+Now that the code changes are merged into the main branch, a new pipeline run is triggered via a webhook. After about two to three minutes, your code changes are available in the freshly built container image for the POI map service (Figure 5-14).
+
+image::5-14.png[title="Figure 5-14: Tekton build pipeline triggered after merging code changes."]
+
+=== Verify all updates for the component
+
+Let’s verify if all the expected changes that have been applied by the patch template are indeed present. You can open the build pipeline details and then click on the second step named *package* to inspect the logs, as shown in Figure 5-15.
+
+image::5-15.png[title="Figure 5-15: Check pipeline run details for the individual steps."]
+
+You can immediately see that the Quarkus version pulled down by Maven is now `3.6.7` instead of version `3.4.2` that was in use initially for this component according to the old template.
+
+image::5-16.png[title="Figure 5-16: Inspect logs for pipeline step package."]
+
+Next, click the *build-and-push* step in order to check for the container base image that should now be `ubi8/openjdk-17:1.18` rather than `ubi8/openjdk-17:1.16` (Figure 5-17).
+
+image::5-17.png[title="Figure 5-17: Inspect logs for pipeline step build-and-push."]
+
+Finally, open the *Topology* tab for the `demo01-poi-map-service` component. Click on the deployment and choose the *Resources* tab in the side pane that appears from the right to click *View Logs* (Figure 5-18).
+
+image::5-18.png[title="Figure 5-18: Component’s topology view with deployment resources selected."]
+
+If you scroll a bit further to the right within the logs window, you’ll now also find the `smallrye-health` extension additionally included next to all the others that have already been there before applying the patch template (Figure 5-19).
+
+image::5-19.png[title="Figure 5-19: Pod’s log view to inspect the application logs."]
+
+== Updating existing deployments
+
+When taking a closer look at the deployment for the POI backend application, you might wonder if you could switch from a standard deployment to a staged deployment. At the same time, it seems to be unclear and rather complicated for the typical application developer to understand what needs to be changed in a software component’s underlying GitOps repository to achieve this. That’s totally fine, because with a little help from a platform engineering team, all the complexity related to coming up with more sophisticated manifests that support a staged deployment can be baked into yet another software template. Let’s find out how to benefit from such a patch template to get the job done.
+
+=== Register the predefined patch template
+
+. Go to *+ Create → Register existing component* and copy the full HTTPS URL to the `template.yaml` file in the `custom-deployment-patch` folder of the Git repository. Paste the URL into the form’s (1) *Select URL* field, as shown in Figure 5-20.
++
+image::5-20.png[title="Figure 5-20: Template registration into the Software Catalog, step 1."]
++
+. Clicking the *ANALYZE* button shows that two entities will be added into the software catalog (Figure 5-21). One entity is the location, the HTTP URL from where the template was loaded, and the other entity is the template itself.
++
+image::5-21.png[title="Figure 5-21: Template registration into the Software Catalog, step 2."]
++
+. Click the *IMPORT* button to confirm. Figure 5-22 shows the entities have been added to the catalog.
++
+image::5-22.png[title="Figure 5-22: Template registration into the Software Catalog, step 3."]
+
+=== Apply the predefined patch template
+
+Go to *+ Create* and select the *Staged Deployment Patch Template* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 5-23).
+
+image::5-23.png[title="Figure 5-23: Staged Deployment Patch Template."]
+
+==== Template form wizard
+
+This brings you to the template’s form wizard where you can configure certain elements of the template (Figure 5-24). To keep things simple, this exemplary patch template only asks you to provide information about the component which you want to patch the GitOps manifests for: the cluster ID, the GitLab group/owner, the namespace, and the application ID. If you’ve been following the previously recommended naming conventions, you will specify `demo01` as namespace and `poi-backend` as application ID. You can optionally enter a branch name, which defaults to `templated-gitops-patch`, for the branch that will store the various manifest-related changes that get applied by the template. The auto-created branches will in turn become the sources for merge requests that get automatically opened in the GitOps repository of the component you referred to.
+
+image::5-24.png[title="Figure 5-24: Staged Deployment Patch Template configuration form, input section."]
+
+Clicking the *NEXT STEP* button shows you a summary of all the entered form fields for a final review (Figure 5-25).
+
+image::5-25.png[title="Figure 5-25: Staged Deployment Patch Template configuration form, final review."]
+
+Click *CREATE* to kick off the process of patching the component’s GitOps repository.
+
+==== Template patching procedure
+
+The Staged Deployment Patch Template is composed of multiple sequential steps, each of which represents either a built-in or a custom scaffolder action available in your running RHDH portal. 
+
+NOTE: Due to a peculiarity of how the currently available Backstage GitLab plugin—more specifically, the scaffolder action for merge requests—has been implemented against the GitLab API, this template creates three separate merge requests while it ideally would only need to create a single one. The root cause for this is that any branch acting as the source for opened merge requests, is only allowed to contain homogenous Git changesets (i.e., either created, modified, or deleted files). Future implementations will hopefully do away with this limitation and allow to combine any file changes into a unified merge request.
+
+image::5-26.png[title="Figure 5-26: Staged Deployment Patch Template."]
+
+. `fetch:template`: This action fetches the template from its location and recursively walks through all source folders and files (see the `skeleton` subfolder at the origin). In each file, the scaffolder checks if it finds variables and needs to perform parameter replacements based on the settings which have been entered upfront in the form wizard.
+. `publish:gitlab:merge-request`: After creating new manifest-related files in a separate branch, this action will open the first merge request in the respective GitLab repository.
+. `debug:log`: This action prints the full URL pointing to the first merge request.
+. `publish:gitlab:merge-request`: After modifying existing manifest-related files in a separate branch, this action will open the second merge request in the respective GitLab repository.
+. `debug:log`: This action prints the full URL pointing to the second merge request. 
+. `publish:gitlab:merge-request`: After deleting manifest-related files in a separate branch, this action will open the third merge request in the respective GitLab repository.
+. `debug:log`: This action prints the full URL pointing to the third merge request.
+
+=== Review the opened merge requests
+
+In GitLab, go to the `demo01-poi-backend-gitops` repository that has been patched by means of the template and inspect the opened merge requests (Figure 5-27). Remember the note from the previous section, which explains why you ended up with three separate ones.
+
+image::5-27.png[title="Figure 5-27: Inspect the opened merge requests after applying the template."]
+
+Clicking on one of the respective titles brings you to that merge request’s overview. Figure 5-28 shows the one for newly created manifest files.
+
+image::5-28.png[title="Figure 5-28: Merge request overview for newly created files."]
+
+If you want to take a closer look, feel free to inspect all individual changes for each of the merge requests by switching to the *Changes* tab. Figure 5-29 shows the changeset for this merge request.
+
+image::5-29.png[title="Figure 5-29: Merge request changeset details for newly created files."]
+
+Finally, go back to the *Overview* tab and confirm these auto-generated changes by clicking the *MERGE* button (Figure 5-30).
+
+image::5-30.png[title="Figure 5-30: Merge request overview after merging the changes."]
+
+Make sure that in the end all three merge requests that have been opened by applying the template get successfully merged into the main branch of the `demo01-poi-backend-gitops` repository (Figure 5-31).
+
+image::5-31.png[title="Figure 5-31: All merge requests merged in the GitOps repository."]
+
+=== Verify the patched deployment for the component
+
+The changes you applied by means of the merge requests will eventually trigger Argo CD to take action based on the new desired state as defined by the `demo01-poi-backend-gitops` repository that hosts all the deployment manifests. If you don’t want to wait for the next automatic sync interval, you can go into Argo CD’s web UI, search for the `demo01-poi-backend-bootstrap` app, and manually hit the *SYNC* button to trigger it right away. This will lead to the reconciliation of all existing Kubernetes resources to match the new desired state of the patched deployment.
+
+==== Check the namespaces
+
+Most notably, in addition to the namespace `demo01` that already existed, you are supposed to see two new namespaces, namely `demo01-preprod` and `demo01-prod`. You can verify this by going into the OpenShift web console and checking for these additional namespaces (Figure 5-32), which are used to perform a staged deployment and promote the POI backend application from the development stage (`demo01` namespace) to the pre-production stage (`demo01-preprod`) and finally to the production stage (`demo01-prod`).
+
+image::5-32.png[title="Figure 5-32: OpenShift web console projects/namespaces."]
+
+==== Check the database and backend deployments
+
+In the OpenShift web console, click on the `demo01-preprod` namespace by selecting it from the Projects drop-down menu and open the Topology view (Figure 5-33). You should see the POI backend application (Deployment) together with its PostgreSQL database (StatefulSet). The same holds true if you look into the second namespace called `demo01-prod`. For now, don’t worry too much that in both these namespaces only the database instances are successfully up and running while the backend applications are not healthy yet. The reason for this is an error (`ImagePullBackOff`), which stems from the fact that the needed container images aren’t yet available for either of the two deployments.
+
+image::5-33.png[title="Figure 5-33: OpenShift web console topology view pre-prod project/namespace."]
+
+=== Promote the backend application
+
+Thanks to the applied template patch, the POI backend now supports a staged deployment. In order to promote the application from the development stage (currently running in the `demo01` namespace) to the pre-production stage (`demo01-preprod` namespace), all you need to do is create a tag in the corresponding source code repository of the application. When the time comes to put this tagged version into production, you create a release based on this tag which leads to the promotion of the application from the pre-production stage (`demo01-preprod` namespace) to the production stage (`demo01-prod` namespace).
+
+==== Tag the Git branch
+
+Open the `demo01-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu (Figure 5-34).
+
+image::5-34.png[title="Figure 5-34: GitLab tags view in source code repository."]
+
+Click the *NEW TAG* button in the upper right and fill out the form with the details describing the tag to create, as shown in Figure 5-35.
+
+image::5-35.png[title="Figure 5-35: GitLab tag creation form in source code repository."]
+
+Finally, confirm by clicking the *CREATE TAG* button (Figure 5-36).
+
+image::5-36.png[title="Figure 5-36: GitLab tag summary view in source code repository."]
+
+The creation of this new tag `v1.0` triggered the pipeline run of a new CI pipeline named `demo01-poi-backend-promote`, which (as its name implies) is intended to promote the application in question from one deployment stage to the next. In this case, your tag promotes the POI backend application from development to pre-production by copying the respective container image from the source image repository `demo01` to the target image repository `demo01-preprod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in Red Hat Developer Hub’s web UI by opening the CI tab of the `demo01-poi-backend` component. See Figure 5-37.
+
+image::5-37.png[title="Figure 5-37: RHDH component view CI tab showing successful promote pipeline run."]
+
+Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `demo01-preprod` namespace, where you should see that the promoted application is already running fine. The initial `ImagePullBackOff` error is now gone because the container image backing the deployment can finally be resolved correctly.
+
+image::5-38.png[title="Figure 5-38: OpenShift topology view in pre-prod project / namespace showing running deployment."]
+
+==== Create a new release
+
+Open the `demo01-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu. You should find the previously created tag named `v1.0` if you followed the naming conventions (Figure 5-39).
+
+image::5-39.png[title="Figure 5-39: GitLab tags overview showing the previously created v1.0 tag."]
+
+Click the *CREATE RELEASE* button on the right, which opens a form to describe the upcoming release (Figure 5-40). Fill out the main fields as you see fit.
+
+image::5-40a.png[title="Figure 5-40a: GitLab release creation form wizard."]
+image::5-40b.png[title="Figure 5-40b: GitLab release creation form wizard."]
+
+When you are done, scroll down to the end of the page and click the *CREATE RELEASE* button. You’ll be presented with a summary for the newly created release (Figure 5-41).
+
+image::5-41.png[title="Figure 5-41: GitLab release summary view."]
+
+The creation of this new release triggered another run of the new CI pipeline `demo01-poi-backend-promote`, which is used to promote the application in question from one deployment stage to the next. In this case, the created release on GitLab promotes the POI backend application from pre-production to production by copying the respective container image from the source image repository `demo01-preprod` to the target image repository `demo01-prod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in the Red Hat Developer Hub’s web UI by opening the CI tab of the `demo01-poi-backend` component.
+
+image::5-42.png[title="Figure 5-42: RHDH component view CI tab showing successful promote pipeline run."]
+
+Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `demo01-prod` namespace, where you should see that the promoted application is already running fine (Figure 5-43). Remember the initial `ImagePullBackOff` error, which is now gone because the container image backing the deployment could finally be resolved correctly.
+
+image::5-43.png[title="Figure 5-43: OpenShift topology view in prod project/namespace showing running deployment."]
+
+And there you have it! By means of another turnkey-ready patch template, you were able to introduce a staged deployment mechanism for an existing software component that has been originally scaffolded by an application template without support for multi-stage deployments.
+
+== Summary
+
+In this chapter, you learned how Red Hat Developer Hub supports two crucial maintenance activities, namely template evolution and component updates. While the continuous evolution of software templates is primarily among the tasks of platform engineers, maintaining existing components usually lies in the responsibility of application developers. This notwithstanding, platform engineers can make developers' lives considerably easier by baking certain application-specific update operations into yet other templates. Based on such “maintenance” templates, developers have a guided and (semi-)automated process allowing them to confidently patch existing components in a standardized manner.
+
+During the example, you exercised both by incorporating new requirements into an existing software template and patching a previously scaffolded software component. You also worked on slightly more involved updates that go beyond the mere application scope and deal with operational and deployment-related aspects of said components. In those cases, you as a developer could reuse handy patch templates crafted by platform engineers that allow for the same convenience when applying them onto an underlying GitOps repository rather than acting on a component’s source code only.
