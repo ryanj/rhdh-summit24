@@ -374,9 +374,9 @@ image::4-25c.png[title="Figure 4-25c: POI backend DB resource description."]
 
 Similar to these basic changes, more complex modifications can be performed whenever needed, such that the underlying metadata always reflects the current state based on your most recent engineering activities.
 
-This concludes your RHDH journey for building the NestJS backend service of the POI map application based on the template you applied earlier in link:#[Chapter 3].
+This concludes your RHDH journey for building the NestJS backend service of the POI map application based on the template you applied earlier in xref:module-03.adoc[Chapter 3].
 
-Next up, you will shift focus towards the proxy and frontend code base that has already been scaffolded (see link:#_proxy_and_frontend_template[Proxy and frontend template]) into a monorepo using the `quarkus-with-angular` template.
+Next up, you will shift focus towards the proxy and frontend code base that has already been scaffolded (see link:module-03.html#_proxy_and_frontend_template[Proxy and frontend template]) into a monorepo using the `quarkus-with-angular` template.
 
 == Implement the proxy and the frontend
 
