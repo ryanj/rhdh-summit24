@@ -1,20 +1,18 @@
 
-* xref:module-01.adoc[1. Red Hat Developer Hub]
-** xref:module-01.adoc#access[Access Requirements]
-** xref:module-01.adoc#catalog[Software Catalog]
-
-* xref:module-02.adoc[2. Catalog Entities]
-** xref:module-02.adoc#import[Importing Solutions]
-** xref:module-02.adoc#yaml[Catalog-info]
-
-* xref:module-03.adoc[3. Technical Documentation]
-** xref:module-03.adoc#documentation[Tech Docs]
-
-* xref:module-04.adoc[4. Templates]
-** xref:module-04.adoc#new[New Solutions]
-
-* xref:module-05.adoc[5. Software Lifecycle]
-** xref:module-05.adoc#delivery[Iterating on Solutions]
-
-* xref:module-06.adoc[6. Catalog Evolution]
-** xref:module-06.adoc#migration[Evolving Solutions]
+* xref:module-01.adoc[Chapter 1: A platform for portals]
+** xref:module-01.adoc#_internal_developer_platforms[Internal Developer Platforms]
+** xref:module-01.adoc#_red_hat_developer_hub[Red Hat Developer Hub]
+* xref:module-02.adoc[Chapter 2: The Software Catalog]
+** xref:module-02.adoc#_entities[Entities]
+* xref:module-03.adoc[Chapter 3: Templates: Application Head Start]
+** xref:module-03.adoc#_software_templates[Software Templates]
+** xref:module-03.adoc#_software_templates[Software Templates]
+* xref:module-04.adoc[Chapter 4: Building the POI map]
+** xref:module-04.adoc#_implement_the_backend[Implement the backend]
+** xref:module-04.adoc#_implement_the_proxy_and_the_frontend[Implement the proxy and the frontend
+]
+* xref:module-05.adoc[Chapter 5: Template and component evolution]
+** xref:module-05.adoc#_evolving_software_templates[Evolving Software Templates]
+** xref:module-05.adoc#_updating_existing_components[Updating existing components]
+** xref:module-05.adoc#_updating_existing_deployments[Updating existing deployments]
+* xref:module-06.adoc[Chapter 6: Conclusion]
