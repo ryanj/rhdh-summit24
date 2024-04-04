@@ -6,7 +6,7 @@ nav:
 
 asciidoc:
   attributes:
-    page-user: "{user}"
+    page-user: {user}
     page-links:
     - link: https://redhat.com
       text: Red Hat
@@ -16,8 +16,6 @@ asciidoc:
       text: Red Hat Developer Hub
     - link: {gitlab_url}
       text: GitLab
-    - link: {devspaces_url}
-      text: DevSpaces
     lab_name: "Prepare to Perform with the Software Catalog"
     release-version: master
     page-pagination: true
