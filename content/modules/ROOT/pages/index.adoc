@@ -17,10 +17,4 @@ This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
 
 your user_id is: {user}
 
-= About the preview edition
-
-This fragment invites you into our thinking as we write a developer’s guide to developer portals. In the first chapter, you’ll learn what an internal developer portal is and the problems addressed by this category of software. To practically apply those ideas, you’ll examine Red Hat Developer Hub (RHDH), built around the open source Backstage core to implement an enterprise distribution of a platform for creating developer portals.
-
-Subsequent chapters present some of the tools found in an RHDH instance and their representation in the RHDH user interface, then show you how to work with those tools to build an application. By the end of this preview, you’ll know the basics of Backstage Software Templates and the architecture of the example app. 
-
-We hope this advance screening will leave you informed about why IDPs are having a moment and intrigued enough to read the complete first edition when it is available. We’ll do our best to deliver insights about developer portals in modern development in terms of Backstage and RHDH, which together represent the pioneering implementation of developer portal concepts.
+By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, Backstage Software Templates, and the architecture of the example app. 

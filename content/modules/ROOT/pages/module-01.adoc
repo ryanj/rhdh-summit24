@@ -32,7 +32,7 @@ You’re supposed to be an expert in Java, not an expert on the details of your 
 
 Internal Developer Platforms (IDPs) aim to provide abstraction of development processes, offering a surface for capturing effective tools, libraries, source boilerplate, and configuration and centralizing access to them. Ironically, in the IDP ecosystem examined here, simplifying all that YAML involves… more YAML.
 
-= Internal Developer Platforms
+== Internal Developer Platforms
 
 An Internal Developer Platform is a set of tools, services, and practices intended to improve the productivity and collaboration of software development teams by abstracting and automating the surrounding complexity of the development and deployment process. An IDP provides developers with a unified environment for managing application components, services, and the development lifecycle, including code, infrastructure, and deployment.
 
@@ -83,7 +83,7 @@ Like Backstage, Red Hat Developer Hub is a platform for building developer porta
 
 You’ll see both the names Backstage and Red Hat Developer Hub in this book, which uses RHDH as a convenient Backstage deployment. We don’t exactly use the terms interchangeably. Directions and examples will usually refer to Red Hat Developer Hub, but concepts and terms that come directly from the upstream Backstage core are named as such. For example, you might go to the RHDH Catalog, but see references to core concepts like Backstage Software Templates. This illustrates how RHDH is a distribution of Backstage, providing all the core Backstage features, layered beneath essential plug-ins and configuration tended by Red Hat in the Developer Hub product. The examples in this book could be followed stepwise on a generic Backstage instance with little adaptation. But not any generic Backstage. You need a Backstage instance configured with the plug-ins for the implementing services on which the examples depend.
 
-= Summary
+== Summary
 
 Every team and every project evolves a tailored development environment. This collection of tools, services and configuration is often maintained by convention and transmitted by osmosis.
 

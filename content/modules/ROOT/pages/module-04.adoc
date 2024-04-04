@@ -360,15 +360,15 @@ image::4-24.png[title="Figure 4-24: POI backend component Overview tab schedule 
 
 Eventually, whether you just waited for a while or actively scheduled a refresh, you will see the three description changes that have been done in the underlying `catalog-info.yaml` in the respective RHDH catalog view and component tabs (Figure 4-25).
 
-===== Component description
+==== Component description
 
 image::4-25a.png[title="Figure 4-25a: POI backend component description."]
 
-===== API description
+==== API description
 
 image::4-25b.png[title="Figure 4-25b: POI backend API description."]
 
-===== Resourse description
+==== Resourse description
 
 image::4-25c.png[title="Figure 4-25c: POI backend DB resource description."]
 
