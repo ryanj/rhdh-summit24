@@ -6,7 +6,7 @@
 ** xref:module-02.adoc#_entities[Entities]
 * xref:module-03.adoc[Chapter 3: Templates: Application Head Start]
 ** xref:module-03.adoc#_software_templates[Software Templates]
-** xref:module-03.adoc#_software_templates[Software Templates]
+** xref:module-03.adoc#_instantiating_a_template_scaffolding[Instantiating a template: Scaffolding]
 * xref:module-04.adoc[Chapter 4: Building the POI map]
 ** xref:module-04.adoc#_implement_the_backend[Implement the backend]
 ** xref:module-04.adoc#_implement_the_proxy_and_the_frontend[Implement the proxy and the frontend
