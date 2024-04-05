@@ -23,6 +23,7 @@ asciidoc:
     rhdh_url: {rhdh_url}
     gitlab_url: {gitlab_url}
     console_url: {console_url}
+    cluster_id: {cluster_id}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid
     usernum: usernum
