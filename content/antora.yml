@@ -6,7 +6,7 @@ nav:
 
 asciidoc:
   attributes:
-    page-user: {user}
+    page-user: user{usernum}
     page-links:
     - link: https://redhat.com
       text: Red Hat
@@ -22,8 +22,10 @@ asciidoc:
     devspaces_url: {devspaces_url}
     rhdh_url: {rhdh_url}
     gitlab_url: {gitlab_url}
+    console_url: {console_url}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid
+    usernum: usernum
     ssh_user: devops
     ssh_password: devops
     ssh_command: ssh devops@bastion.{guid}.example.opentlc.com

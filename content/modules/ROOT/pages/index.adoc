@@ -9,12 +9,14 @@ Other vars can also be set there, such as `ssh_user` and `ssh_password`, and ref
 
 This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
 
-{devspaces_url}
-
 {rhdh_url}
+
+{console_url}
 
 {gitlab_url}
 
 your user_id is: {user}
+
+your user_number is: {usernum}
 
 By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, Backstage Software Templates, and the architecture of the example app. 
