@@ -241,7 +241,7 @@ image::3-17.png[title="Figure 3-17: Example usage for the fetch-template action.
 There’s a lot going on when you click *Create* and kick off the process of scaffolding from a template. If you imagine yourself encountering a portal where this template is already available, the value of the developer portal comes into clearer focus. Think of bouncing between service UIs and auth systems to manually perform all the steps automated by the template actions, from source control in GitLab to GitOps processes to continually build from source with Argo CD and Tekton Pipelines. You can see a depiction of the services harnessed together by the template scaffolding process in Figure 3-18.
 
 
-image::3-18.png[title="Figure 3-18: RHDH GitOps automation: Portal, GitLab, Argo CD, Tekton, OpenShift.']
+image::3-18.png[title="Figure 3-18: RHDH GitOps automation: Portal, GitLab, Argo CD, Tekton, OpenShift."]
 
 RHDH first reads the template contents from GitLab and then writes the scaffolded source code as well as the resulting GitOps related repository to GitLab. Then the portal instructs Argo CD to  create all the specified resources in the target Kubernetes cluster and namespace. The POI map example templates generate manifests in the form of Helm deployment charts that declare the following:
 
