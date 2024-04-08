@@ -10,7 +10,7 @@ You scaffolded the POI backend from the `nestjs-with-postgres` template in the l
 
 Because the backend service will use a database table named poi with a specific table structure, you need to provide a SQL DDL (Data Definition Language) snippet to configure Helm’s provisioning of the PostgreSQL database. 
 
-Open the backend’s GitOps repository, `demo01-poi-backend-gitops`, in GitLab. As the change to be made is a rather trivial one, you might take a shortcut here rather than going through a full development cycle including feature branches and merge requests. Edit the Helm chart’s values.yaml file directly in GitLab to add the following DDL snippet:
+Open the backend’s GitOps repository, `{user}-poi-backend-gitops`, in GitLab. As the change to be made is a rather trivial one, you might take a shortcut here rather than going through a full development cycle including feature branches and merge requests. Edit the Helm chart’s values.yaml file directly in GitLab to add the following DDL snippet:
 
 [source,yaml]
 ----
@@ -31,7 +31,7 @@ Open the backend’s GitOps repository, `demo01-poi-backend-gitops`, in GitLab. 
 ----
 
 
-To do so, browse to the file `helm/app/values.yaml` in the GitLab repository `demo01-poi-backend-gitops` and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
+To do so, browse to the file `helm/app/values.yaml` in the GitLab repository `{user}-poi-backend-gitops` and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
 
 :!figure-caption:
 
@@ -41,7 +41,7 @@ This change in the GitOps repository will eventually trigger another build pipel
 
 === Write the code
 
-Click on *Catalog* in the RHDH left-hand navigation and select the demo01-poi-backend component. In the component’s details view, jump to the corresponding GitLab source code repository by clicking the *View Source* link in the About tile of the Overview tab. From the GitLab page of the repository (Figure 4-2), use the *Clone URL* button to create a local clone for developing the application code. 
+Click on *Catalog* in the RHDH left-hand navigation and select the {user}-poi-backend component. In the component’s details view, jump to the corresponding GitLab source code repository by clicking the *View Source* link in the About tile of the Overview tab. From the GitLab page of the repository (Figure 4-2), use the *Clone URL* button to create a local clone for developing the application code. 
 
 image::4-2.png[title="Figure 4-2: POI backend repository in GitLab."]
 
@@ -60,10 +60,10 @@ unzip archive.zip -d archive/
 +
 [source,console]
 ----
-cp -r archive/* demo1-poi-backend/
+cp -r archive/* {user}-poi-backend/
 ----
 +
-3. Go into the project repository’s root folder `demo1-poi-backend` to open the file `openapi.yaml`, scroll down to line 97 in this file, and *specify the proper server URL* (see TODO section in the following code snippet) for this OpenAPI spec.
+3. Go into the project repository’s root folder `{user}-poi-backend` to open the file `openapi.yaml`, scroll down to line 97 in this file, and *specify the proper server URL* (see TODO section in the following code snippet) for this OpenAPI spec.
 +
 [source,yaml]
 ----
@@ -72,18 +72,18 @@ servers:
   # TODO:
   #  Add the secure https route URL pointing to your backend service into the setting
   # below. You can find the route URL in RHDH by inspecting the component's details in
-  # the topology view. If you used the suggested namespace ('demo01') and component id
+  # the topology view. If you used the suggested namespace ('{user}') and component id
  # ('poi-backend') it should look like this
-  # https://demo01-poi-backend-demo01.<cluster_id_here>
+  # https://{user}-poi-backend-{user}.<cluster_id_here>
   #   Beware that this must be a secure HTTP URL that starts with 'https://'
-  - url: <HTTPS_ROUTE_URL_TO_YOUR_BACKEND_SERVICE_HERE>
+  - url: https://{user}-poi-backend-{user}{cluster_id}
     description: (RHDH component deployment)
   #---------------------------------------------------------------------
 ----
 +
 It’s important that this server URL matches the respective HTTPS route URL that was created during the initial deployment of the backend service. Save this file after applying the modification.
 +
-4. Make sure you are inside the project’s root folder (`demo01-poi-backend`), then run the following Git commands:
+4. Make sure you are inside the project’s root folder (`{user}-poi-backend`), then run the following Git commands:
 +
 .. Create a new Git branch:
 +
@@ -151,7 +151,7 @@ image::4-6.png[title="Figure 4-6: POI backend component view Tekton tab in RHDH.
 
 === Check backend app status
 
-With the necessary application changes done, let’s figure out if your backend service is running correctly. Open the demo01-poi-backend in the RHDH catalog component view, switch to the *Topology* tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-7). 
+With the necessary application changes done, let’s figure out if your backend service is running correctly. Open the {user}-poi-backend in the RHDH catalog component view, switch to the *Topology* tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-7). 
 
 image::4-7.png[title="Figure 4-7: POI backend component Topology tab deployment resources."]
 
@@ -177,7 +177,7 @@ If you change the end of the URL to the path `/poi/find/all`, you should see a r
 
 === Explore the application’s API
 
-Your NestJS backend service offers a Swagger UI based on the underlying OpenAPI specification. You can inspect the exposed REST API by switching to the *API* tab in the catalog component’s detail view and then clicking on the one entry, `demo01-poi-backend-api`, in the *Provided APIs* table, as shown in Figure 4-9.
+Your NestJS backend service offers a Swagger UI based on the underlying OpenAPI specification. You can inspect the exposed REST API by switching to the *API* tab in the catalog component’s detail view and then clicking on the one entry, `{user}-poi-backend-api`, in the *Provided APIs* table, as shown in Figure 4-9.
 
 image::4-9.png[title="Figure 4-9: POI backend component API tab."]
 
@@ -205,7 +205,7 @@ image::4-13.png[title="Figure 4-13: GitLab raw file view for `openapi.yaml` defi
 
 Now that the application is up and running, you can shift your focus to another important aspect: documentation. You learned in the Applying Templates section that everything necessary to follow a “docs-like-code” approach is preconfigured and in place from the beginning. This means you can fully focus on writing documentation itself. No need to worry or explicitly care about generating and publishing documentation updates based on changed documentation sources.
 
-To see how convenient it is to add new documentation to your backend component, open the `demo01-poi-backend` component detail view in the RHDH catalog and click on the *View TechDocs* link in the *About* tile of the component’s Overview tab. This opens the current version of the backend service documentation (Figure 4-14).
+To see how convenient it is to add new documentation to your backend component, open the `{user}-poi-backend` component detail view in the RHDH catalog and click on the *View TechDocs* link in the *About* tile of the component’s Overview tab. This opens the current version of the backend service documentation (Figure 4-14).
 
 image::4-14.png[title="Figure 4-14: POI backend component tech docs."]
 
@@ -244,7 +244,7 @@ When you are done, click *Create issue* at the bottom of the page. The result is
 
 image::4-20.png[title="Figure 4-20: GitLab open TechDocs issue for POI backend component."]
 
-Switching to the RHDH component view for the `demo01-poi-backend` component and selecting the *Issues* tab, we can of course see this raised documentation-related issue accordingly (Figure 4-21).
+Switching to the RHDH component view for the `{user}-poi-backend` component and selecting the *Issues* tab, we can of course see this raised documentation-related issue accordingly (Figure 4-21).
 
 image::4-21.png[title="Figure 4-21: POI Backend component Issues tab with open TechDocs issue."]
 
@@ -252,7 +252,7 @@ In summary, TechDocs in Red Hat Developer Hub takes away a lot of the usual pain
 
 === Update the Software Catalog
 
-After developing the application specific code and writing some documentation, it’s recommended to also update relevant sections of the `catalog-info.yaml` for the `demo01-poi-backend` component. For this simple service, most of the catalog YAML definition is fine as originally scaffolded. However, it contains a few “general-purpose” descriptions across the contained entities, namely for the *Component*, the *API*, and the *Resource*. Modify the descriptions for the Component, the API, and Resource to something more meaningful that fits this `demo01-poi-backend` component. For instance, you might want to change these as follows:
+After developing the application specific code and writing some documentation, it’s recommended to also update relevant sections of the `catalog-info.yaml` for the `{user}-poi-backend` component. For this simple service, most of the catalog YAML definition is fine as originally scaffolded. However, it contains a few “general-purpose” descriptions across the contained entities, namely for the *Component*, the *API*, and the *Resource*. Modify the descriptions for the Component, the API, and Resource to something more meaningful that fits this `{user}-poi-backend` component. For instance, you might want to change these as follows:
 
  * *Component description*: `NestJS backend service for the POI map application`
 
@@ -260,7 +260,7 @@ After developing the application specific code and writing some documentation, i
 
  * *Resource description*: `database storing the POI records for the NestJS backend service of the POI map application`
 
-In order to do that, go to the `demo01-poi-backend` component’s catalog detail view, select the *Overview* tab and click the *Edit Metadata* icon in the upper-right corner of the *About* tile (Figure 4-22).
+In order to do that, go to the `{user}-poi-backend` component’s catalog detail view, select the *Overview* tab and click the *Edit Metadata* icon in the upper-right corner of the *About* tile (Figure 4-22).
 
 
 
@@ -275,14 +275,14 @@ This opens the `catalog-info.yaml` file in GitLab’s edit mode, where you can d
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: demo01-poi-backend
+  name: {user}-poi-backend
   description: NestJS backend service for the POI map application
   annotations:
-    argocd/app-name: demo01-poi-backend-dev
-    backstage.io/kubernetes-id: demo01-poi-backend
-    backstage.io/kubernetes-namespace: demo01
+    argocd/app-name: {user}-poi-backend-dev
+    backstage.io/kubernetes-id: {user}-poi-backend
+    backstage.io/kubernetes-namespace: {user}
     backstage.io/techdocs-ref: dir:.
-    gitlab.com/project-slug: development/demo01-poi-backend
+    gitlab.com/project-slug: development/{user}-poi-backend
     janus-idp.io/tekton-enabled: 'true'
   tags:
     - nodejs
@@ -290,71 +290,71 @@ metadata:
     - book
     - example
   links:
-    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/dev-pipelines/ns/demo01/
+    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/dev-pipelines/ns/{user}/
       title: Pipelines
       icon: web
-    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/k8s/ns/demo01/deployments/demo01-poi-backend
+    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/k8s/ns/{user}/deployments/{user}-poi-backend
       title: Deployment
       icon: web
-    - url: https://devspaces.apps.cluster-nxfzm.sandbox2909.opentlc.com/#https://gitlab-gitlab.apps.cluster-nxfzm.sandbox2909.opentlc.com/development/demo01-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces.apps.cluster-nxfzm.sandbox2909.opentlc.com/#https://gitlab-gitlab.apps.cluster-nxfzm.sandbox2909.opentlc.com/development/{user}-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
       title: OpenShift Dev Spaces
       icon: web
 spec:
   type: service
   lifecycle: production
-  owner: "user:default/user1"
-  system: idp-system-demo01
+  owner: "user:default/{user}"
+  system: idp-system-{user}
   providesApis:
-    - demo01-poi-backend-api
+    - {user}-poi-backend-api
   dependsOn: 
-    - resource:default/demo01-poi-backend-db
+    - resource:default/{user}-poi-backend-db
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: idp-system-demo01
+  name: idp-system-{user}
   tags:
     - rhdh
     - book
 spec:
-  owner: "user:default/user1"
+  owner: "user:default/{user}"
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: demo01-poi-backend-api
+  name: {user}-poi-backend-api
   description: API provided by the NestJS backend service of the POI map application to load and store POI records from the database
   links:
-    - url: http://demo01-poi-backend-demo01.apps.cluster-nxfzm.sandbox2909.opentlc.com/swagger
+    - url: http://{user}-poi-backend-{user}.apps.cluster-nxfzm.sandbox2909.opentlc.com/swagger
       title: Swagger UI
       icon: web
-    - url: https://gitlab-gitlab.apps.cluster-nxfzm.sandbox2909.opentlc.com/development/demo01-poi-backend/-/blob/main/openapi.yaml
+    - url: https://gitlab-gitlab.apps.cluster-nxfzm.sandbox2909.opentlc.com/development/{user}-poi-backend/-/blob/main/openapi.yaml
       title: API Spec
       icon: code
 spec:
   type: openapi
   lifecycle: production
-  owner: "user:default/user1"
-  system: idp-system-demo01
+  owner: "user:default/{user}"
+  system: idp-system-{user}
   definition:
     $text: ./openapi.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: demo01-poi-backend-db
+  name: {user}-poi-backend-db
   description: database storing the POI records for the NestJS backend service of the POI map application
 spec:
   type: database
-  owner: "user:default/user1"
-  system: idp-system-demo01
+  owner: "user:default/{user}"
+  system: idp-system-{user}
 ----
 
 Confirm these metadata changes by clicking *Commit changes* at the bottom (Figure 4-23).
 
 image::4-23.png[title="Figure 4-23: GitLab edit file view for catalog-info.yaml of POI backend component."]
 
-If you now go back to RHDH into the `demo01-poi-backend` component’s detail view, select the Overview tab, and take a look at the About tile, it might still show the previous component description. The reason is that RHDH, based on configuration settings, will periodically refresh such component changes by syncing the respective files from the GitLab repository into the software catalog. In case you are impatient, you can click the *Sync* icon in the upper-right of the About tile to actively schedule a refresh (Figure 4-24).
+If you now go back to RHDH into the `{user}-poi-backend` component’s detail view, select the Overview tab, and take a look at the About tile, it might still show the previous component description. The reason is that RHDH, based on configuration settings, will periodically refresh such component changes by syncing the respective files from the GitLab repository into the software catalog. In case you are impatient, you can click the *Sync* icon in the upper-right of the About tile to actively schedule a refresh (Figure 4-24).
 
 image::4-24.png[title="Figure 4-24: POI backend component Overview tab schedule entity refresh."]
 
@@ -384,7 +384,7 @@ Remember that the `quarkus-with-angular` template you applied in one of the prev
 
 === Write the code
 
-In RHDH, switch to the Catalog View and select the `demo01-poi-map-service` component. In contrast to a local development workflow that you followed for the backend service, you are taking a different approach here. In the component’s details view, select the *Overview* tab and click the *OpenShift Dev Spaces* link in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
+In RHDH, switch to the Catalog View and select the `{user}-poi-map-service` component. In contrast to a local development workflow that you followed for the backend service, you are taking a different approach here. In the component’s details view, select the *Overview* tab and click the *OpenShift Dev Spaces* link in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
 
 NOTE: During the time it takes to launch your browser-based VS Code instance, you might be asked for a re-authentication along the way, potentially more than once depending on how your RHDH environment has been configured in that regard.
 
@@ -438,7 +438,7 @@ Click into the terminal window at the bottom right of the screen and proceed wit
 +
  4. Copy all the contents from the `app-sources` folder into the application’s source code root folder and overwrite all existing files by running:
 +
-  cp -r archive/* demo01-poi-map/
+  cp -r archive/* {user}-poi-map/
 +
  5. Create a new branch in VS Code by switching to the Source Control view and then clicking the 3-dots menu in the upper-right of the left view pane to select *Branch → Create Branch* (Figure 4-29) and use `app-dev` as the branch’s name (Figure 4-30).
 +
@@ -446,7 +446,7 @@ image::4-29.png[title="Figure 4-29: OpenShift Dev Spaces VS Code create new bran
 +
 image::4-30.png[title="Figure 4-30: OpenShift Dev Spaces VS Code name branch."]
 +
- 6. Go into the project repository’s root folder, `demo1-poi-map`, then open the file `src/main/angular/src/assets/env.js`. Scroll down to line 12 and specify the REST API URL and the websocket endpoint (see TODO sections in the following example) for 
+ 6. Go into the project repository’s root folder, `{user}-poi-map`, then open the file `src/main/angular/src/assets/env.js`. Scroll down to line 12 and specify the REST API URL and the websocket endpoint (see TODO sections in the following example) for 
 +
 [source,yaml]
 ----
@@ -454,22 +454,22 @@ image::4-30.png[title="Figure 4-30: OpenShift Dev Spaces VS Code name branch."]
   //TODO 1:
   //  Add the secure https route URL pointing to your proxy service into the setting below.
   //  You can find the route URL in RHDH by inspecting the component's details in the topology view.
-  //  If you used the suggested namespace ('demo01') and component id ('poi-map') it should look like this https://demo01-poi-map-demo01.<cluster_id_here>
+  //  If you used the suggested namespace ('{user}') and component id ('poi-map') it should look like this https://{user}-poi-map-{user}.<cluster_id_here>
   //  Beware that this must be a secure HTTP URL that starts with 'https://'
-  window["env"]["gatewayApiUrl"] = "<HTTPS_ROUTE_URL_TO_YOUR_PROXY_SERVICE_HERE>";
+  window["env"]["gatewayApiUrl"] = "https://{user}-poi-map-{user}{cluster_id}";
   //TODO 2:
   //  Add the secure websocket route URL pointing to your proxy service into the setting below.
   //  You can find the route URL in RHDH by inspecting the component's details in the topology view.
-  //  If you used the suggested namespace ('demo01') and component id ('poi-map') it should look like this wss://demo01-poi-map-demo01.<cluster_id_here>/ws-server-endpoint
+  //  If you used the suggested namespace ('{user}') and component id ('poi-map') it should look like this wss://{user}-poi-map-{user}.<cluster_id_here>/ws-server-endpoint
   //  Beware that this must be a secure websocket URL that starts with 'wss://'
   window["env"]["websocketEndpoint"] =
-     "<WSS_ROUTE_URL_TO_YOUR_PROXY_SERVICE_HERE>/ws-server-endpoint";
+     "wss://{user}-poi-map-{user}{cluster_id}/ws-server-endpoint";
   //---------------------------------------------------------------------
 ----
 +
 It’s important that both these (HTTPS and WSS) match the route’s URL which has been created during the initial deployment of the proxy service. Save this file after applying the modification.
 +
- 7. Go into the project repository’s root folder `demo1-poi-backend`, then open the file `src/main/resources/META-INF/openapi.yaml`, scroll down to line 12, and specify the proper server URL (see TODO section) for this OpenAPI spec.
+ 7. Go into the project repository’s root folder `{user}-poi-backend`, then open the file `src/main/resources/META-INF/openapi.yaml`, scroll down to line 12, and specify the proper server URL (see TODO section) for this OpenAPI spec.
 +
 [source,yaml]
 ----
@@ -479,33 +479,33 @@ servers:
   # Add the secure https route URL pointing to your proxy service into the
   # setting below. You can find the route URL in RHDH by inspecting the
   # component's details in the topology view. If you used the suggested
-  # namespace ('demo01') and component id ('poi-map') it should look like this
-  # https://demo01-poi-map-demo01.<cluster_id_here>
+  # namespace ('{user}') and component id ('poi-map') it should look like this
+  # https://{user}-poi-map-{user}.<cluster_id_here>
   # Beware that this must be a secure HTTP URL that starts with 'https://'
-  - url: <HTTPS_ROUTE_URL_TO_YOUR_PROXY_SERVICE_HERE>
+  - url: https://{user}-poi-map-{user}{cluster_id}
     description: (RHDH component deployment)
   #---------------------------------------------------------------------
 ----
 +
 It’s important that this server URL matches the respective HTTPS route URL which has been created during the initial deployment of the backend service. Save this file after applying the modification.
 +
- 8. *Optional*: This step is only necessary if you used different settings for the namespace (`demo01`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `demo1-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
+ 8. *Optional*: This step is only necessary if you used different settings for the namespace (`{user}`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
 +
 [source,yaml]
 ----
 #---------------------------------------------------------------------
 # OPTIONAL TODO:
 # In case you have been following the instructions given in the respective
-# book chapters regarding the settings for namespace ('demo01') and
+# book chapters regarding the settings for namespace ('{user}') and
 # component id ('poi-backend'), you are good.
 # Otherwise please change the following config property and set it to the
 # cluster internal Kubernetes service name which was generate during the
 # initial RHDH deployment of the backend app component.
 #
 # http://<CLUSTER_INTERNAL_K8S_SERVICE_NAME>:3000
-# http://demo01-poi-backend:3000
+# http://{user}-poi-backend:3000
 
-parks.backend.endpoint=http://demo01-poi-backend:3000
+parks.backend.endpoint=http://{user}-poi-backend:3000
 
 #---------------------------------------------------------------------
 ----
@@ -520,7 +520,7 @@ image::4-31.png[title="Figure 4-31: OpenShift Dev Spaces VS Code changeset view.
 +
 image::4-32.png[title="Figure 4-32: OpenShift Dev Spaces VS Code publish branch."]
 +
- 11. Open the GitLab repository for the `demo01-poi-map` component and create a new merge request for this `app-dev` branch (Figure 4-33).
+ 11. Open the GitLab repository for the `{user}-poi-map` component and create a new merge request for this `app-dev` branch (Figure 4-33).
 +
 image::4-33a.png[title="Figure 4-33a: GitLab create merge request for pushed branch."]
 +
@@ -538,7 +538,7 @@ image::4-35.png[title="Figure 4-35: POI frontend’s Tekton build pipeline trigg
 
 === Check frontend app status
 
-With the necessary application changes being done, let’s figure out if your POI map proxy and frontend are running correctly. Open the `demo01-poi-map-service` in the RHDH catalog component view, switch to the Topology tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-36). 
+With the necessary application changes being done, let’s figure out if your POI map proxy and frontend are running correctly. Open the `{user}-poi-map-service` in the RHDH catalog component view, switch to the Topology tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-36). 
 
 image::4-36.png[title="Figure 4-36: POI frontend component Topology tab deployment resources."]
 
@@ -552,13 +552,16 @@ image::4-38.png[title="Figure 4-38: POI map application fully working."]
 
 === Add the documentation
 
-Backstage promotes technical documentation to first class. Making it relatively easy to create docs encourages their actual creation. Open `demo01-poi-map-service` in the catalog. Click on *View TechDocs* in the *About* tile in the component overview. Once again, the Template scaffolder has left you a bit of boilerplate to start from.
+Backstage promotes technical documentation to first class. Making it relatively easy to create docs encourages their actual creation. Open `{user}-poi-map-service` in the catalog. Click on *View TechDocs* in the *About* tile in the component overview. Once again, the Template scaffolder has left you a bit of boilerplate to start from.
 
-Similarly to the quick edit you made to the backend component (`demo01-poi-backend`) earlier, you can perform smallish updates to the documentation by changing the Markdown file right in GitLab’s file edit mode. For bigger documentation enhancements, you might want to work in a clone of the `demo01-poi-map-service` repo and in the editor or IDE you prefer.
+Similarly to the quick edit you made to the backend component (`{user}-poi-backend`) earlier, you can perform smallish updates to the documentation by changing the Markdown file right in GitLab’s file edit mode. For bigger documentation enhancements, you might want to work in a clone of the `{user}-poi-map-service` repo and in the editor or IDE you prefer.
 
 === Update the Software Catalog
 
-After writing the code and the documentation, it’s necessary to update relevant sections of the `catalog-info.yaml` files for both catalog components (`demo01-poi-map-service` and `demo01-poi-map-frontend`) so that they match the recent changes and are also tailored to reflect the POI map application rather than the “Hello, World” code bases that were originally generated by the template. You’ve already learned how this is done while working on the backend component `demo01-poi-backend` (see link:#_update_the_software_catalog[Update the Software Catalog]).
+After writing the code and the documentation, it’s necessary to update relevant sections of the `catalog-info.yaml` files for both catalog components (`{user}-poi-map-service` and `{user}-poi-map-frontend`) so that they match the recent changes and are also tailored to reflect the POI map application rather than the “Hello, World” code bases that were originally generated by the template. You’ve already learned how this is done while working on the backend component `{user}-poi-backend` (see link:#_update_the_software_catalog[Update the Software Catalog]).
 
 == Summary
-TBD
+
+In this chapter you completed a common development task by replacing the skeleton provided for your language and framework with the first iteration of running code for your new project. You’ve triggered the process of building and deploying that code through a GitOps pipeline onto a cluster. Your map application is online and displays the default set of Points of Interest. You’ve taken your project from scaffolded start to minimum viable product.
+
+Next, you’ll learn a technique for using Software Templates in the developer portal to manage essential maintenance tasks in a repeatable way.
