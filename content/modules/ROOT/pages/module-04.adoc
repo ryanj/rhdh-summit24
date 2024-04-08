@@ -45,25 +45,29 @@ Click on *Catalog* in the RHDH left-hand navigation and select the {user}-poi-ba
 
 image::4-2.png[title="Figure 4-2: POI backend repository in GitLab."]
 
-After cloning this repository, open the NestJS project in the IDE of your choice. At this point, you could start to develop the code for the application in question. To speed things up, we provide a turn-key ready implementation for this backend service in a ZIP archive.
+After cloning this repository, open the NestJS project in the IDE of your choice. At this point, you could start to develop the code for the application in question.
 
-After downloading the ZIP archive to your development machine, perform the following commands at a terminal prompt in your IDE or OS:
+We provide an implementation for this backend service in a repository (https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-backend) in the _Developer Hub Books_ GitHub organization.
 
-1. Unzip the archive:
+You are going to merge the sample code into the repository of your scaffolded backend application. From within the root folder of your cloned Git repository, run the following commands at a terminal prompt in your IDE or OS:
+
+ 1. Add the sample code repository as another Git remote called solution:
 +
-[source,console]
-----
-unzip archive.zip -d archive/
-----
+  git remote add solution  https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-backend.git
 +
-2. Copy all the contents from inside the root folder of the unzipped archive into the root folder of the cloned project repository:
+ 2. Fetch the contents from this new Git remote:
 +
-[source,console]
-----
-cp -r archive/* {user}-poi-backend/
-----
+  git fetch solution
 +
-3. Go into the project repository’s root folder `{user}-poi-backend` to open the file `openapi.yaml`, scroll down to line 97 in this file, and *specify the proper server URL* (see TODO section in the following code snippet) for this OpenAPI spec.
+ 3. Create a new Git branch named `app-dev`:
++
+  git checkout -b app-dev
++
+ 4. Merge the sample code into this new Git branch
++
+  git merge --allow-unrelated-histories --strategy-option theirs -m "merge provided sample code" solution/main
++
+ 5. From the project repository’s root folder, open the file `openapi.yaml`, scroll down to line 97 in this file, and *specify the proper server URL* (see TODO section in the following code snippet) for this OpenAPI spec.
 +
 [source,yaml]
 ----
@@ -83,55 +87,15 @@ servers:
 +
 It’s important that this server URL matches the respective HTTPS route URL that was created during the initial deployment of the backend service. Save this file after applying the modification.
 +
-4. Make sure you are inside the project’s root folder (`{user}-poi-backend`), then run the following Git commands:
+ 6. Stage all changes and commit your work to the `app-dev` branch
 +
-.. Create a new Git branch:
+  git commit -am "implement poi backend"
 +
-  git checkout -b app-dev
+ 7. Push this branch to the origin remote (i.e., your POI backend repository):
 +
-.. Stage all changes:
+  git push origin app-dev
 +
-  git add .
-+
-.. Run `git status`, and you should see a changeset like the following:
-+
-----
-  On branch app-dev
-  
-  Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        new file:   .env
-        modified:   Dockerfile
-        new file:   assets/nationalparks.json
-        new file:   initdb.sql
-        modified:   openapi.yaml
-        modified:   package-lock.json
-        modified:   package.json
-        new file:   prisma/migrations/init/migration.sql
-        new file:   prisma/migrations/migration_lock.toml
-        new file:   prisma/schema.prisma
-        deleted:    src/app.controller.spec.ts
-        deleted:    src/app.controller.ts
-        modified:   src/app.module.ts
-        deleted:    src/app.service.ts
-        new file:   src/poi/db.service.ts
-        new file:   src/poi/poi.controller.ts
-        new file:   src/poi/poi.record.ts
-        new file:   src/poi/poi.service.ts
-        new file:   src/proxy/backend.controller.ts
-----
-+
-.. Commit these application code changes and push this new branch `app-dev` to the GitLab repository:
-+
-----
-git commit -m "implement poi backend"
-----
-+
-----
-git push origin app-dev
-----
-+
-.. In the GitLab web UI, create a new merge request for your `app-dev` branch (Figure 4-3).
+ 8. In the GitLab web UI, create a new merge request for your `app-dev` branch (Figure 4-3).
 +
 image::4-3.png[title="Figure 4-3: GitLab open merge request for app-dev branch."]
 
@@ -418,35 +382,29 @@ Again, to speed things up, we provide a turnkey implementation for the POI proxy
 
 In OpenShift Dev Spaces, your web VS Code instance, open a terminal session by selecting *Terminal → New Terminal* from the burger menu in the upper left corner of the UI (Figure 4-28).
 
-
-
 image::4-28.png[title="Figure 4-28: OpenShift Dev Spaces VS Code open new terminal."]
 
-Click into the terminal window at the bottom right of the screen and proceed with the following steps in order to add the pre-created code necessary for the proxy and frontend applications to work together:
+Create a new branch in VS Code by switching to the Source Control view and then clicking the 3-dots menu in the upper-right of the left view pane to select *Branch → Create Branch* (Figure 4-29) and use `app-dev` as the branch’s name (Figure 4-30).
 
- 1. Switch to the parent directory of the current project root folder: 
-+
-  cd .. 
-+
- 2. You should be in a folder called projects. Inside that folder, download the ZIP archive containing the finished application sources:
-+
-  wget …
-+
- 3. Unzip the archive:
-+
-  unzip archive.zip -d archive/
-+
- 4. Copy all the contents from the `app-sources` folder into the application’s source code root folder and overwrite all existing files by running:
-+
-  cp -r archive/* {user}-poi-map/
-+
- 5. Create a new branch in VS Code by switching to the Source Control view and then clicking the 3-dots menu in the upper-right of the left view pane to select *Branch → Create Branch* (Figure 4-29) and use `app-dev` as the branch’s name (Figure 4-30).
-+
 image::4-29.png[title="Figure 4-29: OpenShift Dev Spaces VS Code create new branch."]
-+
+
 image::4-30.png[title="Figure 4-30: OpenShift Dev Spaces VS Code name branch."]
+
+After creating and selecting this new `app-dev` branch, click into the terminal window at the bottom right of the screen and proceed with the following steps in order to add the pre-created code necessary for the proxy and frontend applications to work together:
+
+ 1. Add the sample code repository as another Git remote called `solution`:
 +
- 6. Go into the project repository’s root folder, `{user}-poi-map`, then open the file `src/main/angular/src/assets/env.js`. Scroll down to line 12 and specify the REST API URL and the websocket endpoint (see TODO sections in the following example) for 
+  git remote add solution  https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-map.git
++
+ 2. Fetch the contents from this new Git remote:
++
+  git fetch solution
++
+ 3. Merge the sample code into your `app-dev` Git branch
++
+  git merge --allow-unrelated-histories --strategy-option theirs -m "merge provided sample code" solution/main
++
+ 4. Switch back to the file explorer view and open the file `src/main/angular/src/assets/env.js` from the files and folders view on the left. In that file, scroll down to line 12 and specify the REST API URL and the websocket endpoint (see TODO sections in the following example): 
 +
 [source,yaml]
 ----
@@ -469,7 +427,7 @@ image::4-30.png[title="Figure 4-30: OpenShift Dev Spaces VS Code name branch."]
 +
 It’s important that both these (HTTPS and WSS) match the route’s URL which has been created during the initial deployment of the proxy service. Save this file after applying the modification.
 +
- 7. Go into the project repository’s root folder `{user}-poi-backend`, then open the file `src/main/resources/META-INF/openapi.yaml`, scroll down to line 12, and specify the proper server URL (see TODO section) for this OpenAPI spec.
+ 5. Next, open the file `src/main/resources/META-INF/openapi.yaml`, scroll down to line 12, and specify the proper server URL (see TODO section) for this OpenAPI spec.
 +
 [source,yaml]
 ----
@@ -489,7 +447,7 @@ servers:
 +
 It’s important that this server URL matches the respective HTTPS route URL which has been created during the initial deployment of the backend service. Save this file after applying the modification.
 +
- 8. *Optional*: This step is only necessary if you used different settings for the namespace (`{user}`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
+ 6. *Optional*: This step is only necessary if you used different settings for the namespace (`{user}`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
 +
 [source,yaml]
 ----
@@ -512,21 +470,25 @@ parks.backend.endpoint=http://{user}-poi-backend:3000
 +
 Save this file after applying the modification.
 +
- 9. Stage and commit all changes which are reflected due to copying the final sources from the unzipped archive into the project’s root folder and performing the manual changes as just explained. Your changeset should look similar to one in Figure 4-31.
+ 7. Stage and commit all changes which are reflected due to performing the manual changes as just explained. Your changeset should look similar to one in Figure 4-31.
 +
 image::4-31.png[title="Figure 4-31: OpenShift Dev Spaces VS Code changeset view."]
 +
- 10. Finally, click the *Publish Branch* button to push this branch to the underlying GitLab repository (Figure 4-32).
+ 8. Finally, click the *Publish Branch* button to push this branch to the underlying GitLab repository (Figure 4-32a).
 +
-image::4-32.png[title="Figure 4-32: OpenShift Dev Spaces VS Code publish branch."]
+image::4-32a.png[title="Figure 4-32a: OpenShift Dev Spaces VS Code publish branch."]
 +
- 11. Open the GitLab repository for the `{user}-poi-map` component and create a new merge request for this `app-dev` branch (Figure 4-33).
+ 9. When prompted to pick one of the two remotes for this repository, make sure to select the `origin` remote that points to your scaffolded application repository (Figure 4-32b)
++
+image::4-32b.png[title="Figure 4-32b: OpenShift Dev Spaces VS Code pick remote."]
++
+ 10. Open the GitLab repository for the `{user}-poi-map` component and create a new merge request for this `app-dev` branch (Figure 4-33).
 +
 image::4-33a.png[title="Figure 4-33a: GitLab create merge request for pushed branch."]
 +
 image::4-33b.png[title="Figure 4-33b: GitLab open merge request for pushed branch."]
 +
-12. Merge this new `app-dev` branch into the `main` branch right away (Figure 4-34).
+ 11. Merge this new `app-dev` branch into the `main` branch right away (Figure 4-34).
 +
 image::4-34.png[title="Figure 4-34: GitLab merged merge request for branch app-dev."]
 
