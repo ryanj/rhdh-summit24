@@ -69,7 +69,7 @@ You are going to merge the sample code into the repository of your scaffolded ba
 +
  5. From the project repository’s root folder, open the file `openapi.yaml`, scroll down to line 97 in this file, and *specify the proper server URL* (see TODO section in the following code snippet) for this OpenAPI spec.
 +
-[source,yaml,subs="user,cluster_id"]
+[source,yaml,subs="attributes"]
 ----
 servers:
   #---------------------------------------------------------------------
@@ -232,7 +232,7 @@ image::4-22.png[title="Figure 4-22: POI backend component Overview tab edit meta
 
 This opens the `catalog-info.yaml` file in GitLab’s edit mode, where you can directly modify the three descriptions in the YAML definition as shown in the following example. Most relevant in the context of this example are the three description fields marked in bold: 
 
-[source,yaml,subs="user,cluster_id"]
+[source,yaml,subs="attributes"]
 ----
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -404,7 +404,7 @@ After creating and selecting this new `app-dev` branch, click into the terminal 
 +
  4. Switch back to the file explorer view and open the file `src/main/angular/src/assets/env.js` from the files and folders view on the left. In that file, scroll down to line 12 and specify the REST API URL and the websocket endpoint (see TODO sections in the following example): 
 +
-[source,yaml,subs="user,cluster_id"]
+[source,yaml,subs="attributes"]
 ----
   //---------------------------------------------------------------------
   //TODO 1:
@@ -427,7 +427,7 @@ It’s important that both these (HTTPS and WSS) match the route’s URL which h
 +
  5. Next, open the file `src/main/resources/META-INF/openapi.yaml`, scroll down to line 12, and specify the proper server URL (see TODO section) for this OpenAPI spec.
 +
-[source,yaml,subs="user,cluster_id"]
+[source,yaml,subs="attributes"]
 ----
 servers:
   #---------------------------------------------------------------------
@@ -447,7 +447,7 @@ It’s important that this server URL matches the respective HTTPS route URL whi
 +
  6. *Optional*: This step is only necessary if you used different settings for the namespace (`{user}`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
 +
-[source,yaml,subs="user"]
+[source,yaml,subs="attributes"]
 ----
 #---------------------------------------------------------------------
 # OPTIONAL TODO:
