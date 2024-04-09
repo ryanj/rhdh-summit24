@@ -393,7 +393,7 @@ image::3-34.png[title="Figure 3-34: POI backend component Dependencies tab."]
 
 For the registered backend component you can see at a first glance:
 
-. who owns it (`{namespace}`);
+. who owns it (`{user}`);
 . which resource—in this case, database—it depends on (`{namespace}-poi-backend-db`);
 . that it provides an API (`{namespace}-poi-backend-api`);
 . and that this component is part of a system (`idp-system-{namespace}`).

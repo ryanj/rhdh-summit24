@@ -392,7 +392,7 @@ After creating and selecting this new `app-dev` branch, click into the terminal 
 
  1. Add the sample code repository as another Git remote called `solution`:
 +
-  git remote add solution  https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-map.git
+  git remote add solution https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-map.git
 +
  2. Fetch the contents from this new Git remote:
 +
