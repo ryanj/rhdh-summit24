@@ -436,7 +436,7 @@ servers:
   # setting below. You can find the route URL in RHDH by inspecting the
   # component's details in the topology view. If you used the suggested
   # namespace ('{user}') and component id ('poi-map') it should look like this
-  # https://{user}-poi-map-{user}.<cluster_id_here>
+  # https://{user}-poi-map-{user}{cluster_id}
   # Beware that this must be a secure HTTP URL that starts with 'https://'
   - url: https://{user}-poi-map-{user}{cluster_id}
     description: (RHDH component deployment)
@@ -445,20 +445,17 @@ servers:
 +
 It’s important that this server URL matches the respective HTTPS route URL which has been created during the initial deployment of the backend service. Save this file after applying the modification.
 +
- 6. *Optional*: This step is only necessary if you used different settings for the namespace (`{user}`) and/or component ID of the backend (`poi-backend`). Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
+ 6. Go into the project repository’s root folder, `{user}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
 +
 [source,yaml,subs="attributes"]
 ----
 #---------------------------------------------------------------------
-# OPTIONAL TODO:
-# In case you have been following the instructions given in the respective
-# book chapters regarding the settings for namespace ('{user}') and
-# component id ('poi-backend'), you are good.
-# Otherwise please change the following config property and set it to the
-# cluster internal Kubernetes service name which was generate during the
+# TODO:
+# Please change the following config property and set it to the
+# cluster internal Kubernetes service name which was generated during the
 # initial RHDH deployment of the backend app component.
 #
-# http://<CLUSTER_INTERNAL_K8S_SERVICE_NAME>:3000
+# http://\{CLUSTER_INTERNAL_K8S_SERVICE_NAME}:3000
 # http://{user}-poi-backend:3000
 
 parks.backend.endpoint=http://{user}-poi-backend:3000
