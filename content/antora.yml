@@ -26,7 +26,9 @@ asciidoc:
     cluster_id: {cluster_id}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid
-    usernum: usernum
+    usernum: 1
+    user: user{usernum}
+    namespace: demo{usernum}
     ssh_user: devops
     ssh_password: devops
     ssh_command: ssh devops@bastion.{guid}.example.opentlc.com

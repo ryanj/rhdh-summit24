@@ -104,7 +104,7 @@ image::5-7.png[title="Figure 5-7: Quarkus Application Patch Template."]
 
 ==== Template form wizard
 
-This brings you to the template’s form wizard where you can configure certain elements of the template. In the first section of this form (Figure 5-8), you provide information about the component that you want to apply this patch on. In this example, it’s the cluster ID, the GitLab group/owner, and most importantly, the GitLab repo name(s) that should get patched. You are going to specify the repo name by clicking on the *+ ADD ITEM* button and entering the repo name of the proxy and frontend component, which is `{user}-poi-map` if you followed the naming conventions so far. You can optionally enter a particular name (default: `templated-app-patch`) for the repo branch that will store the code changes that should get applied by the template. This branch in turn becomes the source for the merge request that gets automatically opened.
+This brings you to the template’s form wizard where you can configure certain elements of the template. In the first section of this form (Figure 5-8), you provide information about the component that you want to apply this patch on. In this example, it’s the cluster ID, the GitLab group/owner, and most importantly, the GitLab repo name(s) that should get patched. You are going to specify the repo name by clicking on the *+ ADD ITEM* button and entering the repo name of the proxy and frontend component, which is `{namespace}-poi-map` if you followed the naming conventions so far. You can optionally enter a particular name (default: `templated-app-patch`) for the repo branch that will store the code changes that should get applied by the template. This branch in turn becomes the source for the merge request that gets automatically opened.
 
 image::5-8.png[title="Figure 5-8: Quarkus Application Patch Template configuration form, first section."]
 
@@ -168,7 +168,7 @@ Next, click the *build-and-push* step in order to check for the container base i
 
 image::5-17.png[title="Figure 5-17: Inspect logs for pipeline step build-and-push."]
 
-Finally, open the *Topology* tab for the `{user}-poi-map-service` component. Click on the deployment and choose the *Resources* tab in the side pane that appears from the right to click *View Logs* (Figure 5-18).
+Finally, open the *Topology* tab for the `{namespace}-poi-map-service` component. Click on the deployment and choose the *Resources* tab in the side pane that appears from the right to click *View Logs* (Figure 5-18).
 
 image::5-18.png[title="Figure 5-18: Component’s topology view with deployment resources selected."]
 
@@ -202,7 +202,7 @@ image::5-23.png[title="Figure 5-23: Staged Deployment Patch Template."]
 
 ==== Template form wizard
 
-This brings you to the template’s form wizard where you can configure certain elements of the template (Figure 5-24). To keep things simple, this exemplary patch template only asks you to provide information about the component which you want to patch the GitOps manifests for: the cluster ID, the GitLab group/owner, the namespace, and the application ID. If you’ve been following the previously recommended naming conventions, you will specify `{user}` as namespace and `poi-backend` as application ID. You can optionally enter a branch name, which defaults to `templated-gitops-patch`, for the branch that will store the various manifest-related changes that get applied by the template. The auto-created branches will in turn become the sources for merge requests that get automatically opened in the GitOps repository of the component you referred to.
+This brings you to the template’s form wizard where you can configure certain elements of the template (Figure 5-24). To keep things simple, this exemplary patch template only asks you to provide information about the component which you want to patch the GitOps manifests for: the cluster ID, the GitLab group/owner, the namespace, and the application ID. If you’ve been following the previously recommended naming conventions, you will specify `{namespace}` as namespace and `poi-backend` as application ID. You can optionally enter a branch name, which defaults to `templated-gitops-patch`, for the branch that will store the various manifest-related changes that get applied by the template. The auto-created branches will in turn become the sources for merge requests that get automatically opened in the GitOps repository of the component you referred to.
 
 image::5-24.png[title="Figure 5-24: Staged Deployment Patch Template configuration form, input section."]
 
@@ -230,7 +230,7 @@ image::5-26.png[title="Figure 5-26: Staged Deployment Patch Template."]
 
 === Review the opened merge requests
 
-In GitLab, go to the `{user}-poi-backend-gitops` repository that has been patched by means of the template and inspect the opened merge requests (Figure 5-27). Remember the note from the previous section, which explains why you ended up with three separate ones.
+In GitLab, go to the `{namespace}-poi-backend-gitops` repository that has been patched by means of the template and inspect the opened merge requests (Figure 5-27). Remember the note from the previous section, which explains why you ended up with three separate ones.
 
 image::5-27.png[title="Figure 5-27: Inspect the opened merge requests after applying the template."]
 
@@ -246,33 +246,33 @@ Finally, go back to the *Overview* tab and confirm these auto-generated changes 
 
 image::5-30.png[title="Figure 5-30: Merge request overview after merging the changes."]
 
-Make sure that in the end all three merge requests that have been opened by applying the template get successfully merged into the main branch of the `{user}-poi-backend-gitops` repository (Figure 5-31).
+Make sure that in the end all three merge requests that have been opened by applying the template get successfully merged into the main branch of the `{namespace}-poi-backend-gitops` repository (Figure 5-31).
 
 image::5-31.png[title="Figure 5-31: All merge requests merged in the GitOps repository."]
 
 === Verify the patched deployment for the component
 
-The changes you applied by means of the merge requests will eventually trigger Argo CD to take action based on the new desired state as defined by the `{user}-poi-backend-gitops` repository that hosts all the deployment manifests. If you don’t want to wait for the next automatic sync interval, you can go into Argo CD’s web UI, search for the `{user}-poi-backend-bootstrap` app, and manually hit the *SYNC* button to trigger it right away. This will lead to the reconciliation of all existing Kubernetes resources to match the new desired state of the patched deployment.
+The changes you applied by means of the merge requests will eventually trigger Argo CD to take action based on the new desired state as defined by the `{namespace}-poi-backend-gitops` repository that hosts all the deployment manifests. If you don’t want to wait for the next automatic sync interval, you can go into Argo CD’s web UI, search for the `{namespace}-poi-backend-bootstrap` app, and manually hit the *SYNC* button to trigger it right away. This will lead to the reconciliation of all existing Kubernetes resources to match the new desired state of the patched deployment.
 
 ==== Check the namespaces
 
-Most notably, in addition to the namespace `{user}` that already existed, you are supposed to see two new namespaces, namely `{user}-preprod` and `{user}-prod`. You can verify this by going into the OpenShift web console and checking for these additional namespaces (Figure 5-32), which are used to perform a staged deployment and promote the POI backend application from the development stage (`{user}` namespace) to the pre-production stage (`{user}-preprod`) and finally to the production stage (`{user}-prod`).
+Most notably, in addition to the namespace `{namespace}` that already existed, you are supposed to see two new namespaces, namely `{namespace}-preprod` and `{namespace}-prod`. You can verify this by going into the OpenShift web console and checking for these additional namespaces (Figure 5-32), which are used to perform a staged deployment and promote the POI backend application from the development stage (`{namespace}` namespace) to the pre-production stage (`{namespace}-preprod`) and finally to the production stage (`{namespace}-prod`).
 
 image::5-32.png[title="Figure 5-32: OpenShift web console projects/namespaces."]
 
 ==== Check the database and backend deployments
 
-In the OpenShift web console, click on the `{user}-preprod` namespace by selecting it from the Projects drop-down menu and open the Topology view (Figure 5-33). You should see the POI backend application (Deployment) together with its PostgreSQL database (StatefulSet). The same holds true if you look into the second namespace called `{user}-prod`. For now, don’t worry too much that in both these namespaces only the database instances are successfully up and running while the backend applications are not healthy yet. The reason for this is an error (`ImagePullBackOff`), which stems from the fact that the needed container images aren’t yet available for either of the two deployments.
+In the OpenShift web console, click on the `{namespace}-preprod` namespace by selecting it from the Projects drop-down menu and open the Topology view (Figure 5-33). You should see the POI backend application (Deployment) together with its PostgreSQL database (StatefulSet). The same holds true if you look into the second namespace called `{namespace}-prod`. For now, don’t worry too much that in both these namespaces only the database instances are successfully up and running while the backend applications are not healthy yet. The reason for this is an error (`ImagePullBackOff`), which stems from the fact that the needed container images aren’t yet available for either of the two deployments.
 
 image::5-33.png[title="Figure 5-33: OpenShift web console topology view pre-prod project/namespace."]
 
 === Promote the backend application
 
-Thanks to the applied template patch, the POI backend now supports a staged deployment. In order to promote the application from the development stage (currently running in the `{user}` namespace) to the pre-production stage (`{user}-preprod` namespace), all you need to do is create a tag in the corresponding source code repository of the application. When the time comes to put this tagged version into production, you create a release based on this tag which leads to the promotion of the application from the pre-production stage (`{user}-preprod` namespace) to the production stage (`{user}-prod` namespace).
+Thanks to the applied template patch, the POI backend now supports a staged deployment. In order to promote the application from the development stage (currently running in the `{namespace}` namespace) to the pre-production stage (`{namespace}-preprod` namespace), all you need to do is create a tag in the corresponding source code repository of the application. When the time comes to put this tagged version into production, you create a release based on this tag which leads to the promotion of the application from the pre-production stage (`{namespace}-preprod` namespace) to the production stage (`{namespace}-prod` namespace).
 
 ==== Tag the Git branch
 
-Open the `{user}-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu (Figure 5-34).
+Open the `{namespace}-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu (Figure 5-34).
 
 image::5-34.png[title="Figure 5-34: GitLab tags view in source code repository."]
 
@@ -284,17 +284,17 @@ Finally, confirm by clicking the *CREATE TAG* button (Figure 5-36).
 
 image::5-36.png[title="Figure 5-36: GitLab tag summary view in source code repository."]
 
-The creation of this new tag `v1.0` triggered the pipeline run of a new CI pipeline named `{user}-poi-backend-promote`, which (as its name implies) is intended to promote the application in question from one deployment stage to the next. In this case, your tag promotes the POI backend application from development to pre-production by copying the respective container image from the source image repository `{user}` to the target image repository `{user}-preprod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in Red Hat Developer Hub’s web UI by opening the CI tab of the `{user}-poi-backend` component. See Figure 5-37.
+The creation of this new tag `v1.0` triggered the pipeline run of a new CI pipeline named `{namespace}-poi-backend-promote`, which (as its name implies) is intended to promote the application in question from one deployment stage to the next. In this case, your tag promotes the POI backend application from development to pre-production by copying the respective container image from the source image repository `{namespace}` to the target image repository `{namespace}-preprod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in Red Hat Developer Hub’s web UI by opening the CI tab of the `{namespace}-poi-backend` component. See Figure 5-37.
 
 image::5-37.png[title="Figure 5-37: RHDH component view CI tab showing successful promote pipeline run."]
 
-Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `{user}-preprod` namespace, where you should see that the promoted application is already running fine. The initial `ImagePullBackOff` error is now gone because the container image backing the deployment can finally be resolved correctly.
+Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `{namespace}-preprod` namespace, where you should see that the promoted application is already running fine. The initial `ImagePullBackOff` error is now gone because the container image backing the deployment can finally be resolved correctly.
 
 image::5-38.png[title="Figure 5-38: OpenShift topology view in pre-prod project / namespace showing running deployment."]
 
 ==== Create a new release
 
-Open the `{user}-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu. You should find the previously created tag named `v1.0` if you followed the naming conventions (Figure 5-39).
+Open the `{namespace}-poi-backend` repository in GitLab and choose *Repository → Tags* from the left navigation menu. You should find the previously created tag named `v1.0` if you followed the naming conventions (Figure 5-39).
 
 image::5-39.png[title="Figure 5-39: GitLab tags overview showing the previously created v1.0 tag."]
 
@@ -307,11 +307,11 @@ When you are done, scroll down to the end of the page and click the *CREATE RELE
 
 image::5-41.png[title="Figure 5-41: GitLab release summary view."]
 
-The creation of this new release triggered another run of the new CI pipeline `{user}-poi-backend-promote`, which is used to promote the application in question from one deployment stage to the next. In this case, the created release on GitLab promotes the POI backend application from pre-production to production by copying the respective container image from the source image repository `{user}-preprod` to the target image repository `{user}-prod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in the Red Hat Developer Hub’s web UI by opening the CI tab of the `{user}-poi-backend` component.
+The creation of this new release triggered another run of the new CI pipeline `{namespace}-poi-backend-promote`, which is used to promote the application in question from one deployment stage to the next. In this case, the created release on GitLab promotes the POI backend application from pre-production to production by copying the respective container image from the source image repository `{namespace}-preprod` to the target image repository `{namespace}-prod`. While you might want to perform more sophisticated actions in a real-world setting, the approach shown here illustrates typical concepts and activities happening behind the scenes. You can inspect the pipeline run directly in the Red Hat Developer Hub’s web UI by opening the CI tab of the `{namespace}-poi-backend` component.
 
 image::5-42.png[title="Figure 5-42: RHDH component view CI tab showing successful promote pipeline run."]
 
-Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `{user}-prod` namespace, where you should see that the promoted application is already running fine (Figure 5-43). Remember the initial `ImagePullBackOff` error, which is now gone because the container image backing the deployment could finally be resolved correctly.
+Once this pipeline run successfully finishes, you can switch to the OpenShift web console and open the Topology view for the `{namespace}-prod` namespace, where you should see that the promoted application is already running fine (Figure 5-43). Remember the initial `ImagePullBackOff` error, which is now gone because the container image backing the deployment could finally be resolved correctly.
 
 image::5-43.png[title="Figure 5-43: OpenShift topology view in prod project/namespace showing running deployment."]
 

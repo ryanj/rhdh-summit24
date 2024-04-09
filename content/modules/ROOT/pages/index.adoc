@@ -19,4 +19,6 @@ your user_id is: {user}
 
 your user_number is: {usernum}
 
+your namespaces are: {namespace}, {namespace}-preprod, {namespace}-prod
+
 By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, Backstage Software Templates, and the architecture of the example app. 

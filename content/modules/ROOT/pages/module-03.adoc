@@ -252,7 +252,7 @@ RHDH first reads the template contents from GitLab and then writes the scaffolde
 
 Continuing with the itemization of the steps automated by RHDH in its process of scaffolding resources from the backend template, take a look at the GitOps resources the scaffolder puts in place:
 
-. Two new repositories, link:{gitlab_url}/development/{user}-poi-backend[`{user}-poi-backend`] and link:{gitlab_url}/development/{user}-poi-backend-gitops[`{user}-poi-backend-gitops`], dividing application source from CI/CD automation resources (Figure 3-19).
+. Two new repositories, link:{gitlab_url}/development/{namespace}-poi-backend[`{namespace}-poi-backend`] and link:{gitlab_url}/development/{namespace}-poi-backend-gitops[`{namespace}-poi-backend-gitops`], dividing application source from CI/CD automation resources (Figure 3-19).
 +
 image::3-19.png[title="Figure 3-19: GitLab repositories for the POI backend."]
 +
@@ -266,7 +266,7 @@ image::3-21.png[title="Figure 3-21: OpenShift topology view of the POI backend."
 
 ==== POI backend in the Software Catalog
 
-The template scaffolding process added an entry to the Software Catalog for the POI backend, {user}-poi-backend. Switch to the Catalog View in the RHDH left navigation to see it (Figure 3-22). 
+The template scaffolding process added an entry to the Software Catalog for the POI backend, {namespace}-poi-backend. Switch to the Catalog View in the RHDH left navigation to see it (Figure 3-22). 
 
 image::3-22.png[title="Figure 3-22: POI backend entity in the Software Catalog."]
 
@@ -296,14 +296,14 @@ The available information displayed in the details view and its different tabs i
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: {user}-poi-backend
+  name: {namespace}-poi-backend
   description: Creates a NestJS Service together with a PostgreSQL database
   annotations:
-    argocd/app-name: {user}-poi-backend-dev
-    backstage.io/kubernetes-id: {user}-poi-backend
-    backstage.io/kubernetes-namespace: {user}
+    argocd/app-name: {namespace}-poi-backend-dev
+    backstage.io/kubernetes-id: {namespace}-poi-backend
+    backstage.io/kubernetes-namespace: {namespace}
     backstage.io/techdocs-ref: dir:.
-    gitlab.com/project-slug: development/{user}-poi-backend
+    gitlab.com/project-slug: development/{namespace}-poi-backend
     janus-idp.io/tekton-enabled: 'true'
   tags:
     - nodejs
@@ -311,24 +311,24 @@ metadata:
     - book
     - example
   links:
-    - url: https://console-openshift-console{cluster_id}/dev-pipelines/ns/{user}/
+    - url: https://console-openshift-console{cluster_id}/dev-pipelines/ns/{namespace}/
       title: Pipelines
       icon: web
-    - url: https://console-openshift-console{cluster_id}/k8s/ns/{user}/deployments/{user}-poi-backend
+    - url: https://console-openshift-console{cluster_id}/k8s/ns/{namespace}/deployments/{namespace}-poi-backend
       title: Deployment
       icon: web
-    - url: https://devspaces{cluster_id}/#https://gitlab-gitlab{cluster_id}/development/{user}-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces{cluster_id}/#https://gitlab-gitlab{cluster_id}/development/{namespace}-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
       title: OpenShift Dev Spaces
       icon: web
 spec:
   type: service
   lifecycle: production
   owner: "user:default/{user}"
-  system: idp-system-{user}
+  system: idp-system-{namespace}
   providesApis:
-    - {user}-poi-backend-api
+    - {namespace}-poi-backend-api
   dependsOn: 
-    - resource:default/{user}-poi-backend-db
+    - resource:default/{namespace}-poi-backend-db
 ----
 
 Towards the end of this component definition you can see information about the owner, relationships regarding the logical grouping of components into a system, but also whether or not there are provided or consumed APIs for this component (`providesApis`), and if dependencies to other components and/or infrastructure resources (e.g., databases, messaging queues, caches) exist (`dependsOn`).
@@ -393,10 +393,10 @@ image::3-34.png[title="Figure 3-34: POI backend component Dependencies tab."]
 
 For the registered backend component you can see at a first glance:
 
-. who owns it (`{user}`);
-. which resource—in this case, database—it depends on (`{user}-poi-backend-db`);
-. that it provides an API (`{user}-poi-backend-api`);
-. and that this component is part of a system (`idp-system-{user}`).
+. who owns it (`{namespace}`);
+. which resource—in this case, database—it depends on (`{namespace}-poi-backend-db`);
+. that it provides an API (`{namespace}-poi-backend-api`);
+. and that this component is part of a system (`idp-system-{namespace}`).
 
 As more components will be added by means of applying further templates and by properly maintaining all these relationships in the respective `catalog-info.yaml` files during the development phase, such diagrams will grow and thus become more valuable in making sense of larger and more complex systems.
 
@@ -450,7 +450,7 @@ Insights into what’s happening during the scaffolding process under the covers
 
 As a result of applying this template, you end up with the following resources created on your behalf:
 
-. In GitLab you have two new repositories, namely link:{gitlab_url}/development/{user}-poi-map[`{user}-poi-map`] and link:{gitlab_url}/development/{user}-poi-map-gitops[`{user}-poi-map-gitops`] (Figure 3-42).
+. In GitLab you have two new repositories, namely link:{gitlab_url}/development/{namespace}-poi-map[`{namespace}-poi-map`] and link:{gitlab_url}/development/{namespace}-poi-map-gitops[`{namespace}-poi-map-gitops`] (Figure 3-42).
 +
 image::3-42.png[title="Figure 3-42: GitLab repositories for the POI frontend."]
 +
@@ -466,7 +466,7 @@ image::3-44.png[title="Figure 3-44: OpenShift topology view with the POI backend
 
 In contrast to the backend template, the major difference with this template is the fact that you end up with two separately registered catalog components. This is intentional, and results from the “monorepo” approach that has been chosen when creating the template for this proxy service that embeds the frontend application.
 
-Switch to the Catalog View in Developer Hub to find and explore your two new software catalog components, which are `{user}-poi-map-frontend` (Angular Single Page Application) and `{user}-poi-map-service` (Quarkus proxy), as shown in Figure 3-45.
+Switch to the Catalog View in Developer Hub to find and explore your two new software catalog components, which are `{namespace}-poi-map-frontend` (Angular Single Page Application) and `{namespace}-poi-map-service` (Quarkus proxy), as shown in Figure 3-45.
 
 image::3-45.png[title="Figure 3-45: POI proxy service and frontend entities in the Software Catalog."]
 
@@ -476,7 +476,7 @@ Just to clarify, of course it would work to treat both these components complete
 
 NOTE: Keep in mind that the actual possibilities, the available tabs, and the tiles anywhere in that detail view primarily depend on the configuration of the RHDH instance, the installed plug-ins as well as any component view customizations which might or might not be in place for your environment.
 
-Because you already visited the different tabs for a component’s detail view earlier while exploring the `{user}-poi-backend` component (see link:#_poi_backend_in_the_software_catalog[POI backend in the Software Catalog]) of the POI map application, this should all look very familiar to you at that stage.
+Because you already visited the different tabs for a component’s detail view earlier while exploring the `{namespace}-poi-backend` component (see link:#_poi_backend_in_the_software_catalog[POI backend in the Software Catalog]) of the POI map application, this should all look very familiar to you at that stage.
 
 == Summary
 
