@@ -291,7 +291,7 @@ The *Overview* tab displays a few tiles, including an *About* section with direc
 
 The available information displayed in the details view and its different tabs is directly and largely based on the component’s `catalog-info.yaml` file. To give a simple example, the links tile holds custom component links which are found in the links section of this component’s YAML definition:
 
-[source,yaml]
+[source,yaml,subs="attributes"]
 ----
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -311,13 +311,13 @@ metadata:
     - book
     - example
   links:
-    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/dev-pipelines/ns/{user}/
+    - url: https://console-openshift-console{cluster_id}/dev-pipelines/ns/{user}/
       title: Pipelines
       icon: web
-    - url: https://console-openshift-console.apps.cluster-nxfzm.sandbox2909.opentlc.com/k8s/ns/{user}/deployments/{user}-poi-backend
+    - url: https://console-openshift-console{cluster_id}/k8s/ns/{user}/deployments/{user}-poi-backend
       title: Deployment
       icon: web
-    - url: https://devspaces.apps.cluster-nxfzm.sandbox2909.opentlc.com/#https://gitlab-gitlab.apps.cluster-nxfzm.sandbox2909.opentlc.com/development/{user}-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces{cluster_id}/#https://gitlab-gitlab{cluster_id}/development/{user}-poi-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
       title: OpenShift Dev Spaces
       icon: web
 spec:
