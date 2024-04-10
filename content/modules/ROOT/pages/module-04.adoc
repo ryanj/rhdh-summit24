@@ -53,7 +53,10 @@ You are going to merge the sample code into the repository of your scaffolded ba
 
  1. Add the sample code repository as another Git remote called solution:
 +
-  git remote add solution https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-backend.git
+[source,console,subs="attributes"]
+----
+git remote add solution {gitlab_url}/rhdh/sample-code-poi-backend.git
+----
 +
  2. Fetch the contents from this new Git remote:
 +
@@ -392,7 +395,10 @@ After creating and selecting this new `app-dev` branch, click into the terminal 
 
  1. Add the sample code repository as another Git remote called `solution`:
 +
-  git remote add solution https://github.com/developer-hub-books/rhdh-book1-sample-code-poi-map.git
+[source,console,subs="attributes"]
+----
+git remote add solution {gitlab_url}/rhdh/sample-code-poi-map.git
+----
 +
  2. Fetch the contents from this new Git remote:
 +
