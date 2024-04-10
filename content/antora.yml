@@ -19,11 +19,11 @@ asciidoc:
     lab_name: "Prepare to Perform with the Software Catalog"
     release-version: master
     page-pagination: true
-    devspaces_url: {devspaces_url}
-    rhdh_url: {rhdh_url}
-    gitlab_url: {gitlab_url}
-    console_url: {console_url}
     cluster_id: {cluster_id}
+    devspaces_url: https://devspaces{cluster_id}
+    rhdh_url: https://backstage-backstage{cluster_id}
+    console_url: https://console-openshift-console{cluster_id}
+    gitlab_url: https://gitlab-gitlab{cluster_id}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid
     usernum: 1
