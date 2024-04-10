@@ -10,7 +10,7 @@ You scaffolded the POI backend from the `nestjs-with-postgres` template in the l
 
 Because the backend service will use a database table named poi with a specific table structure, you need to provide a SQL DDL (Data Definition Language) snippet to configure Helm’s provisioning of the PostgreSQL database. 
 
-Open the backend’s GitOps repository, `{namespace}-poi-backend-gitops`, in GitLab. As the change to be made is a rather trivial one, you might take a shortcut here rather than going through a full development cycle including feature branches and merge requests. Edit the Helm chart’s values.yaml file directly in GitLab to add the following DDL snippet:
+Open the backend’s GitOps repository, link:{gitlab_url}/development/{namespace}-poi-backend-gitops[`{namespace}-poi-backend-gitops`], in GitLab. As the change to be made is a rather trivial one, you might take a shortcut here rather than going through a full development cycle including feature branches and merge requests. Edit the link:{gitlab_url}/development/{namespace}-poi-backend-gitops/-/edit/main/helm/app/values.yaml[Helm chart’s `values.yaml` file] directly in GitLab to add the following DDL snippet:
 
 [source,yaml]
 ----
@@ -31,7 +31,7 @@ Open the backend’s GitOps repository, `{namespace}-poi-backend-gitops`, in Git
 ----
 
 
-To do so, browse to the file `helm/app/values.yaml` in the GitLab repository `{namespace}-poi-backend-gitops` and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
+To do so, browse to the file `helm/app/values.yaml` in the link:{gitlab_url}/development/{namespace}-poi-backend-gitops[GitLab repository `{namespace}-poi-backend-gitops`] and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
 
 :!figure-caption:
 
@@ -98,7 +98,7 @@ It’s important that this server URL matches the respective HTTPS route URL tha
 +
   git push origin app-dev
 +
- 8. In the GitLab web UI, create a new merge request for your `app-dev` branch (Figure 4-3).
+ 8. In the link:{gitlab_url}/development/{namespace}-poi-backend/-/merge_requests/new?merge_request%5Bsource_branch%5D=app-dev[GitLab web UI, create a new merge request for your `app-dev` branch] (Figure 4-3).
 +
 image::4-3.png[title="Figure 4-3: GitLab open merge request for app-dev branch."]
 
@@ -106,7 +106,7 @@ Once the merge request has been created, you can switch to the component’s det
 
 image::4-4.png[title="Figure 4-4: POI backend component view Pull/Merge Requests tab in RHDH."]
 
-Back in GitLab, you can merge this merge request (Figure 4-5).
+Back in GitLab, you can merge this link:{gitlab_url}/development/{namespace}-poi-backend/-/merge_requests/1[merge request] (Figure 4-5).
 
 image::4-5.png[title="Figure 4-5: GitLab-merged merge request for app-dev branch."]
 
@@ -379,7 +379,7 @@ What’s really convenient when taking this route is that you eventually end up 
 
 image::4-27.png[title="Figure 4-27: OpenShift Dev Spaces welcome screen."]
 
-Again, to speed things up, we provide a turnkey implementation for the POI proxy service in a ZIP archive.
+Again, to speed things up, we provide a turnkey implementation for the POI proxy service in an example repo.
 
 In OpenShift Dev Spaces, your web VS Code instance, open a terminal session by selecting *Terminal → New Terminal* from the burger menu in the upper left corner of the UI (Figure 4-28).
 
@@ -483,13 +483,13 @@ image::4-32a.png[title="Figure 4-32a: OpenShift Dev Spaces VS Code publish branc
 +
 image::4-32b.png[title="Figure 4-32b: OpenShift Dev Spaces VS Code pick remote."]
 +
- 10. Open the GitLab repository for the `{namespace}-poi-map` component and create a new merge request for this `app-dev` branch (Figure 4-33).
+ 10. Open the link:{gitlab_url}/development/{namespace}-poi-map[GitLab repository] for the `{namespace}-poi-map` component and link:{gitlab_url}/development/{namespace}-poi-map/-/merge_requests/new?merge_request%5Bsource_branch%5D=app-dev[create a new merge request] for this `app-dev` branch (Figure 4-33).
 +
 image::4-33a.png[title="Figure 4-33a: GitLab create merge request for pushed branch."]
 +
 image::4-33b.png[title="Figure 4-33b: GitLab open merge request for pushed branch."]
 +
- 11. Merge this new `app-dev` branch into the `main` branch right away (Figure 4-34).
+ 11. link:{gitlab_url}/development/{namespace}-poi-map/-/merge_requests/1[Merge this new `app-dev` branch] into the `main` branch right away (Figure 4-34).
 +
 image::4-34.png[title="Figure 4-34: GitLab merged merge request for branch app-dev."]
 
