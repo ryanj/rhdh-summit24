@@ -483,7 +483,7 @@ image::4-32a.png[title="Figure 4-32a: OpenShift Dev Spaces VS Code publish branc
 +
 image::4-32b.png[title="Figure 4-32b: OpenShift Dev Spaces VS Code pick remote."]
 +
- 10. Open the link:{gitlab_url}/development/{namespace}-poi-map[GitLab repository] for the `{namespace}-poi-map` component and link:{gitlab_url}/development/{namespace}-poi-map/-/merge_requests/new?merge_request%5Bsource_branch%5D=app-dev[create a new merge request] for this `app-dev` branch (Figure 4-33).
+ 10. Open the link:{gitlab_url}/development/{namespace}-poi-map[GitLab repository for the `{namespace}-poi-map` component] and link:{gitlab_url}/development/{namespace}-poi-map/-/merge_requests/new?merge_request%5Bsource_branch%5D=app-dev[create a new merge request] for this `app-dev` branch (Figure 4-33).
 +
 image::4-33a.png[title="Figure 4-33a: GitLab create merge request for pushed branch."]
 +

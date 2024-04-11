@@ -1,27 +1,17 @@
 = {lab_name}
 
-The `lab_name` var, known as an asciidoc attribute, above was set in `./content/antora.yml` and can be used to set the lab_name or title of your content.
-You are both free to change its value and if you prefer to use a different var name, you can change the value of `lab_name`, for example to `title` in `./content/antora.yml` and then reference it in your content as `\{title}`.
+Welcome, {user}!
 
-== Variables
+In order to follow along with this workshop adaptation of link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with the Red Hat Developer Hub], you will need to create three namespaces in the link:{console_url}[openshift web console]:
 
-Other vars can also be set there, such as `ssh_user` and `ssh_password`, and referenced inline in the lab content by using the `\{foo}` syntax.
+1. First, open the link:{console_url}[openshift web console] in a new browser window.
+2. Select the *rhsso* login option.
+3. Enter your username (`{user}`) and password when prompted.
+4. Click on `create a Project` to create a new project namespace in OpenShift.
+5. Enter your first project name (`{namespace}`)
+6. Click on the project dropdown and select the *Create Project* button to create a second project named `{namespace}-preprod`
+7. Repeat the previous step to create a third project named `{namespace}-prod` 
 
-This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
+After creating the three namespaces, you should be ready to proceed.
 
-{rhdh_url}
-
-{console_url}
-
-{gitlab_url}
-
-your user_id is: {user}
-
-your user_number is: {usernum}
-
-your namespaces are: 
- * link:{console_url}/topology/ns/{namespace}[{namespace}]
- * link:{console_url}/topology/ns/{namespace}-preprod[{namespace}-preprod]
- * link:{console_url}/topology/ns/{namespace}-prod[{namespace}-prod]
-
-By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, Backstage Software Templates, and the architecture of the example app. 
+By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in project complexity.
