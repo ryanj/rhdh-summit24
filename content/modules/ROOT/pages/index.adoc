@@ -2,16 +2,29 @@
 
 Welcome, {user}!
 
+By the end of this lesson, you’ll know the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in project complexity.
+
 In order to follow along with this workshop adaptation of link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with the Red Hat Developer Hub], you will need to create three namespaces in the link:{console_url}[openshift web console]:
 
-1. First, open the link:{console_url}[openshift web console] in a new browser window.
-2. Select the *rhsso* login option.
-3. Enter your username (`{user}`) and password when prompted.
-4. Click on `create a Project` to create a new project namespace in OpenShift.
-5. Enter your first project name (`{namespace}`)
-6. Click on the project dropdown and select the *Create Project* button to create a second project named `{namespace}-preprod`
-7. Repeat the previous step to create a third project named `{namespace}-prod` 
+:!figure-caption:
+ 
+. First, open the link:{console_url}[openshift web console] in a new browser window.
+. When prompted, select the *rhsso* login option.
+. Enter your username ("{user}") and password (from the previous page).
+. Click on the *Create a new project* link to create a new project namespace for your work.
++
+image::0-2.png[title="Figure 0-2. Create a new project"]
++
+. Enter your first project name, "{namespace}" (not "demoX" as shown in the screenshots). 
++
+image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
++
+. Click on the project dropdown and then select the *Create Project* button to create a second project named "`{namespace}-preprod`"
++
+image::0-4.png[title="Figure 0-4. Click on Create Project"]
++
+image::0-5.png[title="Figure 0-5. Create Project: {namespace}-preprod"]
++
+. Repeat the previous step to create a third project named "`{namespace}-prod`"
 
-After creating the three namespaces, you should be ready to proceed.
-
-By the end of this workshop, you’ll know the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in project complexity.
+After creating these three project namespaces, you are ready to proceed with the rest of the workshop!
