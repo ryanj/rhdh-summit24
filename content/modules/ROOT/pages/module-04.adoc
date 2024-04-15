@@ -118,7 +118,7 @@ image::4-6.png[title="Figure 4-6: POI backend component view Tekton tab in RHDH.
 
 === Check backend app status
 
-With the necessary application changes done, let’s figure out if your backend service is running correctly. Open the {namespace}-poi-backend in the RHDH catalog component view, switch to the *Topology* tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-7). 
+With the necessary application changes done, let’s figure out if your backend service is running correctly. link:{rhdh_url}/catalog/default/component/{namespace}-poi-backend[Open the {namespace}-poi-backend in the RHDH catalog component view], switch to the *Topology* tab, click the deployment, and select *Resources* from the right-side pane (Figure 4-7).
 
 image::4-7.png[title="Figure 4-7: POI backend component Topology tab deployment resources."]
 
@@ -172,7 +172,7 @@ image::4-13.png[title="Figure 4-13: GitLab raw file view for `openapi.yaml` defi
 
 Now that the application is up and running, you can shift your focus to another important aspect: documentation. You learned in the Applying Templates section that everything necessary to follow a “docs-like-code” approach is preconfigured and in place from the beginning. This means you can fully focus on writing documentation itself. No need to worry or explicitly care about generating and publishing documentation updates based on changed documentation sources.
 
-To see how convenient it is to add new documentation to your backend component, open the `{namespace}-poi-backend` component detail view in the RHDH catalog and click on the *View TechDocs* link in the *About* tile of the component’s Overview tab. This opens the current version of the backend service documentation (Figure 4-14).
+To see how convenient it is to add new documentation to your backend component, link:{rhdh_url}/catalog/default/component/{namespace}-poi-backend[open the `{namespace}-poi-backend` component detail view] in the RHDH catalog and click on the *View TechDocs* link in the *About* tile of the component’s Overview tab. This opens the current version of the backend service documentation (Figure 4-14).
 
 image::4-14.png[title="Figure 4-14: POI backend component tech docs."]
 

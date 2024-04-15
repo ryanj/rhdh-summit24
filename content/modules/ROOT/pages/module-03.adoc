@@ -197,7 +197,7 @@ With the two map application templates available to the portal’s Create functi
 
 === Backend template
 
-Begin by creating an instance from the `nestjs-with-postgres` template. This template scaffolds the source repository for the backend service, builds the code in it, and deploys the result along with the database server on which the backend relies. Go to *+ Create* and select the template *NestJS Service with backing PostgreSQL database* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 3-10).
+Begin by creating an instance from the link:{rhdh_url}/create/templates/default/nestjs-with-postgres[`nestjs-with-postgres` template]. This template scaffolds the source repository for the backend service, builds the code in it, and deploys the result along with the database server on which the backend relies. Go to *+ Create* and select the template *NestJS Service with backing PostgreSQL database* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 3-10).
 
 image::3-10.png[title="Figure 3-10: Portal Create view with template tiles."]
 
@@ -207,7 +207,7 @@ This brings you to the template’s form wizard (Figure 3-11) where you can conf
 
 image::3-11.png[title="Figure 3-11: NestJS Service template configuration form, first section."]
 
-In the second section (Figure 3-12), you specify the who, what, and where of the application resources to be scaffolded from the template. The cluster ID and namespace _where_ the running application should be deployed, _what_ application ID names it, and the user _who_ owns it. You’ll see this metadata reflected in descriptions, data about, and links between entities in the Software Catalog after you submit the Create forms and scaffolding is complete. 
+In the second section (Figure 3-12), you specify the who, what, and where of the application resources to be scaffolded from the template. The namespace _where_ the running application should be deployed, _what_ application ID names it, and the user _who_ owns it. You’ll see this metadata reflected in descriptions, data about, and links between entities in the Software Catalog after you submit the Create forms and scaffolding is complete.
 
 image::3-12.png[title="Figure 3-12: NestJS Service template configuration form, second section."]
 
@@ -413,7 +413,7 @@ The backend component has a working TechDocs setup as configured and scaffolded 
 
 === Proxy and frontend template
 
-Now that the backend component’s source code and GitOps repositories are in place, you continue by applying the second custom template—the quarkus-with-angular template, which addresses the proxy and frontend parts of the POI map application. Go to *+ Create* and select the template *Quarkus Service with hosted Angular Frontend* by clicking the *[CHOOSE]* button in the lower-right corner of the corresponding template tile (Figure 3-36).
+Now that the backend component’s link:{gitlab_url}/development/{namespace}-poi-backend/-/tree/main/[source code] and link:{gitlab_url}/development/{namespace}-poi-backend-gitops/-/tree/main/[GitOps repositories] are in place, you continue by applying the second custom template—the link:{rhdh_url}/create/templates/default/quarkus-with-angular[quarkus-with-angular template], which addresses the proxy and frontend parts of the POI map application. Go to link:{rhdh_url}/create[*+ Create*] and select the template *Quarkus Service with hosted Angular Frontend* by clicking the *[CHOOSE]* button in the lower-right corner of the corresponding template tile (Figure 3-36).
 
 image::3-36.png[title="Figure 3-36: Portal Create view with template tiles."]
 
@@ -426,7 +426,7 @@ image::3-37.png[title="Figure 3-37: Quarkus Service with Angular template config
 
 In the second section (Figure 3-38), you specify important settings, namely the *cluster ID*, *namespace*, *application ID*, and *owner* for our new software component. Based on this information it’s clear into which Kubernetes cluster and namespace this component is eventually going to be deployed with the entered application ID as its name. The selected user defines the ownership for this software component. 
 
-NOTE: It’s important to make sure that you use the same namespace and cluster ID as for the backend template you applied earlier (see link:#_template_form_wizard_2[Template form wizard]).
+NOTE: It’s important to make sure that you use the same namespace ({namespace}) as the backend template you applied earlier (see link:#_template_form_wizard_2[Template form wizard]).
 
 image::3-38.png[title="Figure 3-38: Quarkus Service with Angular template configuration form, second section."]
 
