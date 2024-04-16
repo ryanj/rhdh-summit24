@@ -6,7 +6,9 @@ Welcome, _{user}_!
 
 By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in complexity.
 
-In order to follow along with this workshop adaptation of link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with the Red Hat Developer Hub], you will need to create three namespaces in the link:{console_url}[OpenShift Web Console]:
+In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub]*, you will need to create three namespaces in the link:{console_url}[OpenShift Web Console].
+
+image::https://developers.redhat.com/sites/default/files/styles/cheat_sheet_feature/public/2023_DeveloperPortals_Preview_Cover_Art.webp[title="Figure 0-1. Developer Portals: Prepare to Perform with Red Hat Developer Hub"]
 
 . First, log in to the link:{console_url}[OpenShift Web Console].
 .. When prompted, select the *rhsso* login option.
@@ -19,12 +21,12 @@ image::0-2.png[title="Figure 0-2. Create a new project"]
 +
 image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
 +
-. Create a second project named `{namespace}-preprod` by clicking on the project dropdown menu and then selecting the *Create Project* button.
+. Create a second project named `{namespace}-preprod` by clicking on the project dropdown menu and selecting the *Create Project* button.
 +
 image::0-4.png[title="Figure 0-4. Click on Create Project"]
 +
 image::0-5.png[title="Figure 0-5. Create Project: {namespace}-preprod"]
 +
-. Repeat the previous step to create a *third* project named: `{namespace}-prod`
+. Repeat the previous step to create a third project named: `{namespace}-prod`
 
 After creating these three project namespaces (`{namespace}`, `{namespace}-preprod`, and `{namespace}-prod`), you are ready to proceed with the workshop.  Enjoy!
