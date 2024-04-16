@@ -1,21 +1,21 @@
 = {lab_name}
 
-Welcome, {user}!
-
-By the end of this lesson, you’ll know the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in project complexity.
-
-In order to follow along with this workshop adaptation of link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with the Red Hat Developer Hub], you will need to create three namespaces in the link:{console_url}[openshift web console]:
-
 :!figure-caption:
- 
-. First, log in to the link:{console_url}[openshift web console].
+
+Welcome, _{user}_!
+
+By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in complexity.
+
+In order to follow along with this workshop adaptation of link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with the Red Hat Developer Hub], you will need to create three namespaces in the link:{console_url}[OpenShift Web Console]:
+
+. First, log in to the link:{console_url}[OpenShift Web Console].
 .. When prompted, select the *rhsso* login option.
 .. Login with username: `{user}` and password: `{rhdh_user_password}`
 . Create a new project for your work by selecting the *Create a new project* link.
 +
 image::0-2.png[title="Figure 0-2. Create a new project"]
 +
-.. Enter your project name: `{namespace}` (not "demoX" as shown in the screenshots).
+.. Name your new project: `{namespace}` (not "demoX" as shown in the screenshots), then click *Create* to continue.
 +
 image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
 +
@@ -27,4 +27,4 @@ image::0-5.png[title="Figure 0-5. Create Project: {namespace}-preprod"]
 +
 . Repeat the previous step to create a *third* project named: `{namespace}-prod`
 
-After creating these three project namespaces, you are ready to proceed with the rest of the workshop!
+After creating these three project namespaces (`{namespace}`, `{namespace}-preprod`, and `{namespace}-prod`), you are ready to proceed with the workshop.  Enjoy!
