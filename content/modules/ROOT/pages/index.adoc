@@ -8,23 +8,23 @@ In order to follow along with this workshop adaptation of link:https://developer
 
 :!figure-caption:
  
-. First, open the link:{console_url}[openshift web console] in a new browser window.
+. First, log in to the link:{console_url}[openshift web console].
 .. When prompted, select the *rhsso* login option.
-.. Login using your username ("*{user}*") and your password ({rhdh_user_password}).
-. Click on the *Create a new project* link to create a new project namespace for your work.
+.. Login with username: `{user}` and password: `{rhdh_user_password}`
+. Create a new project for your work by selecting the *Create a new project* link.
 +
 image::0-2.png[title="Figure 0-2. Create a new project"]
 +
-. Enter your first project name, "*{namespace}*" (not "demoX" as shown in the screenshots).
+.. Enter your project name: `{namespace}` (not "demoX" as shown in the screenshots).
 +
 image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
 +
-. Click on the project dropdown and then select the *Create Project* button to create a second project named "*{namespace}-preprod*"
+. Create a second project named `{namespace}-preprod` by clicking on the project dropdown menu and then selecting the *Create Project* button.
 +
 image::0-4.png[title="Figure 0-4. Click on Create Project"]
 +
 image::0-5.png[title="Figure 0-5. Create Project: {namespace}-preprod"]
 +
-. Repeat the previous step to create a third project named "*{namespace}-prod*"
+. Repeat the previous step to create a *third* project named: `{namespace}-prod`
 
 After creating these three project namespaces, you are ready to proceed with the rest of the workshop!
