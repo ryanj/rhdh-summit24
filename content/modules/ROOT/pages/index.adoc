@@ -10,7 +10,7 @@ In order to follow along with this workshop adaptation of link:https://developer
  
 . First, open the link:{console_url}[openshift web console] in a new browser window.
 .. When prompted, select the *rhsso* login option.
-.. Login using your username ("*{user}*") and your password (from the previous page).
+.. Login using your username ("*{user}*") and your password ({rhdh_user_password}).
 . Click on the *Create a new project* link to create a new project namespace for your work.
 +
 image::0-2.png[title="Figure 0-2. Create a new project"]

@@ -29,6 +29,7 @@ asciidoc:
     usernum: 1
     user: user{usernum}
     namespace: demo{usernum}
+    rhdh_user_password: "from the previous page"
     ssh_user: devops
     ssh_password: devops
     ssh_command: ssh devops@bastion.{guid}.example.opentlc.com
