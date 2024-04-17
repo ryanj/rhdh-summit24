@@ -50,6 +50,8 @@ Backstage is an open source IDP platform created by Spotify, originally to serve
 * Software Catalog: A central repository for the services and components used in a team or organization, enabling discovery and reuse. Catalog entities index the disparate resources that go into an application, from source code to build services to orchestrated deployments.
 * Standardized workflows: Designed to capture effective patterns, tools, processing used by development teams and present them as established paths to development, Backstage helps enforce best practices and standards.
 * Plug-in ecosystem: Backstage supports custom plug-ins and a growing ecosystem of integration and automation plug-ins. Plug-ins integrate Backstage with infrastructure services and software components, import patterns and mechanisms, and allow teams to customize Backstage to integrate their own systems, tools, and methods. 
+* Tech Docs conventionalize the mechanics of creating and publishing documentation but someone still has to write it. You can write documentation easily in Markdown or other familiar markups and manage it like code in your repos to see it compiled and published in an automated way.
+* Search lets others find components, services, and documentation without clicking around endlessly.
 
 Backstage's purpose is to enhance developer productivity with a single platform for development activities.
 

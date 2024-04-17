@@ -161,47 +161,14 @@ This excerpted `steps` array defines three step actions:
 2. `publishSource` → `publish:github` initializes a Git repository based on the templated source from step 1 and pushes it to GitHub. There are similar actions available for other Git hosting services; for instance, GitLab or BitBucket.
 3. `registerComponent` → `catalog:register` registers entities into the software catalog based on a catalog description file. Conventionally named `catalog-info.yaml`, this file is read from the Git repository created in step 2.
 
-== Template registration
-
-You need to tell the portal about a new template in order to work with it. In an organization with an established Developer Hub or Backstage instance, daily development probably won’t involve registering new templates as often as it will involve creating new entities from provided templates and monitoring and working with entities already created and indexed in the Software Catalog. But you’ll have to register the two POI application templates on your new and mostly empty RHDH instance, so here is a look at how template registration works.
-
-There are two ways to add templates and make them available to the portal’s *Create* functions. First, RHDH inherits `app-config.yaml`, Backstage’s main portal configuration file. This file declares configuration for the life of a running portal instance, including references to template source URLs. The portal must be restarted to change this static configuration.
-
-Templates can instead be added dynamically through the *Register existing component* item found in the _Create_ view. Again, you inform the portal about new templates by reference to their source URL.
-
-You can use the dynamic approach described above to add the two templates from their respective repository location.
-
-1. Go to *+ Create* → *Register existing component* and copy the full HTTP URL to the `template.yaml` file in the `nestjs-with-postgres` folder of the Git repository. Paste the URL into the form’s (1) *Select URL* field (see Figure 3-6).
-+
-image::3-6.png[title="Figure 3-6: Template registration into the Software Catalog, step 1."]
-+
-2. Clicking the *ANALYZE* button shows that two entities will be added into the software catalog (Figure 3-7). One entity is the location, the HTTP URL from where the template was loaded, and the other entity is the template itself.
-+
-image::3-7.png[title="Figure 3-7: Template registration into the Software Catalog, step 2."]
-+
-3. Click the *IMPORT* button to confirm. Figure 3-8 shows the entities have been added to the catalog.
-+
-image::3-8.png[title="Figure 3-8: Template registration into the Software Catalog, step 3."]
-+
-4. Click the *REGISTER ANOTHER* button. This brings you the same registration form wizard where you can register the second template. Copy the HTTP URL of the `template.yaml` file in the `quarkus-with-angular` folder of the Git repository into the form’s (1) *Select URL* field and continue as you did for the first template. 
-
-== Catalog inspection for templates
-
-Go to the software catalog and filter for *Kind: Template* to see the two new templates (Figure 3-9).
-
-image::3-9.png[title="Figure 3-9: Viewing templates in the Software Catalog."]
-
-== Instantiating a template: Scaffolding
-
-With the two map application templates available to the portal’s Create functions, you’re informed about how Software Templates work and how to add templates to your RHDH portal. From here, you’re ready to start where most developers would: using a template to get the basics in place for building a new application.
-
-=== Backend template
+== Backend template
+From here, you’re ready to start where most developers would: using a template to get the basics in place for building a new application.
 
 Begin by creating an instance from the link:{rhdh_url}/create/templates/default/nestjs-with-postgres[`nestjs-with-postgres` template]. This template scaffolds the source repository for the backend service, builds the code in it, and deploys the result along with the database server on which the backend relies. Go to *+ Create* and select the template *NestJS Service with backing PostgreSQL database* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 3-10).
 
 image::3-10.png[title="Figure 3-10: Portal Create view with template tiles."]
 
-==== Template form wizard
+=== Template form wizard
 
 This brings you to the template’s form wizard (Figure 3-11) where you can configure certain elements of the template. In the first section of this form, you define the GitLab location where the resulting source code and GitOps repositories should be stored.
 
@@ -219,7 +186,7 @@ Clicking the *NEXT STEP* button shows you a summary of all the entered form fiel
 
 image::3-14.png[title="Figure 3-14: NestJS Service template configuration form, final review."]
 
-==== Template scaffolding process
+=== Template scaffolding process
 
 The NestJS Service backend template is composed of six sequential steps, each of which represents either a built-in or a custom scaffolder action available in your running RHDH portal:
 
@@ -248,7 +215,7 @@ RHDH first reads the template contents from GitLab and then writes the scaffolde
 . A CI pipeline in Tekton, and a webhook event listener that is triggered on every commit to the source code repository (see the `helm/build` folder of the related GitOps repository)
 . Everything needed to deploy the backend application, which in this simple case is a Kubernetes Deployment, Service, and Route, along with the database (see the `helm/app` folder of the related GitOps repository)
 
-==== Template results
+=== Template results
 
 Continuing with the itemization of the steps automated by RHDH in its process of scaffolding resources from the backend template, take a look at the GitOps resources the scaffolder puts in place:
 
@@ -264,7 +231,7 @@ image::3-20.png[title="Figure 3-20: Argo CD applications for the POI backend."]
 +
 image::3-21.png[title="Figure 3-21: OpenShift topology view of the POI backend."]
 
-==== POI backend in the Software Catalog
+=== POI backend in the Software Catalog
 
 The template scaffolding process added an entry to the Software Catalog for the POI backend, {namespace}-poi-backend. Switch to the Catalog View in the RHDH left navigation to see it (Figure 3-22). 
 
@@ -280,7 +247,7 @@ In the next sections, you will briefly visit the different tabs from that compon
 
 The Component screens in RHDH represent everything known about this application, derived from component metadata, information from plugin integrations with infrastructure services, like Argo CD, Tekton, and the OpenShift (or Kubernetes) cluster where executables run.
 
-===== Overview tab
+==== Overview tab
 
 The *Overview* tab displays a few tiles, including an *About* section with direct access to the source code repository (*View source*) and technical documentation (*View TechDocs*). In the upper-right corner of a Component Overview’s About tile you can:
 
@@ -333,7 +300,7 @@ spec:
 
 Towards the end of this component definition you can see information about the owner, relationships regarding the logical grouping of components into a system, but also whether or not there are provided or consumed APIs for this component (`providesApis`), and if dependencies to other components and/or infrastructure resources (e.g., databases, messaging queues, caches) exist (`dependsOn`).
 
-===== Topology tab
+==== Topology tab
 
 The Topology plug-in provides a tab in the Component view showing the component’s resources on a deployment target OpenShift or Kubernetes cluster (Figure 3-24). These include the usual application resources in Kubernetes API terms, such as Deployment, Job, Daemonset, Statefulset, CronJob, and Pod. When you click on the POI backend deployment, a side pane slides in from the right to show more details. You can even retrieve logs from the container running in the pod, directly in the portal’s Component view.
 
@@ -341,7 +308,7 @@ image::3-24.png[title="Figure 3-24: POI backend component Topology tab."]
 
 Find more information about how to install, configure and use the Topology plug-in at https://access.redhat.com/documentation/en-us/red_hat_plug-ins_for_backstage/2.0/html/topology_plugin_for_backstage/topology-plugin-for-backstage.
 
-===== Issues and Pull / Merge Requests tabs
+==== Issues and Pull / Merge Requests tabs
 
 As a developer, you need to be aware of project issues as well as incoming changes from other developers. You can see this activity in your portal’s Component views. Based on plug-ins, RHDH can integrate with various Git hosting services such as GitLab, GitHub, and others to retrieve and display issues (Figure 3-25) and pull/merge requests (Figure 3-26), respectively. Because the component is freshly scaffolded and just registered in the catalog, unsurprisingly, both these tabs are currently empty. You will revisit them during the development of the application specific code.
 
@@ -349,7 +316,7 @@ image::3-25.png[title="Figure 3-25: POI backend component Issues tab."]
 
 image::3-26.png[title="Figure 3-26: POI backend component Pull/Merge Requests tab."]
 
-===== CI tab
+==== CI tab
 
 In this tab, you can explore the build pipelines for the component in question. This view isn’t limited to just one type of continuous integration (CI), but if applicable, can conveniently display multiple CI-related activities for the same component. In your example, and as shown in Figure 3-27, there are two different pipelines, namely:
 
@@ -361,7 +328,7 @@ image::3-27.png[title="Figure 3-27: POI backend component, CI tab."]
 A click on any of the listed pipeline runs shows the separate pipeline steps/stages and their respective outcomes. It’s also possible to retrieve the logs for each step/stage individually by clicking on it.
 Find more information about how to install, configure and use this plug-in here: https://access.redhat.com/documentation/en-us/red_hat_plug-ins_for_backstage/2.0/html/tekton_plugin_for_backstage/tekton-plugin-for-backstage
 
-===== CD tab
+==== CD tab
 
 In this example, the CD related information is retrieved from Argo CD by means of another plug-in. What’s shown is a basic tabular history of the Argo CD application managing the component’s deployment (Figure 3-28).
 
@@ -373,19 +340,19 @@ image::3-29.png[title="Figure 3-29: The POI backend’s Argo CD tile in the Comp
 
 Find more information about how to install, configure and use this plug-in here: https://access.redhat.com/documentation/en-us/red_hat_plug-ins_for_backstage/2.0/html/argocd_plugin_for_backstage/argocd-plugin-for-backstage
 
-===== Kubernetes tab
+==== Kubernetes tab
 
 In this tab (Figure 3-30), you can inspect the various pods underpinning the catalog component that are running in the target Kubernetes cluster, including some workload-related details. This is very handy, in particular, when there are any issues or errors with some of these pods.
 
 image::3-30.png[title="Figure 3-30: POI backend component Kubernetes tab."]
 
-===== API tab
+==== API tab
 
 Whether or not components either consume APIs from other components and/or provide APIs themselves, including API ownership information as well as system relationships if applicable, is all shown in the API tab (Figure 3-33). The scaffolded backend application provides an API that you can further investigate by clicking on its name. However, as this is currently a “Hello, World” REST endpoint, a more detailed discussion concerning API-related RHDH features follows at a later stage. After the actual API for the POI backend service has been implemented / added, we will revisit this view.
 
 image::3-33.png[title="Figure 3-33: POI backend component API tab."]
 
-===== Dependencies tab
+==== Dependencies tab
 
 Components very rarely live in isolation; instead, they are often logically grouped to form a superordinate system. In addition, components can directly depend on other components or resources such databases, caches, messaging infrastructure, and the like. Thankfully, the dependencies tab provides insights into these aspects, with helpful diagrams illustrating more complex component hierarchies and/or relationships between components and resources (Figure 3-34).
 
@@ -400,7 +367,7 @@ For the registered backend component you can see at a first glance:
 
 As more components will be added by means of applying further templates and by properly maintaining all these relationships in the respective `catalog-info.yaml` files during the development phase, such diagrams will grow and thus become more valuable in making sense of larger and more complex systems.
 
-===== Docs tab
+==== Docs tab
 
 Having technical documentation for registered catalog components is vital. The core idea is to live a “docs-like-code” approach. Under the covers, the default way to write documentation is based on Markdown and the documentation-related files are co-located in the same repository as the component’s source code. The Docs tab (Figure 3-35) shows the latest available version of a component’s rendered HTML documentation, which has been generated and published as part of the configured CI pipeline. 
 
@@ -411,13 +378,13 @@ The backend component has a working TechDocs setup as configured and scaffolded 
 . *Modifying the underlying Markdown file:* By clicking the edit icon in the upper right, the user is redirected to the specific Markdown file in the component’s source code repository. This is where changes can directly be made. Thanks to the configured CI pipeline, any changes are triggering a new pipeline run. Once this is finished, a refresh of the documentation page in the Docs tab will show the updated contents immediately.
 . *Opening a documentation-related issue:* By highlighting text on the documentation page and clicking *Open GitLab / GitHub / … issue*, you are redirected to the Git repository issue creation page. This allows for easy creation of an issue to signal problems with the documentation to the maintainers/owners of the catalog entity.
 
-=== Proxy and frontend template
+== Proxy and frontend template
 
 Now that the backend component’s link:{gitlab_url}/development/{namespace}-poi-backend/-/tree/main/[source code] and link:{gitlab_url}/development/{namespace}-poi-backend-gitops/-/tree/main/[GitOps repositories] are in place, you continue by applying the second custom template—the link:{rhdh_url}/create/templates/default/quarkus-with-angular[quarkus-with-angular template], which addresses the proxy and frontend parts of the POI map application. Go to link:{rhdh_url}/create[*+ Create*] and select the template *Quarkus Service with hosted Angular Frontend* by clicking the *[CHOOSE]* button in the lower-right corner of the corresponding template tile (Figure 3-36).
 
 image::3-36.png[title="Figure 3-36: Portal Create view with template tiles."]
 
-==== Template form wizard
+=== Template form wizard
 
 This brings you into the template’s form wizard where you can parameterize certain elements of the template in question. You’ve been here before when scaffolding the backend component from the first template. What you are going to do here is strikingly similar.
 In the first section of this form (Figure 3-37), you define information about the GitLab location used for publishing the resulting source code and GitOps repositories—leave the defaults as-is.
@@ -442,11 +409,11 @@ Finally, hit *CREATE* to kick off the actual templating process (Figure 3-41).
 
 image::3-41.png[title="Figure 3-41: Quarkus Service with Angular template scaffolding results."]
 
-==== Template scaffolding process
+=== Template scaffolding process
 
 Insights into what’s happening during the scaffolding process under the covers have been provided in detail for the backend template already. Feel free to revisit the corresponding book section (link:#_template_scaffolding_process[Template scaffolding process]) if necessary.
 
-==== Template results
+=== Template results
 
 As a result of applying this template, you end up with the following resources created on your behalf:
 
@@ -462,7 +429,7 @@ image::3-43.png[title="Figure 3-43: Argo CD applications for the POI frontend."]
 
 image::3-44.png[title="Figure 3-44: OpenShift topology view with the POI backend and frontend."]
 
-==== POI proxy service and frontend in the Software Catalog
+=== POI proxy service and frontend in the Software Catalog
 
 In contrast to the backend template, the major difference with this template is the fact that you end up with two separately registered catalog components. This is intentional, and results from the “monorepo” approach that has been chosen when creating the template for this proxy service that embeds the frontend application.
 
