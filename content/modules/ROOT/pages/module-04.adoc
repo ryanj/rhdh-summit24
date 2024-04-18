@@ -31,7 +31,7 @@ Open the backend’s GitOps repository, link:{gitlab_url}/development/{namespace
 ----
 
 
-To do so, browse to the file `helm/app/values.yaml` in the link:{gitlab_url}/development/{namespace}-poi-backend-gitops[GitLab repository `{namespace}-poi-backend-gitops`] and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
+To do so, link:{gitlab_url}/development/{namespace}-poi-backend-gitops/-/edit/main/helm/app/values.yaml[browse to the file `helm/app/values.yaml` in the GitLab repository `{namespace}-poi-backend-gitops`] and append the preceding snippet (Figure 4-1). This will ensure that the database table your backend service needs gets created during the database bootstrapping phase. With the DDL in place, click the *Commit changes* button to confirm your change.
 
 :!figure-caption:
 
