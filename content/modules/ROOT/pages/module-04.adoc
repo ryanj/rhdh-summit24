@@ -233,7 +233,7 @@ In order to do that, go to the `{namespace}-poi-backend` component’s catalog d
 
 image::4-22.png[title="Figure 4-22: POI backend component Overview tab edit metadata."]
 
-This opens the `catalog-info.yaml` file in GitLab’s edit mode, where you can directly modify the three descriptions in the YAML definition as shown in the following example. Most relevant in the context of this example are the three description fields marked in bold: 
+This opens the `catalog-info.yaml` file in GitLab’s edit mode, where you can directly modify the three `description` elements in the YAML definition as shown in the following example:
 
 [source,yaml,subs="attributes"]
 ----
