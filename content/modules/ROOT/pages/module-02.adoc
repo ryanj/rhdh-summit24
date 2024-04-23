@@ -8,29 +8,9 @@ image::2-1.png[title="Figure 2-1: The Software Catalog."]
 == Catalog overview
 The catalog provides a central, organized location where development teams can register and document the services and components they use in their software projects. This includes information about applications, APIs, libraries, databases, and more.
 
-The Software Catalog is a (human) service discovery platform that lets developers search for and browse existing services and resources. This makes it easier to find and reuse existing components, reducing redundancy and promoting collaboration.
-
-The catalog conventionalizes ways to attach metadata, documentation, and other relevant information to each service or component entry. This might include descriptions, ownership information, usage guidelines, and documentation, making it easier for others to understand and work with these resources.
-
-Notice that metadata includes ownership and responsibility for each service or component in the catalog. Making this information obvious makes communication more efficient because it is clear who is accountable and who to contact for any entity in the catalog.
-
-The catalog can track and manage different versions of services and components. This helps ensure that the right versions are used in different projects, and it also allows you to integrate tracking of changes and updates in the Developer Portal.
-
 Backstage, and Developer Hub in turn, is a switchboard for integration with other tools and services, such as version control systems, CI/CD pipelines, and monitoring. Integration means the catalog reflects the current state of the real world, and you can comprehend that state without bouncing between different user interfaces for each integrated service.
 
 Organizations can customize the Software Catalog and most of Developer Hub. This allows you to define what types of services or components should be included, how information is structured, and what access rules regulate who can see or modify components and sections of the portal.
-
-The catalog serves as a centralized system for tracking software components, making it easier for development teams to manage and discover information about the software within their organization.
-
-=== Using the Software Catalog
-
-First, you need to set up Developer Hub (or upstream Backstage) and its Software Catalog in your environment. This involves deploying an instance of the developer portal and configuring the Software Catalog to connect to your source control and other tools.
-
-Components are added to the catalog through YAML configuration files conventionally named `catalog-info.yaml`. These files contain metadata about the component, including its name, owner, and type, and are usually stored in the same repository as the component.
-
-Once components are added, you can use the Developer Hub interface to explore the catalog. You can search for components, view detailed information, and access linked resources such as documentation, source code, and operational dashboards. This book focuses on this daily development usage of a Developer Portal and its Software Catalog.
-
-Owners and teams can update the metadata and documentation as components evolve, ensuring the catalog remains reliable and up to date.
 
 === What’s in the catalog?
 
@@ -46,94 +26,25 @@ The Software Catalog can contain a wide variety of items, broadly categorized in
 
 The Software Catalog is designed to improve software development and operational efficiency by providing a centralized, searchable, and documented catalog of all the software components in an organization. Its ability to integrate with various tools and provide insights into the health and status of components is what makes it so valuable.
 
-== Entities
-
-An Entity is a unit of configuration or a resource that is part of the software ecosystem in an organization. Entities are the fundamental building blocks within the Catalog, serving as abstractions for various types of software-related items, such as services, websites, libraries, APIs, and documentation. Each entity is described by a YAML file, usually named `catalog-info.yaml`, which defines the entity's characteristics, relationships, ownership, and other details.
-
-=== Characteristics of an entity
-
- * *Type and Kind:* Entities are categorized by their type and kind, which specify the general category and the specific nature of the entity, respectively. For example, a service might be represented as an entity with the kind Component and the type service.
- * *Metadata:* This includes essential information such as the entity's name, description, tags, and other identifiers that help in cataloging and discovering the entity within the catalog.
- * *Specification* (spec): The spec field provides detailed information about the entity, including its life cycle status (e.g., experimental, production), ownership (which team or individual is responsible for the entity), and any specific attributes relevant to its kind.
- * *Annotations and labels:* Entities can be annotated with additional metadata and labels that offer more context, link to external resources, or integrate with other tools and services. You can use annotations to link an API documentation, code repository, or monitoring dashboard directly to the entity.
- * *Relations:* Entities can be related to one another, illustrating dependencies, ownership, or other relationships. These relations help in understanding the ecosystem's structure and how different entities interact.
-
-=== Purpose and usage
+== Catalog Purpose and Usage
 
 The primary purpose of defining entities in the Software Catalog is to provide a structured and searchable inventory of all software components within an organization. This inventory aids in visibility, governance, and operational efficiency by creating a comprehensive, integrated view of an organization's software landscape, streamlining workflows, and enhancing the developer experience.
 
-== The catalog-info file
-
-The `catalog-info.yaml` file is the primary mechanism through which components are described and added to the catalog. This YAML file contains metadata about a software component, allowing Developer Hub to understand, categorize, and display information about the component. The structure and contents of the file enable integration of components into the Backstage and Developer Hub ecosystem. The next section describes how the `catalog-info.yaml` file describes components.
-
-=== Basic structure
-
-The `catalog-info.yaml` file includes several key pieces of information, structured in YAML format. Here is a simplified example to illustrate the basic pieces:
-
-[source,yaml]
-----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: example-service
-  description: "An example service."
-  tags:
-    - java
-    - quarkus
-spec:
-  type: service
-  lifecycle: experimental
-----
-
-=== Key fields
-
- * `apiVersion`: Specifies the version of the Backstage API that the file is compatible with. This helps ensure that the file structure aligns with what Backstage and Backstage distributions like Developer Hub expect.
- * `kind`: Describes the type of component. Common kinds include Component, API, and Resource, among others. This field helps the catalog understand how to treat and display the entity.
- * `metadata`: Contains essential information about the component, such as:
- ** `name`: A unique identifier for the component within the catalog.
- ** `description`: A brief description of what the component does.
- ** `tags`: A list of keywords or tags associated with the component, aiding in search and categorization.
- * `spec`: Provides detailed specifications about the component, including:
- ** `type`: A more specific classification of the component, such as service, website, library, etc.
- ** `lifecycle`: Indicates the life cycle stage of the component (e.g., experimental, production, deprecated).
- ** `owner`: Specifies the team or individual responsible for the component. This is crucial for governance, maintenance, and communication purposes.
-
-==== Additional fields
-
-The `catalog-info.yaml` file can also include a variety of other fields to provide more detailed information about the component, integrate with other tools, or link to external resources. Some examples include:
-
- * `annotations`: Used to attach additional metadata or links to external resources, such as documentation, source code repositories, or operational dashboards.
- * `relations`: Defines relationships between different entities in the catalog, such as dependencies between services or ownership relations.
- * `providesApis`: For components that provide APIs, this field expresses the service side of the relation to consumers of that API, listing the 
- * Consumers that rely on endpoints of an API describe that side of the relation with the `consumesApi` field.
-
-=== Using catalog-info files
-
-Developers include a `catalog-info.yaml` file in the root directory of their component's source code repository. When the repository is registered with Developer Hub, the platform reads this file to ingest and display information about the component in the Software Catalog. This lets team members discover, understand, and interact with various software components across the organization through a unified interface.
-
-By standardizing the way components are described and integrated into the Software Catalog, the `catalog-info.yaml` file facilitates better software inventory management, enhances discoverability, and promotes more connected and efficient development.
-
-== Daily life with the catalog
-
-You use the Software Catalog as a central hub for managing, discovering, and interacting with software components. The next sections describe how you’ll typically engage with the Software Catalog throughout different stages of development.
-
-=== Initial setup and component registration
-
-Developers begin by *registering their software components* with the catalog. As discussed earlier, this involves creating the `catalog-info.yaml` file in the root of a component's repository. This file is then submitted to the catalog, either manually through the UI or automatically via discovery mechanisms set up by the team.
-
 === Day-to-day development
 
-*Discovery and browsing:* Once components are registered, you can use the catalog to discover existing components, APIs, and tools. This aids in reusing code, understanding dependencies, and learning about other teams' projects. The search functionality, filtering, and tagging systems help you quickly find relevant components.
+*Registering software components:* developers register components either manually through the UI or automatically via discovery mechanisms set up by the team.
 
-*Understanding components:* For each component, the catalog provides detailed information, including its ownership, life cycle status (e.g., production, deprecated), documentation, and recent updates. You can easily access the component's repository, related documentation, and operational dashboards directly from the catalog.
+*Discovery and browsing:* once components are registered, you can use the catalog to discover existing components, APIs, and tools which aids in reusing code, understanding dependencies, and learning about other teams' projects.
 
-*Integrating and using APIs:* When building or updating services, you can use the catalog to find and integrate APIs. The catalog provides endpoints, documentation, and even testing tools for listed APIs, simplifying the integration process.
+*Understanding components:* for each component, the catalog provides detailed information, including its ownership, life cycle status (e.g., production, deprecated), documentation, the component's repository,  and operational dashboards.
+
+*Integrating and using APIs:* When building or updating services, you can use the catalog to find and integrate APIs, and have access to endpoints, documentation, and even testing tools all of which simplifies the integration process.
 
 === Collaboration and governance
 
-*Ownership and responsibilities:* The catalog clearly defines the ownership of each component, making it easier to identify and contact the responsible teams for collaboration, support, or contributions. This transparency fosters a sense of ownership and accountability.
+*Ownership and responsibilities:* the catalog clearly defines the ownership of each component, making it easier to identify and contact the responsible teams for collaboration, support, or contributions.
 
-*Compliance and best practices:* Teams can enforce standards, best practices, and compliance requirements through the catalog. Templates can be provided for creating new services or components, ensuring consistency and adherence to organizational policies.
+*Compliance and best practices:* teams can enforce standards, best practices, and compliance requirements through the catalog by means of software templates.
 
 === Maintenance and improvement
 
@@ -144,7 +55,3 @@ Developers begin by *registering their software components* with the catalog. As
 === Scalability and evolution
 
 As the organization grows, the catalog supports the *scaling of software development processes* by streamlining component registration, discovery, and management. It helps maintain a clear overview of the software landscape, even as the number of components increases.
-
-== Summary
-
-The Software Catalog encapsulates increasingly diverse software ecosystems, allowing you to focus more on building features and fixing bugs, and less on navigating a maze of infrastructure and supporting services.

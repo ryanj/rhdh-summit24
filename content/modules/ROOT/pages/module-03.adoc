@@ -35,134 +35,12 @@ image::3-2.png[title="Figure 3-2: POI application architecture."]
 
 == Software Templates
 
-=== Template structure
-
-A Software Template is stored in its own source control repository, then registered in a given RHDH instance’s software catalog. 
-
-The two templates defining the foundations of the POI map application use the same folder structure:
-
-[source]
-----
-my-template (1)
-├── manifests (2) 
-├── skeleton (3)
-└── template.yaml (4)
-----
-
-where:
-
-1. `my-template` is the top-level directory containing all template resources;
-2. The `manifests` subdirectory holds the YAML files, Helm charts, and other declarations related to the deployment of the application;
-3. The `skeleton` subdirectory holds the basic source code structure of the application; 
-4. `template.yaml` is a YAML file defining a Backstage catalog entity of the kind link:https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-template[Template].
-
 The scaffolding to support the three-part architecture of the map application is split between two templates, as shown in Figure 3-3. The first template deploys the backend application together with its database.The second template creates the framework for the frontend and API client.
 
 image::3-3.png[title="Figure 3-3: Application architecture expressed in two templates."]
 
-== Software Template basics
-
-As you saw in the preceding template directory listing, the `template.yml` file at the root of the template directory defines a Backstage Software Template. A template manifest is structured around a few major YAML stanzas.
-
-First, the `metadata` block describes the template and defines its `owner` and the Backstage entity `type` created by instantiating it–in this case, an entity of type `service`.
-
-[source,yaml]
-----
-apiVersion: scaffolder.backstage.io/v1beta3
-kind: Template
-metadata:
-  name: a-simple-template
-  title: A simple template
-  description: This simple template is used for learning purposes.
-spec:
-  owner: rhdeveloper-book-authors
-  type: service
-----
-
-Next, the `parameters` array declares the elements of the configuration form presented when someone selects a template and creates a new instance of the entities defined in it. The `parameters` array describes configuration that varies between deployments of a template’s resources so that you can change it as appropriate for a new instance.
-
-Given the example `parameters` stanza shown here, each new instance of this template will expect you to enter or choose a number of configuration items, including the source repository where template resources should be created, and the RHDH user who owns the entities created from the template. While platform engineering topics like template creation are beyond the scope of this book, it is helpful to see how a template author defines the template instance configuration form. Notice in the `Name` property that parameters can have a default value. The `Owner` property defines a selection pop-up menu and the items on it.
-
-[source,yaml]
-----
-  parameters:
-  - title: Enter some (required *) component parameters
-    required:
-      - name
-    properties:
-      name:
-        title: Name
-        type: string
-        description: unique name for this component
-        default: my-component-123
-      owner:
-        title: Owner
-        type: string
-        description: owner of this component
-        ui:field: EntityPicker
-        ui:options:
-          catalogFilter:
-            kind: [User]
-  - title: Choose a repository location
-    required:
-      - repoUrl
-    properties:
-      repoUrl:
-        title: Repository Location
-        type: string
-        ui:field: RepoUrlPicker
-        ui:options:
-          allowedHosts:
-            - github.com
-            - gitlab.com
-----
-
-The preceding YAML snippet renders as a form in RHDH’s web UI, as shown in Figure 3-4. You can specify the component’s name and owner in the first form section.
-
-image::3-4.png[title="Figure 3-4: Template parameters form wizard, section 1."]
-
-In the second form (Figure 3-5), the template gathers where to scaffold the entity’s source code repository. In this template, *host* can be either *github.com* or *gitlab.com*, selected from a drop-down menu. The user or organization owner and the repository name are also configured in this section.
-
-image::3-5.png[title="Figure 3-5: Template parameters form wizard, section 2."]
-
-The third section is where the templating magic actually happens. The `steps` array defines the sequential actions that are executed by the scaffolder backend in RHDH:
-
-[source,yaml]
-----
-  steps:
-    - id: templateSource
-      name: Generating the source code component
-      action: fetch:template
-      input:
-        url: ./skeleton
-        targetPath: ./source
-        values:
-          name: ${{ parameters.name }}
-    - id: publishSource
-      name: Publishing to the source code repository
-      action: publish:github
-      input:
-        sourcePath: ./source
-        description: Source code repository for component ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}
-        defaultBranch: main
-        repoVisibility: public
-    - id: registerComponent
-      name: Register component into the catalog
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps.publishSource.output.repoContentsUrl }}
-        catalogInfoPath: '/catalog-info.yaml'
-----
-
-This excerpted `steps` array defines three step actions:
-
-1. `templateSource` → `fetch:template` downloads source boilerplate from the template’s origin repository, expands variables declared in the `parameters`, replacing their tokens with the appropriate values within files and filenames, and finally places the result in the configured repository, or optionally in a subdirectory specified by the `targetPath` variable.
-2. `publishSource` → `publish:github` initializes a Git repository based on the templated source from step 1 and pushes it to GitHub. There are similar actions available for other Git hosting services; for instance, GitLab or BitBucket.
-3. `registerComponent` → `catalog:register` registers entities into the software catalog based on a catalog description file. Conventionally named `catalog-info.yaml`, this file is read from the Git repository created in step 2.
-
 == Backend template
-From here, you’re ready to start where most developers would: using a template to get the basics in place for building a new application.
+With this, you’re ready to start where most developers would: using a template to get the basics in place for building a new application.
 
 Begin by creating an instance from the link:{rhdh_url}/create/templates/default/nestjs-with-postgres[`nestjs-with-postgres` template]. This template scaffolds the source repository for the backend service, builds the code in it, and deploys the result along with the database server on which the backend relies. Go to *+ Create* and select the template *NestJS Service with backing PostgreSQL database* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 3-10).
 
@@ -190,13 +68,6 @@ image::3-14.png[title="Figure 3-14: NestJS Service template configuration form, 
 
 The NestJS Service backend template is composed of six sequential steps, each of which represents either a built-in or a custom scaffolder action available in your running RHDH portal:
 
-1. `fetch:template`: Fetches the template from its location and recursively walks through all source folders and files (see `skeleton` subfolder at the origin). In each file, the scaffolder checks if it finds variables and needs to perform parameter replacements based on the settings that have been entered upfront in the form wizard. You can find more details about the templating syntax in the Backstage documentation: https://backstage.io/docs/features/software-templates/writing-templates/#the-templating-syntax
-2. `publish:gitlab`: All processed source files resulting from the templating process in step 1 are then published into a source code repository for this component according to the GitLab settings.
-3. `fetch:template`: Similar to step 1, it will fetch the template contents from its location and recurse through the manifest files (see `manifest` subfolder at the origin) to potentially perform parameter replacements in the files’ contents based on the settings which have been entered.
-4. `publish:gitlab`: All processed manifest files resulting from the scaffolding process in step 3 are then published into a GitOps repository for this component according to the GitLab settings.
-5. `catalog:register`: Using the information found in the scaffolded source code repository’s `catalog-info.yaml` file, the component is registered in the software catalog. To learn more about the descriptor format, check out the official docs page: https://backstage.io/docs/features/software-catalog/descriptor-format/ 
-6. `argocd:create-resources`: Instructs Argo CD to take action and start processing what has been scaffolded and published into the GitOps repository in steps 3 and 4, respectively.
-
 image::3-15.png[title="Figure 3-15: NestJS Service template scaffolding."]
 
 Template steps can use built-in actions (https://backstage.io/docs/features/software-templates/builtin-actions/) and custom actions written for a team’s specific needs (https://backstage.io/docs/features/software-templates/writing-custom-actions/). You can view which actions are installed in your RHDH instance by visiting {rhdh_url}/create/actions. This page shows the instance’s available actions, including a brief description of each and the parameters it accepts. 
@@ -205,7 +76,7 @@ image::3-16.png[title="Figure 3-16: Describing the fetch-template action and its
 
 image::3-17.png[title="Figure 3-17: Example usage for the fetch-template action."]
 
-There’s a lot going on when you click *Create* and kick off the process of scaffolding from a template. If you imagine yourself encountering a portal where this template is already available, the value of the developer portal comes into clearer focus. Think of bouncing between service UIs and auth systems to manually perform all the steps automated by the template actions, from source control in GitLab to GitOps processes to continually build from source with Argo CD and Tekton Pipelines. You can see a depiction of the services harnessed together by the template scaffolding process in Figure 3-18.
+A lot has happened when you clicked *Create* and kicked off the process of scaffolding from a template. If you imagine yourself encountering a portal where this template is already available, the value of the developer portal comes into clearer focus. Think of bouncing between service UIs and auth systems to manually perform all the steps automated by the template actions, from source control in GitLab to GitOps processes to continually build from source with Argo CD and Tekton Pipelines. You can see a depiction of the services harnessed together by the template scaffolding process in Figure 3-18.
 
 
 image::3-18.png[title="Figure 3-18: RHDH GitOps automation: Portal, GitLab, Argo CD, Tekton, OpenShift."]
@@ -373,11 +244,6 @@ Having technical documentation for registered catalog components is vital. The c
 
 image::3-35.png[title="Figure 3-35: POI backend component Docs tab."]
 
-The backend component has a working TechDocs setup as configured and scaffolded during the templating phase. Two really handy features, which we’ll examine more closely later during the application development phase, are:
-
-. *Modifying the underlying Markdown file:* By clicking the edit icon in the upper right, the user is redirected to the specific Markdown file in the component’s source code repository. This is where changes can directly be made. Thanks to the configured CI pipeline, any changes are triggering a new pipeline run. Once this is finished, a refresh of the documentation page in the Docs tab will show the updated contents immediately.
-. *Opening a documentation-related issue:* By highlighting text on the documentation page and clicking *Open GitLab / GitHub / … issue*, you are redirected to the Git repository issue creation page. This allows for easy creation of an issue to signal problems with the documentation to the maintainers/owners of the catalog entity.
-
 == Proxy and frontend template
 
 Now that the backend component’s link:{gitlab_url}/development/{namespace}-poi-backend/-/tree/main/[source code] and link:{gitlab_url}/development/{namespace}-poi-backend-gitops/-/tree/main/[GitOps repositories] are in place, you continue by applying the second custom template—the link:{rhdh_url}/create/templates/default/quarkus-with-angular[quarkus-with-angular template], which addresses the proxy and frontend parts of the POI map application. Go to link:{rhdh_url}/create[*+ Create*] and select the template *Quarkus Service with hosted Angular Frontend* by clicking the *[CHOOSE]* button in the lower-right corner of the corresponding template tile (Figure 3-36).
@@ -444,10 +310,6 @@ Just to clarify, of course it would work to treat both these components complete
 NOTE: Keep in mind that the actual possibilities, the available tabs, and the tiles anywhere in that detail view primarily depend on the configuration of the RHDH instance, the installed plug-ins as well as any component view customizations which might or might not be in place for your environment.
 
 Because you already visited the different tabs for a component’s detail view earlier while exploring the `{namespace}-poi-backend` component (see link:#_poi_backend_in_the_software_catalog[POI backend in the Software Catalog]) of the POI map application, this should all look very familiar to you at that stage.
-
-== Summary
-
-You’ve explored the basics of how Software Templates are defined, then used two example templates to deploy the foundation atop which you’ll implement the POI map application. In your running Portal, the Software Catalog lists three new entities indexing all of the resources of your development project, from source code to the executing components of the application. 
 
 In the next chapter, you’ll add code to the scaffolding provided by the templates to create a functional POI map.
 

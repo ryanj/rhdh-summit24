@@ -1,100 +1,12 @@
-= Chapter 5: Template and component evolution
+= Bonus Chapter 5: Component evolution
 
-You’ve learned how to jump-start a new application with Software Templates, which scaffolded source repos for you and eventually constructed container images and deployed them on Kubernetes. But, software is never finished. Sooner or later, you’ll need to update your templates and the components they generate. In this chapter, you’ll see how to manage these maintenance and upgrade tasks in Red Hat Developer Hub.
-
-== Evolving Software Templates
-
-Remember the second template you have applied in Chapter 3 to scaffold the proxy and frontend parts of the POI map application created a Quarkus application that hosts an Angular SPA frontend. In order to have some concrete example to work on, assume your company decides that all Templates for Quarkus applications should, as of now, adhere to the following standards:
-
-* The container base image for Java applications should be `ubi8/openjdk-17:1.18`.
-* The platform version for Quarkus should be `3.6.7`.
-* Quarkus-based applications are supposed to include the `smallrye-health` extension.
-
-Taking a closer look, it’s quite clear that the software template `quarkus-with-angular` that is currently registered in the Red Hat Developer Hub catalog needs to be updated. While the responsibility for template-related maintenance typically lies with platform engineers, the suggested updates in the context of this use case are relatively straightforward and serve as a simple example for developers in order to have a basic understanding of this procedure.
-
-=== Locate the template and clone the repository
-
-Go to *+ Create* and find the *Quarkus Service with hosted Angular Frontend* template. Click the *Links (<>)* button in the lower-left corner of the software template tile (Figure 5-1).
-
-image::5-1.png[title="Figure 5-1: Quarkus Service with hosted Angular Frontend template."]
-
-Clicking this Links button brings you to the GitLab repository that hosts the template files. Over in GitLab, find the *Clone* button for the repository, then clone it to your local machine by using the provided clone URL (Figure 5-2). 
-
-:!figure-caption:
-
-image::5-2.png[title="Figure 5-2: GitLab repository for the template to clone from."]
-
-=== Make the necessary template changes
-
-After successfully cloning it, open the repository in the IDE of your choice, then start to perform the following necessary changes to the respective files residing in the `quarkus-with-angular` folder.
-
-==== Patch the container file
-
-Open the file `quarkus-with-angular/skeleton/Dockerfile`, scroll down to the `FROM` statement in line 80, and adapt the base image to `openjdk-17:1.18` as follows:
-
-----
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.18
-----
-
-Save your changes.
-
-==== Patch the pom.xml file
-
-Open the file `quarkus-with-angular/skeleton/pom.xml`, scroll down to the Quarkus platform version in line 15, and adapt the version to 3.6.7 as follows:
-
-----
-<quarkus.platform.version>3.6.7</quarkus.platform.version>
-----
-
-Next, scroll further down to the dependencies section, which starts at line 31, and include the `smallrye-health` extension by adding the following XML snippet (e.g., right below the `quarkus-arc` dependency that is already there). It’s important that you don’t remove any of the existing ones:
-
-:source-highlighter: coderay
-
-[,xml,highlight=7..10]
-----
-<!-- ... -->
-<dependencies>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-arc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-health</artifactId>
-    </dependency>
-<!-- ... -->
-</dependencies>
-----
-
-Save the file.
-
-=== Commit and push template updates
-
-With these template updates in place, stage, commit, and push your changes. Then verify that your changes are reflected in the upstream repository on GitLab (Figure 5-3).
-
-image::5-3.png[title="Figure 5-3: GitLab repository after updating the template."]
-
-With these updates in place, all new components scaffolded from this new version of the `quarkus-with-angular` Template automatically follow the defined requirements related to the version of the container base image, the Quarkus platform version, and the inclusion of the `smallrye-health` extension. In the next section, you’ll learn how to update existing software components that have already been created.
+You’ve learned how to jump-start a new application with Software Templates, which scaffolded source repos for you and eventually constructed container images and deployed them on Kubernetes. But, software is never finished. Sooner or later, you’ll need to update your templates and the components they generate. In this chapter, you’ll see how to manage selected maintenance and upgrade tasks in Red Hat Developer Hub.
 
 == Updating existing components
 
-It’s crucial not to forget about the fact that despite changing a specific software template, existing applications built from this very template do not yet adhere to any newly defined standards. So how should you go about that? 
+It’s crucial not to forget about the fact that despite introducing changes to a specific software template and thereby create a new version of the template, existing applications built from the original template do not adhere to any newly defined standards. So how should you go about that? 
 
-Unsurprisingly, the answer again is related to yet another template that will make the procedure of patching previously created software components a lot easier and less error prone. By making sure that the necessary changes are first suggested to existing source code repositories by means of a pull request, component owners can review everything and have a final say before eventually merging the auto-generated changes originating from the applied “patch template.”
-
-=== Register the predefined patch template
-
-1. Go to *+ Create → Register existing component* and copy the full HTTPS URL to the `template.yaml` file in the `custom-component-patch` folder of the Git repository. Paste the URL into the form’s (1) Select URL field, as shown in Figure 5-4.
-+
-image::5-4.png[title="Figure 5-4: Template registration into the Software Catalog, step 1."]
-+
-2. Clicking the *ANALYZE* button shows that two entities will be added into the software catalog (Figure 5-5). One entity is the location, pointing to the HTTPS URL from where the template was loaded, and the other entity is the template itself.
-+
-image::5-5.png[title="Figure 5-5: Template registration into the Software Catalog, step 2."]
-+
-3. Click the *IMPORT* button to confirm. Figure 5-6 shows the entities have been added to the catalog.
-+
-image::5-6.png[title="Figure 5-6: Template registration into the Software Catalog, step 3."]
+Unsurprisingly, the answer again is related to yet another template that will make the procedure of patching previously created software components a lot easier and less error prone. By making sure that the necessary changes are first suggested to existing source code repositories by means of a pull request, component owners can review everything and have a final say before eventually merging the auto-generated changes originating from the applied "patch template."
 
 === Apply the predefined patch template
 
@@ -179,20 +91,6 @@ image::5-19.png[title="Figure 5-19: Pod’s log view to inspect the application 
 == Updating existing deployments
 
 When taking a closer look at the deployment for the POI backend application, you might wonder if you could switch from a standard deployment to a staged deployment. At the same time, it seems to be unclear and rather complicated for the typical application developer to understand what needs to be changed in a software component’s underlying GitOps repository to achieve this. That’s totally fine, because with a little help from a platform engineering team, all the complexity related to coming up with more sophisticated manifests that support a staged deployment can be baked into yet another software template. Let’s find out how to benefit from such a patch template to get the job done.
-
-=== Register the predefined patch template
-
-. Go to *+ Create → Register existing component* and copy the full HTTPS URL to the `template.yaml` file in the `custom-deployment-patch` folder of the Git repository. Paste the URL into the form’s (1) *Select URL* field, as shown in Figure 5-20.
-+
-image::5-20.png[title="Figure 5-20: Template registration into the Software Catalog, step 1."]
-+
-. Clicking the *ANALYZE* button shows that two entities will be added into the software catalog (Figure 5-21). One entity is the location, the HTTP URL from where the template was loaded, and the other entity is the template itself.
-+
-image::5-21.png[title="Figure 5-21: Template registration into the Software Catalog, step 2."]
-+
-. Click the *IMPORT* button to confirm. Figure 5-22 shows the entities have been added to the catalog.
-+
-image::5-22.png[title="Figure 5-22: Template registration into the Software Catalog, step 3."]
 
 === Apply the predefined patch template
 
@@ -316,9 +214,3 @@ Once this pipeline run successfully finishes, you can switch to the OpenShift we
 image::5-43.png[title="Figure 5-43: OpenShift topology view in prod project/namespace showing running deployment."]
 
 And there you have it! By means of another turnkey-ready patch template, you were able to introduce a staged deployment mechanism for an existing software component that has been originally scaffolded by an application template without support for multi-stage deployments.
-
-== Summary
-
-In this chapter, you learned how Red Hat Developer Hub supports two crucial maintenance activities, namely template evolution and component updates. While the continuous evolution of software templates is primarily among the tasks of platform engineers, maintaining existing components usually lies in the responsibility of application developers. This notwithstanding, platform engineers can make developers' lives considerably easier by baking certain application-specific update operations into yet other templates. Based on such “maintenance” templates, developers have a guided and (semi-)automated process allowing them to confidently patch existing components in a standardized manner.
-
-During the example, you exercised both by incorporating new requirements into an existing software template and patching a previously scaffolded software component. You also worked on slightly more involved updates that go beyond the mere application scope and deal with operational and deployment-related aspects of said components. In those cases, you as a developer could reuse handy patch templates crafted by platform engineers that allow for the same convenience when applying them onto an underlying GitOps repository rather than acting on a component’s source code only.

@@ -1,38 +1,14 @@
 = Chapter 1: A platform for portals
 
-This is (secretly) yet another book about DevOps.
-
-As a cultural initiative, DevOps has probably made software more reliable and its creation more rapid. Its best understood practices have benefited their progenitors, publicizers, and most successful adopters. Developer engagement with deployment concerns engenders a systems thinking that improves application architecture, but DevOps declares for developers an unbounded array of new concepts, terms, and concerns.
-
-This increase in cognitive load can make it feel like the early returns from DevOps practices such as automation and “infrastructure as code” are diminishing and progress slowing. More than 80% of developers say they have some kind of DevOps responsibility. The more layers between code editor and cloud deployment a developer has to master, the harder it is to onboard new teammates and the greater the chances of their burning out in the face of endless switching into less and less familiar contexts.
-
 == The proliferating complexity of simple applications
 
-Think about writing “Hello, World.” A few years ago, you’d grab your favorite editor or IDE, write some code, build it with your compiler or run it through your runtime. Then you’d hand it off to whoever controlled production when you pushed your locally-tested changes to the development branch. Your code got built and tested and deployed and had network traffic routed to it, backing services connected, deployment specifics configured, but little of that was within your control or even your line of sight.
+Think about writing “Hello, World.” A few years ago, you’d grab your favorite editor or IDE, write some code, build it with your compiler or run it through your runtime. Then you’d hand it off to whoever controlled production when you pushed your locally-tested changes to the development branch.
 
-DevOps implies a host of new concerns, systems, services, and tools.
-
-Microservices add complexity along another axis. There are many pieces of any microservices application architecture. What is the component you need to work with in the first place? Who is responsible for a given microservice? How do you use its API facilities? What APIs and other components does it depend on? Where is its documentation?
-
-== Hello, [cruel] World
-
-Writing “Hello, World” hasn’t gotten any harder. But running it has. Hello World today means a running container, built by an automated pipeline (triggered by a source code commit) into a container image, stored in some registry, with an attendant manifest declaring how it should be brought to life by a container orchestrator.
-
-There is a lot of stuff that is not your application.
-
-=== So much YAML
-
-Build configuration, CI/CD, container, repository, deployment (Deployment), StatefulSet, Ingress, Route…
-
-You want this stuff—or you should. And your company definitely wants it. It has a lot of benefits, even though we’re focusing on some of the drawbacks right now. But complexity in doing simple things will threaten to impose diminishing returns. In computing, the answer to complexity is always abstraction.
-
-You’re supposed to be an expert in Java, not an expert on the details of your new team’s AWS and OpenShift environments, configurations, and prerequisites.
-
-== Trade it all for just a little more
-
-Internal Developer Platforms (IDPs) aim to provide abstraction of development processes, offering a surface for capturing effective tools, libraries, source boilerplate, and configuration and centralizing access to them. Ironically, in the IDP ecosystem examined here, simplifying all that YAML involves… more YAML.
+Writing “Hello, World” hasn’t gotten any harder. But running it has. Hello World today means a running container, built by an automated pipeline (triggered by a source code commit) into a container image, stored in some registry, with an attendant manifest declaring how it should be brought to life by a container orchestrator. There is a lot of stuff that is not your application.
 
 == Internal Developer Platforms
+
+Internal Developer Platforms (IDPs) aim to provide abstraction of development processes, offering a surface for capturing effective tools, libraries, source boilerplate, and configuration and centralizing access to them. Ironically, in the IDP ecosystem examined here, simplifying all that YAML involves… more YAML.
 
 An Internal Developer Platform is a set of tools, services, and practices intended to improve the productivity and collaboration of software development teams by abstracting and automating the surrounding complexity of the development and deployment process. An IDP provides developers with a unified environment for managing application components, services, and the development lifecycle, including code, infrastructure, and deployment.
 
@@ -55,38 +31,12 @@ Backstage is an open source IDP platform created by Spotify, originally to serve
 
 Backstage's purpose is to enhance developer productivity with a single platform for development activities.
 
-== Backstage history
-
-Backstage started at Spotify in 2016-17. Spotify developers maintain a huge number of microservices, components, and tools.
-
-Backstage addressed the complexity and diminished visibility attendant to an ever-expanding set of services and tools—and ever-expanding teams creating and using them. The main idea was a unified interface for discovering and interacting with all of the resources that comprise an application. Not just source code, but integration and deployment configuration, source control, standard versions, languages, and libraries; execution status; rebuild and redeploy automations—everything.
-
-In 2020, Spotify released Backstage under the open source Apache license, allowing other organizations to benefit from the platform and contribute to its improvement. Developers and companies adopted the project in response, many of them contributing new features, abilities, and fixes to the upstream code base. A Backstage ecosystem has grown around the core software as well, with plug-ins and integrations developed to extend its functionality.
-
-In 2022, the Cloud Native Computing Foundation (CNCF) accepted Backstage as an incubating project. This solidified Backstage's position as a principal implementation of IDP concepts and standardized the project’s governance within the CNCF landscape.
-
-== Backstage today: Project and ecosystem
-
-Backstage is an open source platform designed as the foundation of an internal developer portal. Earlier, you saw the three key software expressions of Backstage’s purpose. Those features are how Backstage abstracts complexity and provides paved roads to standard tools and practices. When resources are documented, discoverable, searchable, and their dependencies and ownership clear, teams benefit in several ways.
-
-Backstage promotes collaboration by providing visibility into what different teams are working on. Transparency helps prevent duplication of efforts, encourages reuse of services and components, and fosters a sense of community among development teams.
-
-Backstage can automate tasks such as creating new services or components, provisioning infrastructure, and generating documentation. Automation reduces manual overhead and lets developers focus on writing code.
-
-Teams can customize Backstage with features and plug-ins (https://backstage.io/plugins/) to fit their specific requirements. Since Backstage has a growing community of contributors and adopters, new features, integrations, and improvements appear frequently.
-
 == Red Hat Developer Hub	 	 	 	
 
-Akin to familiar Red Hat flagship products like link:https://developers.redhat.com/products/rhel/overview[Red Hat Enterprise Linux] and link:https://developers.redhat.com/products/openshift/overview[Red Hat OpenShift], link:https://developers.redhat.com/products/developer-hub/overview[Red Hat Developer Hub] (RHDH) is an enterprise distribution with an open source project at its core. Harnessing the Backstage core code together with curated plug-ins, day-two configuration, and ready-made golden path templates for common development scenarios, RHDH in turn has an open source “midstream” project, called Janus, where community development efforts are organized and publicly conducted.
+link:https://developers.redhat.com/products/developer-hub/overview[Red Hat Developer Hub] (RHDH) is an enterprise distribution with an open source project at its core. Harnessing the Backstage core code together with curated plug-ins, day-two configuration, and ready-made golden path templates for common development scenarios, RHDH in turn has an open source “midstream” project, called Janus, where community development efforts are organized and publicly conducted.
 
-Like Backstage, Red Hat Developer Hub is a platform for building developer portals. There is always platform engineering work, with or without that formal title. Identifying patterns and standards and refining them in line with organization goals is a key part of getting value out of your site’s developer portal. RHDH makes it easier for you to get started with the examples in the book by avoiding a lot of secondary decisions about integrations, configuration, and features that you’d need to make if you started from scratch with upstream Backstage.
+Like Backstage, Red Hat Developer Hub is a platform for building developer portals. There is always platform engineering work, with or without that formal title. Identifying patterns and standards and refining them in line with organization goals is a key part of getting value out of your site’s developer portal. RHDH makes it easier for you to get started with the examples in this lab by avoiding a lot of secondary decisions about integrations, configuration, and features that you’d need to make if you started from scratch with upstream Backstage.
 
 == Note about names
 
-You’ll see both the names Backstage and Red Hat Developer Hub in this book, which uses RHDH as a convenient Backstage deployment. We don’t exactly use the terms interchangeably. Directions and examples will usually refer to Red Hat Developer Hub, but concepts and terms that come directly from the upstream Backstage core are named as such. For example, you might go to the RHDH Catalog, but see references to core concepts like Backstage Software Templates. This illustrates how RHDH is a distribution of Backstage, providing all the core Backstage features, layered beneath essential plug-ins and configuration tended by Red Hat in the Developer Hub product. The examples in this book could be followed stepwise on a generic Backstage instance with little adaptation. But not any generic Backstage. You need a Backstage instance configured with the plug-ins for the implementing services on which the examples depend.
-
-== Summary
-
-Every team and every project evolves a tailored development environment. This collection of tools, services and configuration is often maintained by convention and transmitted by osmosis.
-
-Internal Developer Portals help teams curate, manage and replicate these environments. Backstage is an open source CNCF project for building developer portals, and for encapsulating tools, services, documentation and best practices in “golden paths” to ease onboarding and everyday work. Red Hat Developer Hub is Red Hat’s enterprise IDP platform, curating Backstage core and the ecosystem around it.
+You’ll see both the names Backstage and Red Hat Developer Hub in this lab, which uses RHDH as a convenient Backstage deployment. We don’t exactly use the terms interchangeably. Directions and examples will usually refer to Red Hat Developer Hub, but concepts and terms that come directly from the upstream Backstage core are named as such.
