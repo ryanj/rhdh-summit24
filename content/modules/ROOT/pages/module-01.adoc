@@ -6,15 +6,15 @@ Think about writing “Hello, World.” A few years ago, you’d grab your favor
 
 Writing “Hello, World” hasn’t gotten any harder. But running it has. Hello World today means a running container, built by an automated pipeline (triggered by a source code commit) into a container image, stored in some registry, with an attendant manifest declaring how it should be brought to life by a container orchestrator. There is a lot of stuff that is not your application.
 
-== Internal Developer Platforms
+== Internal Developer Portals
 
-An Internal Developer Platform is a set of tools, services, and practices intended to improve the productivity and collaboration of software development teams by abstracting and automating the surrounding complexity of the development and deployment process. An IDP provides developers with a unified environment for managing application components, services, and the development lifecycle, including code, infrastructure, and deployment.
+An Internal Developer Portal (IDP) is a set of tools, services, and practices intended to improve the productivity and collaboration of software development teams by abstracting and automating the surrounding complexity of the development and deployment process. An IDP provides developers with a unified environment for managing application components, services, and the development lifecycle, including code, infrastructure, and deployment.
 
-IDPs address several key challenges in the software development process, including:
+IDPs address several challenges in software development, including:
 
-* *Complexity:* Modern software development involves many tools, services, and processes. IDPs centralize access to these resources.
-* *Collaboration:* IDPs promote collaboration by offering shared resources, standardized workflows, and a consistent experience in a development team.
-* *Visibility:* Developers can’t always see what other teams are working on. IDPs make large deployment environments more transparent.
+* *Complexity:* Development involves many tools, services, and processes. IDPs centralize access to these resources.
+* *Collaboration:* IDPs promote collaboration by offering shared resources, standardized workflows, and a consistent experience.
+* *Visibility:* Developers can’t always see what other teams are working on. IDPs make large environments more transparent.
 * *Productivity:* By automating repetitive tasks and providing self-service capabilities, IDPs allow developers to focus on writing code and delivering value.
 
 === Backstage: A platform for building developer portals
