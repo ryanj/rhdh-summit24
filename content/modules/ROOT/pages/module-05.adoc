@@ -16,7 +16,7 @@ image::5-7.png[title="Figure 5-7: Quarkus Application Patch Template."]
 
 ==== Template form wizard
 
-This brings you to the template’s form wizard where you can configure certain elements of the template. In the first section of this form (Figure 5-8), you provide information about the component that you want to apply this patch on. In this example, it’s the cluster ID, the GitLab group/owner, and most importantly, the GitLab repo name(s) that should get patched. You are going to specify the repo name by clicking on the *+ ADD ITEM* button and entering the repo name of the proxy and frontend component, which is `{namespace}-poi-map` if you followed the naming conventions so far. You can optionally enter a particular name (default: `templated-app-patch`) for the repo branch that will store the code changes that should get applied by the template. This branch in turn becomes the source for the merge request that gets automatically opened.
+This brings you to the link:{rhdh_url}/create/templates/default/quarkus-app-patch[template’s form wizard] where you can configure certain elements of the template. In the first section of this form (Figure 5-8), you provide information about the component that you want to apply this patch on. In this example, it’s the GitLab group/owner (default: `development`), and most importantly, the GitLab repo name(s) that should get patched. You are going to specify the repo name by clicking on the *+ ADD ITEM* button and entering the repo name of the frontend application, which is `{namespace}-poi-map` if you followed the naming conventions so far. You can optionally enter a particular name (default: `templated-app-patch`) for the repo branch that will store the code changes that should get applied by the template. This branch in turn becomes the source for the merge request that gets automatically opened.
 
 image::5-8.png[title="Figure 5-8: Quarkus Application Patch Template configuration form, first section."]
 
@@ -50,7 +50,7 @@ image::5-11.png[title="Figure 5-11: Quarkus Application Patch Template."]
 
 === Review the opened merge request
 
-In GitLab, go to the repository that has been patched by means of the template and inspect the opened merge request (Figure 5-12). The *Changes* tab shows the applied patches to the files as previously discussed.
+In GitLab, link:{gitlab_url}/development/{namespace}-poi-map/-/merge_requests[go to the repository] that has been patched by means of the template and inspect the opened merge request (Figure 5-12). The *Changes* tab shows the applied patches to the files as previously discussed.
 
 image::5-12.png[title="Figure 5-12: Inspect the suggested changes in the opened merge request."]
 
@@ -62,7 +62,7 @@ image::5-13.png[title="Figure 5-13: Merge the suggested changes."]
 
 === Inspect the build pipeline
 
-Now that the code changes are merged into the main branch, a new pipeline run is triggered via a webhook. After about two to three minutes, your code changes are available in the freshly built container image for the POI map service (Figure 5-14).
+Now that the code changes are merged into the main branch, a link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service/ci[new pipeline] run is triggered via a webhook. After about two to three minutes, your code changes are available in the freshly built container image for the POI map service (Figure 5-14).
 
 image::5-14.png[title="Figure 5-14: Tekton build pipeline triggered after merging code changes."]
 
@@ -80,7 +80,7 @@ Next, click the *build-and-push* step in order to check for the container base i
 
 image::5-17.png[title="Figure 5-17: Inspect logs for pipeline step build-and-push."]
 
-Finally, open the *Topology* tab for the `{namespace}-poi-map-service` component. Click on the deployment and choose the *Resources* tab in the side pane that appears from the right to click *View Logs* (Figure 5-18).
+Finally, open the link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service/topology[*Topology* tab] for the `{namespace}-poi-map-service` component. Click on the deployment and choose the *Resources* tab in the side pane that appears from the right to click *View Logs* (Figure 5-18).
 
 image::5-18.png[title="Figure 5-18: Component’s topology view with deployment resources selected."]
 
