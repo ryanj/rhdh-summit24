@@ -7,7 +7,7 @@
 ** xref:module-03.adoc#_software_templates[Software Templates]
 ** xref:module-03.adoc#_backend_template[Backend template]
 ** xref:module-03.adoc#_proxy_and_frontend_template[Proxy and frontend template]
-* xref:module-04.adoc[Chapter 4: Building the POI map]
+* xref:module-04.adoc[Chapter 4: Application development]
 ** xref:module-04.adoc#_implement_the_backend[Implement the backend]
 ** xref:module-04.adoc#_implement_the_proxy_and_the_frontend[Implement the proxy and the frontend]
 * xref:module-05.adoc[Bonus Chapter 5: Component evolution]
