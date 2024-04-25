@@ -12,6 +12,8 @@ Unsurprisingly, the answer again is related to yet another template that will ma
 
 Go to *+ Create* and select the *Quarkus Application Patch Template* by clicking the *CHOOSE* button in the lower-right corner of the template tile (Figure 5-7).
 
+:!figure-caption:
+
 image::5-7.png[title="Figure 5-7: Quarkus Application Patch Template."]
 
 ==== Template form wizard
