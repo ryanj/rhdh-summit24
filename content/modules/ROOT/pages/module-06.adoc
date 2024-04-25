@@ -1,11 +1,9 @@
 = Chapter 6: Summary
 
 == Embracing the Future of Development with IDPs
-
 You’ve reached the end of this exploration of Internal Developer Platforms through the lens of Red Hat Developer Hub (RHDH) and its foundations in the Backstage project. Software development is in a time of change. The journey from understanding the basic constructs of an IDP to navigating the complexities of software templates, the Software Catalog, and the evolutionary processes involved in maintaining and updating these elements, underscores a significant shift towards more streamlined, efficient, and collaborative development practices.
 
 == Paradigm Shift
-
 The adoption of IDPs like Backstage and RHDH represents more than just a shift in tools or processes; it embodies a paradigm shift in how organizations approach software development. By centralizing access to tools, services, and information, IDPs reduce cognitive load on developers, enabling them to focus on their core task of creating value through code. This shift is not just about efficiency; it's about empowering developers with the right tools and information at the right time, fostering a culture of collaboration, and driving innovation.
 
 == The Journey Ahead
@@ -16,6 +14,12 @@ As the digital landscape continues to evolve, the role of IDPs will become incre
  * *Automating repetitive tasks to accelerate development cycles*
  * *Providing a scalable framework to manage growing software ecosystems*
 
-== [Call to Action]
-
 For organizations and developers navigating the fast-paced world of software development, the message is clear: the future is in platforms that not only simplify complexity but also amplify the capabilities of developers. The exploration of RHDH and Backstage is just the beginning. The real journey lies in the continuous evolution of these platforms and the ecosystems around them. Developers, platform engineers, and organizational leaders are called to embrace these changes, contribute to the open-source communities that drive them, and shape the future of development in their own organizations.
+
+== Call to Action
+* Explore hands-on learning paths on Red Hat Developer: 
+    - Install Red Hat Developer Hub and onboard users: https://red.ht/onboard-rhdh
+    - Application development with Red Hat Developer Hub: https://red.ht/app-dev-rhdh
+* Visit the Red Hat Developer Hub product page: https://developer.redhat.com/rhdh
+* Download the latest electronic version of the ebook, continuously updated as errata and software advances require: https://red.ht/developer-hub-book
+* Find repos holding the code and templates for the exercises, and guidance on infrastructure requirements for running them, in this GitHub org: https://github.com/developer-hub-books
