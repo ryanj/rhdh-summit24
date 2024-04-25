@@ -4,7 +4,7 @@ Software Templates are a Backstage feature for flexibly defining a starting poin
 
 == The Point of Interest map application
 
-The exercises in this book center on a world map application (Figure 3-1) that you can pan, zoom, and click to investigate arbitrary points of interest.
+The exercises in this lab center on a world map application (Figure 3-1) that you can pan, zoom, and click to investigate arbitrary points of interest.
 
 :!figure-caption:
 
@@ -54,7 +54,7 @@ In the second section (Figure 3-12), you specify the who, what, and where of the
 
 image::3-12.png[title="Figure 3-12: NestJS Service template configuration form, second section."]
 
-The third form section (Figure 3-13) specifies the container image registry where the application containers should be stored and available to the cluster orchestrator (OpenShift in the book’s exercises). You can also optionally set a tag for the container image. The default, `latest`, is acceptable for purposes of building the example application, although it is not usually a best practice for production.
+The third form section (Figure 3-13) specifies the container image registry where the application containers should be stored and available to the cluster orchestrator (OpenShift in the lab’s exercises). You can also optionally set a tag for the container image. The default, `latest`, is acceptable for purposes of building the example application, although it is not usually a best practice for production.
 
 image::3-13.png[title="Figure 3-13: NestJS Service template configuration form, third section."]
 
@@ -259,7 +259,7 @@ image::3-41.png[title="Figure 3-41: Quarkus Service with Angular template scaffo
 
 === Template scaffolding process
 
-Insights into what’s happening during the scaffolding process under the covers have been provided in detail for the backend template already. Feel free to revisit the corresponding book section (link:#_template_scaffolding_process[Template scaffolding process]) if necessary.
+Insights into what’s happening during the scaffolding process under the covers have been provided in detail for the backend template already. Feel free to revisit the corresponding lab section (link:#_template_scaffolding_process[Template scaffolding process]) if necessary.
 
 === Template results
 
