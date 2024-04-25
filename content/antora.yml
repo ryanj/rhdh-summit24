@@ -6,7 +6,6 @@ nav:
 
 asciidoc:
   attributes:
-    page-user: user{usernum}
     page-links:
     - link: https://redhat.com
       text: Red Hat
@@ -28,6 +27,7 @@ asciidoc:
     guid: my-guid
     usernum: 1
     user: user{usernum}
+    page-user: user{usernum}
     namespace: demo{usernum}
     rhdh_user_password: "from the previous page"
     ssh_user: devops
