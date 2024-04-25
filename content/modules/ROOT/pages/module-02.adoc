@@ -16,13 +16,13 @@ Organizations can customize the Software Catalog and most of Developer Hub. This
 
 The Software Catalog can contain a wide variety of items, broadly categorized into the following:
 
- * *Services:* Backend services, microservices, or server-side applications.
- * *Websites:* Frontend applications, web apps, or static websites.
- * *Libraries:* Shared code libraries or modules that can be used by other software components.
- * *Documentation:* Standalone documentation sites or repositories containing documentation related to software components.
+ * *Services:* backend services, microservices, or server-side applications.
+ * *Websites:* frontend applications, web apps, or static websites.
+ * *Libraries:* shared code libraries or modules that can be used by other software components.
+ * *Documentation:* standalone documentation sites or repositories containing documentation related to software components.
  * *APIs:* RESTful APIs, GraphQL APIs, or any other API endpoints.
  * *Data pipelines:* ETL jobs, data processing pipelines, and other data-intensive workflows.
- * *Components:* Any other software components that don't neatly fit into the above categories but are part of the organization's development and delivery landscape.
+ * *Components:* any other software components that don't neatly fit into the above categories but are part of the organization's development and delivery landscape.
 
 The Software Catalog is designed to improve software development and operational efficiency by providing a centralized, searchable, and documented catalog of all the software components in an organization. Its ability to integrate with various tools and provide insights into the health and status of components is what makes it so valuable.
 
@@ -38,7 +38,7 @@ The primary purpose of defining entities in the Software Catalog is to provide a
 
 *Understanding components:* for each component, the catalog provides detailed information, including its ownership, life cycle status (e.g., production, deprecated), documentation, the component's repository,  and operational dashboards.
 
-*Integrating and using APIs:* When building or updating services, you can use the catalog to find and integrate APIs, and have access to endpoints, documentation, and even testing tools all of which simplifies the integration process.
+*Integrating and using APIs:* when building or updating services, you can use the catalog to find and integrate APIs, and have access to endpoints, documentation, and even testing tools all of which simplifies the integration process.
 
 === Collaboration and governance
 
@@ -50,7 +50,7 @@ The primary purpose of defining entities in the Software Catalog is to provide a
 
 *Monitoring and health checks:* Developer Hub and the Software Catalog integrate with monitoring and CI/CD tools, allowing developers to see the health, performance, and build status of their components directly within the catalog. This centralized overview aids in proactive maintenance and troubleshooting.
 
-*Documentation and resources:* Developers can access and contribute to the documentation of components, improving knowledge sharing and collaboration. The Software Catalog often serves as a gateway to a component's documentation, decision records, and related resources.
+*Documentation and resources:* developers can access and contribute to the documentation of components, improving knowledge sharing and collaboration. The Software Catalog often serves as a gateway to a component's documentation, decision records, and related resources.
 
 === Scalability and evolution
 
