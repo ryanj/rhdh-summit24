@@ -1,4 +1,4 @@
-= Chapter 3: Templates: Application Head Start
+= Chapter 3: Application Scaffolding
 
 Software Templates are a Backstage feature for flexibly defining a starting point for some arbitrary kit. A template might represent a place to begin work on a new application built with some standard language or framework — for example, potentially including executables, runtimes or compilers of standard versions, boilerplate code, build configurations, and the like.
 

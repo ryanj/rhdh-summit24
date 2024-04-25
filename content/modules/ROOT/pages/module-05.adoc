@@ -1,4 +1,4 @@
-= Bonus Chapter 5: Component evolution
+= Bonus Chapter 5: Application Maintenance
 
 You’ve learned how to jump-start a new application with Software Templates, which scaffolded source repos for you and eventually constructed container images and deployed them on Kubernetes. But, software is never finished. Sooner or later, you’ll need to update your templates and the components they generate. In this chapter, you’ll see how to manage selected maintenance and upgrade tasks in Red Hat Developer Hub.
 

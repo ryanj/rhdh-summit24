@@ -1,4 +1,4 @@
-= Chapter 1: A platform for portals
+= Chapter 1: Internal Developer Portals & Red Hat Developer Hub
 
 == The proliferating complexity of simple applications
 

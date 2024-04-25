@@ -1,4 +1,4 @@
-= Conclusion
+= Chapter 6: Summary
 
 == Embracing the Future of Development with IDPs
 

@@ -1,4 +1,4 @@
-= Chapter 4: Developing with the Software Catalog
+= Chapter 4: Application Development
 
 You’ve used a couple of Software Templates to put everything in place to get a new application going. Now you can implement your application features with actual code. Although you’ve peered inside a Template and registered it in your portal, often your usual work would begin nearer to this point, making changes to existing entities indexed in your Software Catalog.
 
