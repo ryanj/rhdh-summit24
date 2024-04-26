@@ -1,4 +1,4 @@
-= Chapter 1: A platform for portals
+= Chapter 1: Internal Developer Portals & Red Hat Developer Hub
 
 == The proliferating complexity of simple applications
 
@@ -19,13 +19,13 @@ IDPs address several challenges in software development, including:
 
 === Backstage: A platform for building developer portals
 
-Backstage is an open source IDP platform created by Spotify, originally to serve their internal development. The Backstage software has three defining features.
+Backstage is an open source IDP platform created by Spotify, originally to serve their internal development. The Backstage software has five defining features.
 
-* Software Catalog: A central repository for the services and components used in a team or organization, enabling discovery and reuse. Catalog entities index the disparate resources that go into an application, from source code to build services to orchestrated deployments.
-* Standardized workflows: Designed to capture effective patterns, tools, processing used by development teams and present them as established paths to development, Backstage helps enforce best practices and standards.
-* Plug-in ecosystem: Backstage supports custom plug-ins and a growing ecosystem of integration and automation plug-ins. Plug-ins integrate Backstage with infrastructure services and software components, import patterns and mechanisms, and allow teams to customize Backstage to integrate their own systems, tools, and methods. 
-* Tech Docs conventionalize the mechanics of creating and publishing documentation but someone still has to write it. You can write documentation easily in Markdown or other familiar markups and manage it like code in your repos to see it compiled and published in an automated way.
-* Search lets others find components, services, and documentation without clicking around endlessly.
+* *Software Catalog:* A central repository for the services and components used in a team or organization, enabling discovery and reuse. Catalog entities index the disparate resources that go into an application, from source code to build services to orchestrated deployments.
+* *Standardized workflows:* Designed to capture effective patterns, tools, processing used by development teams and present them as established paths to development, Backstage helps enforce best practices and standards.
+* *Plug-in ecosystem:* Backstage supports custom plug-ins and a growing ecosystem of integration and automation plug-ins. Plug-ins integrate Backstage with infrastructure services and software components, import patterns and mechanisms, and allow teams to customize Backstage to integrate their own systems, tools, and methods. 
+* *Tech Docs* conventionalize the mechanics of creating and publishing documentation but someone still has to write it. You can write documentation easily in Markdown or other familiar markups and manage it like code in your repos to see it compiled and published in an automated way.
+* *Search* lets others find components, services, and documentation without clicking around endlessly.
 
 Backstage's purpose is to enhance developer productivity with a single place for development activities.
 
@@ -34,7 +34,3 @@ Backstage's purpose is to enhance developer productivity with a single place for
 link:https://developers.redhat.com/products/developer-hub/overview[Red Hat Developer Hub] (RHDH) is an enterprise distribution with an open source project at its core. Harnessing the Backstage core code together with curated plug-ins, day-two configuration, security and operational enhancements, and support.
 
 Like Backstage, Red Hat Developer Hub is a platform for building developer portals. There is always platform engineering work, with or without that formal title. Identifying patterns and standards and refining them in line with organization goals is a key part of getting value out of your site’s developer portal. RHDH makes it easier for you to get started with the examples in this lab by avoiding a lot of secondary decisions about integrations, configuration, and features that you’d need to make if you started from scratch with upstream Backstage.
-
-== Note about names
-
-You’ll see both the names Backstage and Red Hat Developer Hub in this lab, which uses RHDH as a convenient Backstage deployment. We don’t exactly use the terms interchangeably. Directions and examples will usually refer to Red Hat Developer Hub, but concepts and terms that come directly from the upstream Backstage core are named as such.
