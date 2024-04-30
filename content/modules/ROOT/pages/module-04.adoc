@@ -44,7 +44,7 @@ We provide an implementation for this backend service in an link:{gitlab_url}/rh
 
 You are going to merge the sample code into the repository of your scaffolded backend application. 
 
-In the component’s details view, select the *Overview* tab and click the *OpenShift Dev Spaces* link in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
+In link:{rhdh_url}/catalog/default/component/{namespace}-poi-backend[the component’s details view], select the *Overview* tab and click the *OpenShift Dev Spaces* link in the *Links* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-2).
 
 NOTE: OpenShift Dev Spaces is provided as an example.  You are welcome to clone the repo and use your own IDE and terminal in this chapter.
 
@@ -58,11 +58,11 @@ image::4-2d.png[title="Figure 4-2d: Dev Spaces authorize access to grant full us
 
 image::4-2e.png[title="Figure 4-2e: GitLab authorize Dev Spaces."]
 
-Eventually you will end up in your dedicated and fully-fledged VS Code instance with the proper Git repository already checked out (Figure 4-27). This means you can start right away with coding the application in question—all without going through any hassle of having to set everything up locally.
+Eventually you will end up in your dedicated and fully-fledged VS Code instance with the proper Git repository already checked out (Figure 4-2f). This means you can start right away with coding the application in question—all without going through any hassle of having to set everything up locally.
 
 image::4-2f.png[title="Figure 4-2f: OpenShift Dev Spaces welcome screen."]
 
-In OpenShift Dev Spaces, open a terminal session by selecting *Terminal → New Terminal* from the burger menu in the upper left corner of the UI (Figure 4-28).
+In OpenShift Dev Spaces, open a terminal session by selecting *Terminal → New Terminal* from the burger menu in the upper left corner of the UI (Figure 4-2g).
 
 image::4-2g.png[title="Figure 4-2g: OpenShift Dev Spaces VS Code open new terminal."]
 
