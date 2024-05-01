@@ -4,7 +4,7 @@
 
 Welcome, _{user}_!
 
-By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to reign in complexity.
+By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to rein in complexity.
 
 In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub]*, you will first need to set up three project namespaces.
 
