@@ -6,32 +6,24 @@ Welcome, _{user}_!
 
 By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to rein in complexity.
 
-In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub]*, you will first need to set up three project namespaces.
+In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub]*, you will need to set up a project namespace for your work.
 
 image::https://developers.redhat.com/sites/default/files/styles/cheat_sheet_feature/public/2023_DeveloperPortals_Preview_Cover_Art.webp[title="Figure 0-1. Developer Portals: Prepare to Perform with Red Hat Developer Hub"]
 
 == OpenShift Requirements
 
-First, create three project namespaces in OpenShift: `{namespace}`, `{namespace}-preprod`, and `{namespace}-prod`
+First, create a project namespace in OpenShift: `{namespace}`
 
-. Log in to the link:{console_url}[OpenShift Web Console].
-.. When prompted, select the *rhsso* login option.
+. Log in to the link:{console_url}[OpenShift Web Console]
+.. When prompted, select the *rhsso* login option
 .. Login with username: `{user}` and password: `{rhdh_user_password}`
-. Create a new project for your work by selecting the *Create a new project* link.
+. Create a new project for your work by selecting the *Create a new project* link
 +
 image::0-2.png[title="Figure 0-2. Create a new project"]
 +
 . Name your new project: `{namespace}` (not "demoX" as shown in the screenshots), and click *Create* to continue.
 +
 image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
-+
-. Create a second project named `{namespace}-preprod` by clicking on the project dropdown menu and selecting the *Create Project* button.
-+
-image::0-4.png[title="Figure 0-4. Click on Create Project"]
-+
-image::0-5.png[title="Figure 0-5. Create Project: {namespace}-preprod"]
-+
-. Repeat the previous step to create a third project named: `{namespace}-prod`
 
 == Developer Hub Access
 
