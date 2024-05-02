@@ -362,7 +362,7 @@ Remember that the `quarkus-with-angular` template you applied in one of the prev
 
 === Write the code
 
-In RHDH, switch to the Catalog View and select the link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service[`{namespace}-poi-map-service` component]. In contrast to a local development workflow that you followed for the backend service, you are taking a different approach here. In the component’s details view, select the *Overview* tab and click the link:{devspaces_url}/#{gitlab_url}/development/{namespace}-poi-map?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml[*OpenShift Dev Spaces* link] in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
+In RHDH, switch to the Catalog View and select the link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service[`{namespace}-poi-map-service` component]. In the component’s details view, select the *Overview* tab and click the link:{devspaces_url}/#{gitlab_url}/development/{namespace}-poi-map?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml[*OpenShift Dev Spaces* link] in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
 
 Again, to speed things up, we have provided a turnkey link:{gitlab_url}/rhdh/sample-code-poi-map[implementation for the POI proxy service in an example repo].
 
