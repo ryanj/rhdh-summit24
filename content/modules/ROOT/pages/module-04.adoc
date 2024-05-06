@@ -362,7 +362,11 @@ Remember that the `quarkus-with-angular` template you applied in one of the prev
 
 === Write the code
 
-In RHDH, switch to the Catalog View and select the link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service[`{namespace}-poi-map-service` component]. In the component’s details view, select the *Overview* tab and click the link:{devspaces_url}/#{gitlab_url}/development/{namespace}-poi-map?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml[*OpenShift Dev Spaces* link] in the *About* tile. This will launch a web-based developer workspace powered by Eclipse Che (Figure 4-26).
+In RHDH, switch to the Catalog View and select the link:{rhdh_url}/catalog/default/component/{namespace}-poi-map-service[`{namespace}-poi-map-service` component]. In the component’s details view, select the *Overview* tab and click the link:{devspaces_url}/#{gitlab_url}/development/{namespace}-poi-map?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml[*OpenShift Dev Spaces* link] in the *Links* tile. This will launch a web-based developer workspace powered by Eclipse Che.
+
+NOTE: If prompted, close the previous OpenShift Dev Spaces workspace as you initialize your new workspace environment.
+
+In OpenShift Dev Spaces, open another terminal session by selecting *Terminal → New Terminal* from the burger menu in the upper left corner of the UI (Figure 4-2g).
 
 Again, to speed things up, we have provided a turnkey link:{gitlab_url}/rhdh/sample-code-poi-map[implementation for the POI proxy service in an example repo].
 
