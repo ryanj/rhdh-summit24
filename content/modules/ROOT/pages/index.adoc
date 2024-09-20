@@ -6,7 +6,7 @@ Welcome, _{user}_!
 
 By the end of this session you will learn the basics of Red Hat Developer Hub, the Software Catalog, Backstage Software Templates, and have an understanding of how templates can be used to rein in complexity.
 
-In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub]*, you will need to set up a project namespace for your work.
+In order to follow along with this workshop adaptation of *link:https://developers.redhat.com/e-books/developer-portals[Developer Portals: Prepare to Perform with Red Hat Developer Hub^]*, you will need to set up a project namespace for your work.
 
 image::https://developers.redhat.com/sites/default/files/styles/cheat_sheet_feature/public/2023_DeveloperPortals_Preview_Cover_Art.webp[title="Figure 0-1. Developer Portals: Prepare to Perform with Red Hat Developer Hub"]
 
@@ -14,7 +14,7 @@ image::https://developers.redhat.com/sites/default/files/styles/cheat_sheet_feat
 
 First, create a project namespace in OpenShift: `{namespace}`
 
-. Log in to the link:{console_url}[OpenShift Web Console]
+. Log in to the link:{console_url}[OpenShift Web Console^]
 .. When prompted, select the *rhsso* login option
 .. Login with username: `{user}` and password: `{rhdh_user_password}`
 . Create a new project for your work by selecting the *Create a new project* link
@@ -29,7 +29,7 @@ image::0-3.png[title="Figure 0-3. Create Project: {namespace}"]
 
 To access your instance of Red Hat Developer Hub:
 
-. Open link:{rhdh_url}[Red Hat Developer Hub] in a new browser window
+. Open link:{rhdh_url}[Red Hat Developer Hub^] in a new browser window
 . When prompted, select the *GitLab* login option
 . Log in with username: `{user}` and password: `{rhdh_user_password}`
 
