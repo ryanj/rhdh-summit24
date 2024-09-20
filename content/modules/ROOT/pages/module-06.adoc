@@ -18,8 +18,8 @@ For organizations and developers navigating the fast-paced world of software dev
 
 == Call to Action
 * Explore hands-on learning paths on Red Hat Developer: 
-    - Install Red Hat Developer Hub and onboard users: https://red.ht/onboard-rhdh
-    - Application development with Red Hat Developer Hub: https://red.ht/app-dev-rhdh
-* Visit the Red Hat Developer Hub product page: https://developer.redhat.com/rhdh
-* Download the latest electronic version of the ebook, continuously updated as errata and software advances require: https://red.ht/developer-hub-book
-* Find repos holding the code and templates for the exercises, and guidance on infrastructure requirements for running them, in this GitHub org: https://github.com/developer-hub-books
+    - Install Red Hat Developer Hub and onboard users: link:https://red.ht/onboard-rhdh[https://red.ht/onboard-rhdh^]
+    - Application development with Red Hat Developer Hub: link:https://red.ht/app-dev-rhdh[https://red.ht/app-dev-rhdh^]
+* Visit the Red Hat Developer Hub product page: link:https://developer.redhat.com/rhdh[https://developer.redhat.com/rhdh^]
+* Download the latest electronic version of the ebook, continuously updated as errata and software advances require: link:https://red.ht/developer-hub-book[https://red.ht/developer-hub-book^]
+* Find repos holding the code and templates for the exercises, and guidance on infrastructure requirements for running them, in this GitHub org: link:https://github.com/developer-hub-books[https://github.com/developer-hub-books^]
