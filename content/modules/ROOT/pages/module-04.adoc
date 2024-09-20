@@ -440,7 +440,7 @@ servers:
 +
 Save this file after applying the modification.
 +
-. Go into the project repository’s root folder, `{namespace}-poi-backend`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
+. Go into the project repository’s root folder, `{namespace}-poi-map`, then open the file `src/main/resources/application.properties`. Scroll down to line 30 and specify the cluster internal service name (see `TODO` section in the next example).
 +
 [source,yaml,subs="attributes"]
 ----
