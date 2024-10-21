@@ -81,10 +81,6 @@ Continuing with the itemization of the steps automated by RHDH in its process of
 +
 image::3-19.png[title="Figure 3-19: GitLab repositories for the POI backend."]
 +
-. Three Argo CD "applications" (bootstrap, build pipeline, and actual application, as shown in Figure 3-20) for the build and deployment automation that form the basis of GitOps practices. These Argo applications are among the resources declared in the files beneath the link:{gitlab_url}/development/{namespace}-poi-backend-gitops[`{namespace}-poi-backend-gitops`^] repo.
-+
-image::3-20.png[title="Figure 3-20: Argo CD applications for the POI backend."]
-+
 . The deployed application, comprising the NestJS service and its PostgreSQL database. The build pipeline and the webhook that triggers rebuilds and redeployments when source code changes are committed also run on the deployment target cluster, seen in the link:{console_url}/topology/ns/{namespace}?view=graph[OpenShift web console^] in Figure 3-21.
 +
 image::3-21.png[title="Figure 3-21: OpenShift topology view of the POI backend."]
