@@ -81,7 +81,7 @@ Continuing with the itemization of the steps automated by RHDH in its process of
 +
 image::3-19.png[title="Figure 3-19: GitLab repositories for the POI backend."]
 +
-. The deployed application, comprising the NestJS service and its PostgreSQL database. The build pipeline and the webhook that triggers rebuilds and redeployments when source code changes are committed also run on the deployment target cluster, seen in the link:{console_url}/topology/ns/{namespace}?view=graph[OpenShift web console^] in Figure 3-21.
+. The deployed application, comprising the NestJS service and its PostgreSQL database. The build pipeline and the webhook that triggers rebuilds and redeployments when source code changes are committed also run on the deployment target cluster, seen in the link:{openshift_console_url}/topology/ns/{namespace}?view=graph[OpenShift web console^] in Figure 3-21.
 +
 image::3-21.png[title="Figure 3-21: OpenShift topology view of the POI backend."]
 
@@ -269,7 +269,7 @@ image::3-42.png[title="Figure 3-42: GitLab repositories for the POI frontend."]
 + 
 image::3-43.png[title="Figure 3-43: Argo CD applications for the POI frontend."]
 +
-. In Kubernetes, there is the deployed Quarkus proxy application, which also serves the Angular single page application frontend. Additionally, the build pipeline and the webhook related resources have been set up as seen in the link:{console_url}/topology/ns/{namespace}?view=graph[OpenShift web console^] in Figure 3-44.
+. In Kubernetes, there is the deployed Quarkus proxy application, which also serves the Angular single page application frontend. Additionally, the build pipeline and the webhook related resources have been set up as seen in the link:{openshift_console_url}/topology/ns/{namespace}?view=graph[OpenShift web console^] in Figure 3-44.
 
 image::3-44.png[title="Figure 3-44: OpenShift topology view with the POI backend and frontend."]
 

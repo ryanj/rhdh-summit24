@@ -21,7 +21,7 @@ asciidoc:
     cluster_id: {cluster_id}
     devspaces_url: https://devspaces{cluster_id}
     rhdh_url: https://backstage-backstage{cluster_id}
-    console_url: https://console-openshift-console{cluster_id}
+    openshift_console_url: https://console-openshift-console{cluster_id}
     gitlab_url: https://gitlab-gitlab{cluster_id}
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
     guid: my-guid

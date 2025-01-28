@@ -14,7 +14,7 @@ image::https://developers.redhat.com/sites/default/files/styles/cheat_sheet_feat
 
 First, create a project namespace in OpenShift: `{namespace}`
 
-. Log in to the link:{console_url}[OpenShift Web Console^]
+. Log in to the link:{openshift_console_url}[OpenShift Web Console^]
 .. When prompted, select the *rhsso* login option
 .. Login with username: `{user}` and password: `{rhdh_user_password}`
 . Create a new project for your work by selecting the *Create a new project* link
